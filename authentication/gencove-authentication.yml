@@ -1,0 +1,40 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/gencove-openapi-original.json
+docs: https://docs.gencove.com/base/getting-started/
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  notes: >-
+    Gencove uses a static API key by default (Authorization: Api-Key <key>),
+    issued from the dashboard under Account Settings -> API Keys. A short-lived
+    JWT bearer token flow is also available via the jwt-create endpoint
+    (Authorization: Bearer <jwt>). Email/password env vars ($GENCOVE_EMAIL /
+    $GENCOVE_PASSWORD) can be used by the CLI to obtain a token but cannot be
+    combined with $GENCOVE_API_KEY.
+schemes:
+- name: API key
+  type: apiKey
+  in: header
+  parameter: Authorization
+  scheme_hint: 'Api-Key <API-key>'
+  description: |-
+    Authorization header content formatted as: `Api-Key <API-key>`
+    Obtain an API key through Gencove's web UI (Account Settings -> API Keys)
+    or the user-api-key endpoint.
+  docs: https://docs.gencove.com/base/getting-started/
+  sources:
+  - openapi/gencove-openapi-original.json
+- name: JWT
+  type: apiKey
+  in: header
+  parameter: Authorization
+  scheme_hint: 'Bearer <json-web-token>'
+  description: |-
+    Authorization header content formatted as: `Bearer <json-web-token>`
+    Obtain an access token using the jwt-create endpoint; refresh via
+    jwt-refresh and verify via jwt-verify.
+  sources:
+  - openapi/gencove-openapi-original.json
