@@ -1,0 +1,489 @@
+openapi: 3.0.3
+info:
+  title: Gencove Back array upload API
+  version: v2
+  contact:
+    email: support@gencove.com
+  license:
+    name: Proprietary
+  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+servers:
+- url: https://api.gencove.com
+tags:
+- name: upload
+paths:
+  /api/v2/upload-credentials/:
+    post:
+      operationId: upload_credentials_create
+      tags:
+      - upload
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUploadCredentialsResponse'
+          description: ''
+  /api/v2/uploads/:
+    get:
+      operationId: uploads_list
+      description: Retrieve list of user uploads.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Search uploads by id
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+          - failed
+          - started
+          - succeeded
+        description: Filter uploads by upload statuses
+      tags:
+      - upload
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUploadList'
+          description: ''
+  /api/v2/uploads-delete-unassigned/:
+    post:
+      operationId: uploads_delete_unassigned_create
+      tags:
+      - upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletedUnassignedUploads'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DeletedUnassignedUploads'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DeletedUnassignedUploads'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedUnassignedUploads'
+          description: ''
+  /api/v2/uploads-post-data/:
+    post:
+      operationId: uploads_post_data_create
+      description: 'Returns info about initialized file upload based on posted file
+
+        destination path.'
+      tags:
+      - upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadPostDataCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UploadPostDataCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadPostDataCreate'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadPostDataResponse'
+          description: ''
+  /api/v2/uploads-presigned-post-data/:
+    post:
+      operationId: uploads_presigned_post_data_create
+      description: 'Returns S3 presigned parameters needed for file upload as response for
+
+        given file attributes.'
+      tags:
+      - upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadPostDataCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UploadPostDataCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadPostDataCreate'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadPresignedPostDataResponse'
+          description: ''
+  /api/v2/uploads-url/:
+    post:
+      operationId: uploads_url_create
+      tags:
+      - upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadURLCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UploadURLCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadURLCreate'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadURLResponse'
+          description: ''
+  /api/v2/uploads/{upload_id}:
+    get:
+      operationId: uploads_retrieve
+      description: Fetch single upload details
+      parameters:
+      - in: path
+        name: upload_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - upload
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Upload'
+          description: ''
+components:
+  schemas:
+    DeletedUnassignedUploads:
+      type: object
+      properties:
+        upload_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+      - upload_ids
+    UploadPresignedPostDataResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        fields:
+          $ref: '#/components/schemas/AWSPresignedPostData'
+      required:
+      - fields
+      - url
+    UploadPostDataResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        destination_path:
+          type: string
+        s3:
+          allOf:
+          - $ref: '#/components/schemas/S3ObjectNested'
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/UploadStatusNested'
+          readOnly: true
+      required:
+      - id
+      - last_status
+      - s3
+    SourceEnum:
+      enum:
+      - cli
+      - cli url
+      - basespace
+      - s3
+      - array data
+      type: string
+      description: '* `cli` - cli
+
+        * `cli url` - cli url
+
+        * `basespace` - basespace
+
+        * `s3` - s3
+
+        * `array data` - array data'
+    GetUploadCredentialsResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+        access_key:
+          type: string
+        secret_key:
+          type: string
+        token:
+          type: string
+        expiry_time:
+          type: string
+          format: date-time
+      required:
+      - access_key
+      - expiry_time
+      - secret_key
+      - token
+      - version
+    UploadPostDataCreate:
+      type: object
+      description: Used for both normal post data and presigned post data.
+      properties:
+        destination_path:
+          type: string
+      required:
+      - destination_path
+    UploadURLCreate:
+      type: object
+      properties:
+        destination_path:
+          type: string
+        source_url:
+          type: string
+          writeOnly: true
+      required:
+      - destination_path
+      - source_url
+    AWSPresignedPostData:
+      type: object
+      properties:
+        key:
+          type: string
+        AWSAccessKeyId:
+          type: string
+        policy:
+          type: string
+        signature:
+          type: string
+      required:
+      - AWSAccessKeyId
+      - key
+      - policy
+      - signature
+    S3ObjectNested:
+      type: object
+      properties:
+        bucket:
+          type: string
+        object_name:
+          type: string
+    UploadURLResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        destination_path:
+          type: string
+        s3:
+          allOf:
+          - $ref: '#/components/schemas/S3ObjectNested'
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/UploadStatusNested'
+          readOnly: true
+        source:
+          type: string
+        source_url:
+          type: string
+          readOnly: true
+      required:
+      - id
+      - last_status
+      - s3
+      - source
+      - source_url
+    FileNested:
+      type: object
+      description: Used for all nested files except for files associated with sample.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        s3_path:
+          type: string
+          description: S3 object key
+          maxLength: 1024
+        size:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+          description: Size as reported by AWS in bytes
+        download_url:
+          type: string
+          readOnly: true
+        file_type:
+          type: string
+          description: File extension
+          readOnly: true
+        checksum_sha256:
+          type: string
+          description: Object's sha256 Checksum
+          maxLength: 64
+        shadow_mode:
+          type: boolean
+          nullable: true
+          description: If true, file is only accessible by organizations with shadow mode access enabled.
+      required:
+      - download_url
+      - file_type
+      - id
+    PaginatedUploadList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type: string
+              format: uri
+              nullable: true
+            previous:
+              type: string
+              format: uri
+              nullable: true
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Upload'
+    UploadStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    Upload:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/UploadStatusNested'
+          readOnly: true
+        file:
+          $ref: '#/components/schemas/FileNested'
+        created:
+          type: string
+          format: date-time
+        destination_path:
+          type: string
+          description: Destination path given by the user as an optional argument
+          maxLength: 1024
+        source:
+          $ref: '#/components/schemas/SourceEnum'
+        user:
+          type: string
+          format: uuid
+          nullable: true
+        organization:
+          type: string
+          format: uuid
+      required:
+      - file
+      - id
+      - last_status
+      - organization
+      - source
+  securitySchemes:
+    API key:
+      type: apiKey
+      description: 'Authorization header content formated as: `Api-Key <API-key>`
+
+        You can obtain new API key through Gencove''s web UI or `user-api-key` endpoint'
+      in: header
+      name: Authorization
+    JWT:
+      type: apiKey
+      description: 'Authorization header content formated as: `Bearer <json-web-token>`
+
+        You can obtain access token using `jwt-create` endpoint.'
+      in: header
+      name: Authorization

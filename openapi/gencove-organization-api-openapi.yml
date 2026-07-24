@@ -1,0 +1,466 @@
+openapi: 3.0.3
+info:
+  title: Gencove Back array organization API
+  version: v2
+  contact:
+    email: support@gencove.com
+  license:
+    name: Proprietary
+  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+servers:
+- url: https://api.gencove.com
+tags:
+- name: organization
+paths:
+  /api/v2/organization/:
+    get:
+      operationId: organization_retrieve
+      description: Fetch organization details
+      tags:
+      - organization
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: ''
+    patch:
+      operationId: organization_partial_update
+      description: Update organization details
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganization'
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: ''
+  /api/v2/organization-monthly-usage-report/:
+    get:
+      operationId: organization_monthly_usage_report_retrieve
+      description: Retrieve CSV monthly usage report. Optionally specify a date range.
+      parameters:
+      - in: query
+        name: from
+        schema:
+          type: string
+        description: Start date for report. Format is YYYY-MM, e.g. 2023-01. Must supply both 'from' and 'to' parameters.
+      - in: query
+        name: to
+        schema:
+          type: string
+        description: End date for report. Format is YYYY-MM, e.g. 2023-05. Must supply both 'from' and 'to' parameters.
+      tags:
+      - organization
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          description: No response body
+  /api/v2/organization-roles/{role_id}:
+    get:
+      operationId: organization_roles_retrieve
+      parameters:
+      - in: path
+        name: role_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - organization
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRoleObject'
+          description: ''
+  /api/v2/organization-users/:
+    get:
+      operationId: organization_users_list
+      description: Get organization users.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Search users by name, email or id
+      tags:
+      - organization
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOrganizationUserList'
+          description: ''
+    post:
+      operationId: organization_users_create
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRoleObjectCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRoleObjectCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRoleObjectCreate'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRoleObject'
+          description: ''
+  /api/v2/organization-users/{user_id}:
+    patch:
+      operationId: organization_users_partial_update
+      parameters:
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganizationUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganizationUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedOrganizationUser'
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationUser'
+          description: ''
+components:
+  schemas:
+    PatchedOrganizationUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+        has_mfa_device:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        is_support:
+          type: boolean
+          readOnly: true
+          title: Support
+          description: Designates whether this user should be treated as a support.
+    UserRoleObjectCreate:
+      type: object
+      properties:
+        user:
+          type: string
+          format: uuid
+        role:
+          type: string
+          maxLength: 255
+      required:
+      - role
+      - user
+    OrganizationUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+        has_mfa_device:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        is_support:
+          type: boolean
+          readOnly: true
+          title: Support
+          description: Designates whether this user should be treated as a support.
+      required:
+      - email
+      - has_mfa_device
+      - id
+      - is_support
+      - roles
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        expire_uploads_period_days:
+          type: integer
+          readOnly: true
+          nullable: true
+        archive_period_days:
+          type: integer
+          readOnly: true
+          nullable: true
+        archive_restore_period_days:
+          type: integer
+          readOnly: true
+          nullable: true
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        uploads_enabled:
+          type: boolean
+          readOnly: true
+          description: Designates whether the organization can access upload functionality.
+        delete_samples_enabled:
+          type: boolean
+          readOnly: true
+          description: Designates whether the organization can delete samples.
+        project_sharing_enabled:
+          type: boolean
+          readOnly: true
+          description: When enabled, allows organization to share projects with other organizations.
+        account_on_hold:
+          type: boolean
+          readOnly: true
+          description: When enabled, limits ability of organization to manage data and displays UI warning to organization users that invoice is past due.
+        organization_type:
+          allOf:
+          - $ref: '#/components/schemas/OrganizationTypeEnum'
+          readOnly: true
+          description: 'Type of organization
+
+
+            * `enterprise` - enterprise
+
+            * `consumer` - consumer
+
+            * `consumer_provider` - consumer provider'
+      required:
+      - account_on_hold
+      - archive_period_days
+      - archive_restore_period_days
+      - delete_samples_enabled
+      - expire_uploads_period_days
+      - id
+      - name
+      - organization_type
+      - project_sharing_enabled
+      - roles
+      - uploads_enabled
+    PaginatedOrganizationUserList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type: string
+              format: uri
+              nullable: true
+            previous:
+              type: string
+              format: uri
+              nullable: true
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationUser'
+    UserRoleObject:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+      required:
+      - id
+      - name
+    PatchedOrganization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        expire_uploads_period_days:
+          type: integer
+          readOnly: true
+          nullable: true
+        archive_period_days:
+          type: integer
+          readOnly: true
+          nullable: true
+        archive_restore_period_days:
+          type: integer
+          readOnly: true
+          nullable: true
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        uploads_enabled:
+          type: boolean
+          readOnly: true
+          description: Designates whether the organization can access upload functionality.
+        delete_samples_enabled:
+          type: boolean
+          readOnly: true
+          description: Designates whether the organization can delete samples.
+        project_sharing_enabled:
+          type: boolean
+          readOnly: true
+          description: When enabled, allows organization to share projects with other organizations.
+        account_on_hold:
+          type: boolean
+          readOnly: true
+          description: When enabled, limits ability of organization to manage data and displays UI warning to organization users that invoice is past due.
+        organization_type:
+          allOf:
+          - $ref: '#/components/schemas/OrganizationTypeEnum'
+          readOnly: true
+          description: 'Type of organization
+
+
+            * `enterprise` - enterprise
+
+            * `consumer` - consumer
+
+            * `consumer_provider` - consumer provider'
+    OrganizationTypeEnum:
+      enum:
+      - enterprise
+      - consumer
+      - consumer_provider
+      type: string
+      description: '* `enterprise` - enterprise
+
+        * `consumer` - consumer
+
+        * `consumer_provider` - consumer provider'
+  securitySchemes:
+    API key:
+      type: apiKey
+      description: 'Authorization header content formated as: `Api-Key <API-key>`
+
+        You can obtain new API key through Gencove''s web UI or `user-api-key` endpoint'
+      in: header
+      name: Authorization
+    JWT:
+      type: apiKey
+      description: 'Authorization header content formated as: `Bearer <json-web-token>`
+
+        You can obtain access token using `jwt-create` endpoint.'
+      in: header
+      name: Authorization

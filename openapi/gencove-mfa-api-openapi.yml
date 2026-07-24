@@ -1,0 +1,166 @@
+openapi: 3.0.3
+info:
+  title: Gencove Back array mfa API
+  version: v2
+  contact:
+    email: support@gencove.com
+  license:
+    name: Proprietary
+  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+servers:
+- url: https://api.gencove.com
+tags:
+- name: mfa
+paths:
+  /api/v2/mfa-disable/:
+    delete:
+      operationId: mfa_disable_destroy
+      description: Disable MFA for your account.
+      tags:
+      - mfa
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '204':
+          description: No response body
+  /api/v2/mfa-setup/:
+    post:
+      operationId: mfa_setup_create
+      description: Initial step to add MFA to your account.
+      tags:
+      - mfa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUpMFA'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetUpMFA'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SetUpMFA'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUpMFA'
+          description: ''
+  /api/v2/mfa-status/:
+    get:
+      operationId: mfa_status_retrieve
+      description: Returns the status of MFA of the user.
+      tags:
+      - mfa
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MFAStatus'
+          description: ''
+  /api/v2/mfa-validate/:
+    post:
+      operationId: mfa_validate_create
+      description: Second step to add MFA to your account.
+      tags:
+      - mfa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateSetUpMFA'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ValidateSetUpMFA'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ValidateSetUpMFA'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateSetUpMFA'
+          description: ''
+components:
+  schemas:
+    ValidateSetUpMFA:
+      type: object
+      description: Mixin to add token validation to serializers.
+      properties:
+        token:
+          type: string
+          writeOnly: true
+        backup_tokens:
+          type: array
+          items: {}
+          readOnly: true
+      required:
+      - backup_tokens
+      - token
+    DeviceTypeEnum:
+      enum:
+      - generator
+      - yubikey
+      type: string
+      description: '* `generator` - Token generator
+
+        * `yubikey` - YubiKey'
+    MFAStatus:
+      type: object
+      description: Serializer just to use in swagger schema.
+      properties:
+        has_mfa_device:
+          type: boolean
+          readOnly: true
+      required:
+      - has_mfa_device
+    SetUpMFA:
+      type: object
+      properties:
+        device_type:
+          allOf:
+          - $ref: '#/components/schemas/DeviceTypeEnum'
+          writeOnly: true
+        secret:
+          type: string
+          readOnly: true
+          description: Authenticator secret, used when device_type is "generator"
+        config_url:
+          type: string
+          format: uri
+          readOnly: true
+          description: Url to build the QR code image, used when device_type is "generator"
+      required:
+      - config_url
+      - device_type
+      - secret
+  securitySchemes:
+    API key:
+      type: apiKey
+      description: 'Authorization header content formated as: `Api-Key <API-key>`
+
+        You can obtain new API key through Gencove''s web UI or `user-api-key` endpoint'
+      in: header
+      name: Authorization
+    JWT:
+      type: apiKey
+      description: 'Authorization header content formated as: `Bearer <json-web-token>`
+
+        You can obtain access token using `jwt-create` endpoint.'
+      in: header
+      name: Authorization

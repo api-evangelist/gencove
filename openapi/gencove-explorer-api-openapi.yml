@@ -1,0 +1,599 @@
+openapi: 3.0.3
+info:
+  title: Gencove Back array explorer API
+  version: v2
+  contact:
+    email: support@gencove.com
+  license:
+    name: Proprietary
+  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+servers:
+- url: https://api.gencove.com
+tags:
+- name: explorer
+paths:
+  /api/v2/explorer-access-url/:
+    post:
+      operationId: explorer_access_url_create
+      description: Retrieves the Access URL for the given instance.
+      tags:
+      - explorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstanceAccessURL'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstanceAccessURL'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstanceAccessURL'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '202':
+          description: No response body
+  /api/v2/explorer-cost-reporting/:
+    get:
+      operationId: explorer_cost_reporting_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - explorer
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedExplorerCostReportRecordList'
+          description: ''
+  /api/v2/explorer-data-credentials/:
+    post:
+      operationId: explorer_data_credentials_create
+      tags:
+      - explorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetExplorerDataCredentialsResponse'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GetExplorerDataCredentialsResponse'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GetExplorerDataCredentialsResponse'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetExplorerDataCredentialsResponse'
+          description: ''
+  /api/v2/explorer-instances/:
+    get:
+      operationId: explorer_instances_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - explorer
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedExplorerInstanceList'
+          description: ''
+  /api/v2/explorer-instances-inactivity-stop/:
+    post:
+      operationId: explorer_instances_inactivity_stop_create
+      description: Sets the inactivity threshold for the given instances.
+      tags:
+      - explorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesInactivityStop'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesInactivityStop'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesInactivityStop'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '202':
+          description: No response body
+  /api/v2/explorer-instances-inactivity-stop-organization/:
+    get:
+      operationId: explorer_instances_inactivity_stop_organization_retrieve
+      tags:
+      - explorer
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplorerInstancesInactivityStopOrganization'
+          description: ''
+    post:
+      operationId: explorer_instances_inactivity_stop_organization_create
+      description: Sets the inactivity treshold for the user's organization.
+      tags:
+      - explorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesInactivityStopOrganization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesInactivityStopOrganization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesInactivityStopOrganization'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '202':
+          description: No response body
+  /api/v2/explorer-session-start/:
+    post:
+      operationId: explorer_session_start_create
+      description: Start an Explorer session by setting the user_session cookie and returning a clean Explorer URL.
+      tags:
+      - explorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplorerSessionStart'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExplorerSessionStart'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExplorerSessionStart'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplorerSessionStartResponse'
+          description: ''
+  /api/v2/explorer-shell-session-credentials/:
+    post:
+      operationId: explorer_shell_session_credentials_create
+      tags:
+      - explorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplorerShellSessionCredentials'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExplorerShellSessionCredentials'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExplorerShellSessionCredentials'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplorerShellSessionCredentialsResponse'
+          description: ''
+  /api/v2/explorer-start-instances/:
+    post:
+      operationId: explorer_start_instances_create
+      description: Starts the given instances.
+      tags:
+      - explorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesStart'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesStart'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesStart'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '202':
+          description: No response body
+  /api/v2/explorer-stop-instances/:
+    post:
+      operationId: explorer_stop_instances_create
+      description: Stops the given instances.
+      tags:
+      - explorer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesStop'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesStop'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExplorerInstancesStop'
+        required: true
+      security:
+      - JWT: []
+      - API key: []
+      responses:
+        '202':
+          description: No response body
+components:
+  schemas:
+    ExplorerSessionStartResponse:
+      type: object
+      properties:
+        explorer_url:
+          type: string
+          description: Clean Explorer URL to open after the session cookie is set.
+        expires_in:
+          type: integer
+          description: Explorer session duration in seconds.
+      required:
+      - expires_in
+      - explorer_url
+    ExplorerInstancesInactivityStop:
+      type: object
+      properties:
+        instance_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          maxItems: 100
+          minItems: 1
+        stop_after_inactivity_hours:
+          type: integer
+          nullable: true
+          description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
+      required:
+      - instance_ids
+      - stop_after_inactivity_hours
+    GetExplorerDataCredentialsResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+        access_key:
+          type: string
+        secret_key:
+          type: string
+        token:
+          type: string
+        expiry_time:
+          type: string
+          format: date-time
+        region_name:
+          type: string
+      required:
+      - access_key
+      - expiry_time
+      - region_name
+      - secret_key
+      - token
+      - version
+    ExplorerSessionStart:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required:
+      - id
+    ExplorerShellSessionCredentialsResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+        access_key:
+          type: string
+        secret_key:
+          type: string
+        token:
+          type: string
+        expiry_time:
+          type: string
+          format: date-time
+        region_name:
+          type: string
+        ec2_instance_id:
+          type: string
+        shell_session_ssm_document_name:
+          type: string
+        network_activity_ssm_document_name:
+          type: string
+      required:
+      - access_key
+      - ec2_instance_id
+      - expiry_time
+      - network_activity_ssm_document_name
+      - region_name
+      - secret_key
+      - shell_session_ssm_document_name
+      - token
+      - version
+    ExplorerInstancesInactivityStopOrganization:
+      type: object
+      properties:
+        explorer_override_stop_after_inactivity_hours:
+          type: boolean
+        explorer_stop_after_inactivity_hours:
+          type: integer
+          description: 'After how many hours of inactivity should an explorer instance be stopped. If org.explorer_override_stop_after_inactivity_hours or instance.stop_after_inactivity_hours is None, then: 0 -> do not stop instances; Any number -> amount of hours to wait before stopping instances. Otherwise, use instance.stop_after_inactivity_hours.'
+      required:
+      - explorer_override_stop_after_inactivity_hours
+      - explorer_stop_after_inactivity_hours
+    PaginatedExplorerCostReportRecordList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type: string
+              format: uri
+              nullable: true
+            previous:
+              type: string
+              format: uri
+              nullable: true
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExplorerCostReportRecord'
+    ExplorerCostReportRecord:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        start_date:
+          type: string
+          format: date
+          title: Cost Report Start Date
+          description: First day of the month for this reporting cycle
+        end_date:
+          type: string
+          format: date
+          title: Cost Report End Date
+          description: Last day of the month for this reporting cycle
+        report_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,13}(?:\.\d{0,2})?$
+        is_current_report:
+          type: boolean
+          readOnly: true
+        report_is_finalized:
+          type: boolean
+          description: If True, this record will no longer be automatically updated
+        last_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileNested'
+      required:
+      - end_date
+      - files
+      - id
+      - is_current_report
+      - last_updated
+      - start_date
+    ExplorerInstanceAccessURL:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        access_token_expiration:
+          type: integer
+          maximum: 86400
+          minimum: 1
+          description: Number of seconds before the URL expires. Maximum is 86400 seconds.
+      required:
+      - id
+    FileNested:
+      type: object
+      description: Used for all nested files except for files associated with sample.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        s3_path:
+          type: string
+          description: S3 object key
+          maxLength: 1024
+        size:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          nullable: true
+          description: Size as reported by AWS in bytes
+        download_url:
+          type: string
+          readOnly: true
+        file_type:
+          type: string
+          description: File extension
+          readOnly: true
+        checksum_sha256:
+          type: string
+          description: Object's sha256 Checksum
+          maxLength: 64
+        shadow_mode:
+          type: boolean
+          nullable: true
+          description: If true, file is only accessible by organizations with shadow mode access enabled.
+      required:
+      - download_url
+      - file_type
+      - id
+    ExplorerInstancesStart:
+      type: object
+      properties:
+        instance_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          maxItems: 100
+          minItems: 1
+      required:
+      - instance_ids
+    ExplorerInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        stop_after_inactivity_hours:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+          nullable: true
+          description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
+      required:
+      - id
+      - status
+    ExplorerShellSessionCredentials:
+      type: object
+      properties:
+        instance_id:
+          type: string
+          format: uuid
+      required:
+      - instance_id
+    PaginatedExplorerInstanceList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type: string
+              format: uri
+              nullable: true
+            previous:
+              type: string
+              format: uri
+              nullable: true
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExplorerInstance'
+    ExplorerInstancesStop:
+      type: object
+      properties:
+        instance_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          maxItems: 100
+          minItems: 1
+      required:
+      - instance_ids
+  securitySchemes:
+    API key:
+      type: apiKey
+      description: 'Authorization header content formated as: `Api-Key <API-key>`
+
+        You can obtain new API key through Gencove''s web UI or `user-api-key` endpoint'
+      in: header
+      name: Authorization
+    JWT:
+      type: apiKey
+      description: 'Authorization header content formated as: `Bearer <json-web-token>`
+
+        You can obtain access token using `jwt-create` endpoint.'
+      in: header
+      name: Authorization
