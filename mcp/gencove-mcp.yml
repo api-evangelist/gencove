@@ -1,0 +1,42 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/gencove-openapi-original.json
+note: >-
+  No official hosted Gencove MCP server was found. This is a candidate tool list
+  derived from key OpenAPI operations, offered as a starting point for exposing
+  the Gencove API to agents.
+server:
+  name: gencove
+  transport: http
+tools:
+- name: list_projects
+  description: List projects in the organization.
+  source_operation: openapi/gencove-openapi-original.json#projects_list
+- name: create_project
+  description: Create a project bound to a pipeline capability.
+  source_operation: openapi/gencove-openapi-original.json#projects_create
+- name: get_project
+  description: Retrieve a single project.
+  source_operation: openapi/gencove-openapi-original.json#projects_retrieve
+- name: list_project_samples
+  description: List samples in a project.
+  source_operation: openapi/gencove-openapi-original.json#project_samples_list
+- name: get_sample
+  description: Retrieve sample details and deliverable files.
+  source_operation: openapi/gencove-openapi-original.json#samples_retrieve
+- name: list_pipelines
+  description: List available analysis pipelines.
+  source_operation: openapi/gencove-openapi-original.json#pipeline_list
+- name: list_pipeline_capabilities
+  description: List pipeline capabilities (used when creating projects).
+  source_operation: openapi/gencove-openapi-original.json#pipeline_capabilities_list
+- name: create_upload_url
+  description: Get a presigned upload form for FASTQ/array data.
+  source_operation: openapi/gencove-openapi-original.json#array_data_upload_form_create
+- name: get_merged_vcf
+  description: Retrieve the merged VCF deliverable for a project.
+  source_operation: openapi/gencove-openapi-original.json#project_merge_vcfs_retrieve
+- name: create_batch
+  description: Create a batch within a project.
+  source_operation: openapi/gencove-openapi-original.json#project_batches_create

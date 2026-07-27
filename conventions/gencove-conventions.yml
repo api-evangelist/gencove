@@ -1,0 +1,61 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/gencove-openapi-original.json
+docs: https://docs.gencove.com/base/getting-started/
+base_url: https://api.gencove.com/api/v2/
+regional_hosts:
+- https://api.gencove.com
+- https://api.eu1.gencove.com
+authentication:
+  style: api-key-header
+  header: Authorization
+  formats:
+  - 'Api-Key <API-key>'
+  - 'Bearer <json-web-token>'
+  ref: authentication/gencove-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v2
+  example: /api/v2/projects/
+idempotency:
+  supported: false
+  note: >-
+    Gencove does not document an idempotency-key header; the OpenAPI declares no
+    Idempotency-Key parameter. Create operations are not advertised as idempotent.
+pagination:
+  style: limit-offset
+  request_params:
+  - limit
+  - offset
+  response_envelope:
+    results: array of resource objects
+    meta:
+      count: total number of records
+      next: uri to next page (nullable)
+      previous: uri to previous page (nullable)
+  example_schema: PaginatedProjectList
+filtering:
+  common_params:
+  - search
+  - status
+  - sort_by
+  - sort_order
+  - created_after
+  - created_before
+  - modified_after
+  - modified_before
+  - hidden_status
+  - archive_status
+error_envelope:
+  framework: django-rest-framework
+  shape: >-
+    JSON object with a top-level `detail` string for auth/permission/not-found
+    errors, or field-keyed arrays of messages for validation (400) errors.
+  ref: errors/gencove-error-codes.yml
+events:
+  supported: true
+  mechanism: webhooks
+  ref: asyncapi/gencove-webhooks.yml
+rate_limiting:
+  documented: false
+  note: No rate-limit headers or quotas are documented in the public OpenAPI or docs.

@@ -1,0 +1,14 @@
+{
+  "repo": "gencove",
+  "feeds": [
+    {
+      "source": "https://docs.gencove.com/general/support/",
+      "feed_url": "https://docs.gencove.com/general/support/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-07-25T15:00:33Z"
+}

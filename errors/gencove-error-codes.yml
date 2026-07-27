@@ -1,0 +1,39 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gencove-openapi-original.json
+format: drf-json
+note: >-
+  The public OpenAPI declares only success (2xx) responses, so this catalog is
+  derived from the API's framework behavior (Django REST Framework) and its
+  declared apiKey/JWT security schemes rather than from explicit 4xx/5xx schemas
+  in the spec. The error envelope is a JSON object carrying a `detail` string for
+  auth/permission/not-found errors and field-keyed message arrays for validation.
+envelope:
+  detail: string message for auth, permission and not-found errors
+  field_errors: object mapping field name -> array of messages (validation)
+problems:
+- status: 400
+  title: Bad Request
+  meaning: Request body or query parameters failed validation.
+  remediation: Fix the field(s) listed in the response body and retry.
+- status: 401
+  title: Unauthorized
+  meaning: Missing or invalid Authorization header (Api-Key or Bearer JWT).
+  remediation: Provide a valid API key or a fresh JWT via jwt-create/jwt-refresh.
+  evidence: securitySchemes API key + JWT present in OpenAPI
+- status: 403
+  title: Forbidden
+  meaning: Authenticated principal lacks permission for the resource/organization.
+  remediation: Check the caller's role and organization membership.
+- status: 404
+  title: Not Found
+  meaning: The requested project, sample, or object does not exist or is not visible.
+  remediation: Verify the resource id and that it belongs to your organization.
+- status: 429
+  title: Too Many Requests
+  meaning: Client is sending requests faster than allowed (framework throttling).
+  remediation: Back off and retry; batch operations where possible.
+- status: 500
+  title: Internal Server Error
+  meaning: Unexpected server-side error.
+  remediation: Retry later; contact support@gencove.com if it persists.

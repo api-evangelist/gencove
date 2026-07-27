@@ -1,0 +1,26 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gencove-openapi-original.json
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Publishes an OpenAPI 3.0.3 document at /api/v2/openapi.json (124 paths, 151 operations).
+- id: oauth2
+  conforms: false
+  evidence: Auth is a static API key or a JWT bearer token; no OAuth2 authorization flows.
+- id: openid-connect
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use the Django REST Framework JSON envelope, not application/problem+json.
+- id: json-api
+  conforms: false
+- id: cursor-pagination
+  conforms: false
+  evidence: Uses limit/offset pagination with a meta{count,next,previous}+results envelope.
+- id: webhooks
+  conforms: true
+  evidence: Emits signed webhook events (Gencove-Signature) for analysis completion and related events.
+- id: fhir
+  conforms: false
+  evidence: Genomics analysis platform; does not expose FHIR resources.

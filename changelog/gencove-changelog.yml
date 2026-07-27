@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: searched
+source: https://pypi.org/project/gencove/#history
+note: >-
+  Gencove versions its API/CLI/SDK together as the `gencove` package. There is no
+  separate dated API changelog page; the PyPI release history is the authoritative
+  dated record for the client and its API coverage.
+scheme: semver
+current_version: 4.3.0
+entries:
+- version: 4.3.0
+  date: '2026-06-25'
+- version: 4.2.1
+  date: '2026-03-19'
+- version: 4.2.0
+  date: '2025-12-24'
+- version: 4.1.0
+  date: '2025-10-23'
+- version: 4.0.1
+  date: '2025-10-08'
+- version: 4.0.0
+  date: '2025-10-08'
+  breaking: true
+- version: 3.3.0
+  date: '2025-09-29'
+- version: 3.2.0
+  date: '2025-07-10'

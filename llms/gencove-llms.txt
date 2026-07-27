@@ -1,0 +1,23 @@
+# Gencove
+
+> Gencove is an enterprise analytics platform for low-pass whole genome sequencing (lpWGS). Its REST API (base `https://api.gencove.com/api/v2/`) lets you upload FASTQ/array data, run samples through analysis pipelines, track sample status, download deliverables (including merged VCFs), and receive signed webhook events on analysis completion. Authenticate with a static API key (`Authorization: Api-Key <key>`) or a JWT bearer token.
+
+## APIs
+- [Gencove Back API](https://api.gencove.com/api/v2/openapi.json): OpenAPI 3.0.3, 124 paths / 151 operations across projects, samples, pipelines, uploads, batches, BaseSpace/S3 imports, Explorer, and organization/user management.
+
+## Docs
+- [Getting Started](https://docs.gencove.com/base/getting-started/): base URL, authentication, and first requests.
+- [CLI Reference](https://docs.gencove.com/base/cli-reference/): the `gencove` command surface.
+- [SDK / Explorer Reference](https://docs.gencove.com/explorer/reference/): Gencove Explorer SDK.
+- [Support](https://docs.gencove.com/general/support/): support@gencove.com.
+- [Status](https://gencove.statuspage.io): platform status page.
+
+## Specs
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/gencove/refs/heads/main/openapi/gencove-openapi-original.json)
+- [Authentication](https://raw.githubusercontent.com/api-evangelist/gencove/refs/heads/main/authentication/gencove-authentication.yml)
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/gencove/refs/heads/main/conventions/gencove-conventions.yml)
+- [Webhooks](https://raw.githubusercontent.com/api-evangelist/gencove/refs/heads/main/asyncapi/gencove-webhooks.yml)
+- [Data Model](https://raw.githubusercontent.com/api-evangelist/gencove/refs/heads/main/data-model/gencove-data-model.yml)
+
+## Packages
+- [Python CLI/SDK (PyPI)](https://pypi.org/project/gencove/): `pip install gencove` (official, Apache-2.0).

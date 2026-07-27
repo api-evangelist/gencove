@@ -1,9 +1,30 @@
 aid: gencove
 name: Gencove
-description: 'Gencove is a company surfaced as a portfolio company of version-one-ventures and added to
-  the API Evangelist network as a stub for enrichment. Sector: health. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Gencove is an enterprise analytics platform for low-pass whole genome sequencing
+  (lpWGS). Its REST API lets customers upload FASTQ and array data, run samples
+  through configurable analysis pipelines, track sample status, download deliverables
+  (including merged VCFs, imputation and ancestry outputs), manage projects, batches,
+  BaseSpace and S3 imports, and operate the Gencove Explorer compute environment.
+  The platform is used across human health, agriculture and research to turn raw
+  sequencing reads into genotypes, polygenic scores and ancestry at industrial scale.
+  Access is via a web dashboard, the official `gencove` Python CLI/SDK, and a
+  versioned HTTP API authenticated with an API key or JWT, with signed webhooks for
+  analysis-completion events.
 url: https://raw.githubusercontent.com/api-evangelist/gencove/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.google.com/s2/favicons?domain=gencove.com&sz=128
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -12,11 +33,217 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Health
-apis: []
+- Genomics
+- Sequencing
+- Bioinformatics
+- DNA
+- Life Sciences
+- Analytics
+apis:
+- aid: gencove:gencove-array-api
+  name: Gencove array API
+  description: The array API from Gencove — 1 operation(s) for array.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - array
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-array-api-openapi.yml
+- aid: gencove:gencove-basespace-api
+  name: Gencove basespace API
+  description: The basespace API from Gencove — 6 operation(s) for basespace.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - basespace
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-basespace-api-openapi.yml
+- aid: gencove:gencove-batch-api
+  name: Gencove batch API
+  description: The batch API from Gencove — 1 operation(s) for batch.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - batch
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-batch-api-openapi.yml
+- aid: gencove:gencove-billing-api
+  name: Gencove billing API
+  description: The billing API from Gencove — 1 operation(s) for billing.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - billing
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-billing-api-openapi.yml
+- aid: gencove:gencove-explorer-api
+  name: Gencove explorer API
+  description: The explorer API from Gencove — 10 operation(s) for explorer.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - explorer
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-explorer-api-openapi.yml
+- aid: gencove:gencove-file-api
+  name: Gencove file API
+  description: The file API from Gencove — 2 operation(s) for file.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - file
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-file-api-openapi.yml
+- aid: gencove:gencove-firstmile-api
+  name: Gencove firstmile API
+  description: The firstmile API from Gencove — 2 operation(s) for firstmile.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - firstmile
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-firstmile-api-openapi.yml
+- aid: gencove:gencove-invitation-api
+  name: Gencove invitation API
+  description: The invitation API from Gencove — 3 operation(s) for invitation.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - invitation
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-invitation-api-openapi.yml
+- aid: gencove:gencove-jwt-api
+  name: Gencove jwt API
+  description: The jwt API from Gencove — 4 operation(s) for jwt.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - jwt
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-jwt-api-openapi.yml
+- aid: gencove:gencove-mfa-api
+  name: Gencove mfa API
+  description: The mfa API from Gencove — 4 operation(s) for mfa.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - mfa
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-mfa-api-openapi.yml
+- aid: gencove:gencove-notification-api
+  name: Gencove notification API
+  description: The notification API from Gencove — 1 operation(s) for notification.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - notification
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-notification-api-openapi.yml
+- aid: gencove:gencove-organization-api
+  name: Gencove organization API
+  description: The organization API from Gencove — 5 operation(s) for organization.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - organization
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-organization-api-openapi.yml
+- aid: gencove:gencove-pipeline-api
+  name: Gencove pipeline API
+  description: The pipeline API from Gencove — 5 operation(s) for pipeline.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - pipeline
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-pipeline-api-openapi.yml
+- aid: gencove:gencove-project-api
+  name: Gencove project API
+  description: The project API from Gencove — 34 operation(s) for project.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - project
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-project-api-openapi.yml
+- aid: gencove:gencove-role-api
+  name: Gencove role API
+  description: The role API from Gencove — 1 operation(s) for role.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - role
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-role-api-openapi.yml
+- aid: gencove:gencove-s3-api
+  name: Gencove s3 API
+  description: The s3 API from Gencove — 5 operation(s) for s3.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - s3
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-s3-api-openapi.yml
+- aid: gencove:gencove-sample-api
+  name: Gencove sample API
+  description: The sample API from Gencove — 17 operation(s) for sample.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - sample
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-sample-api-openapi.yml
+- aid: gencove:gencove-social-api
+  name: Gencove social API
+  description: The social API from Gencove — 3 operation(s) for social.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - social
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-social-api-openapi.yml
+- aid: gencove:gencove-upload-api
+  name: Gencove upload API
+  description: The upload API from Gencove — 7 operation(s) for upload.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - upload
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-upload-api-openapi.yml
+- aid: gencove:gencove-user-api
+  name: Gencove user API
+  description: The user API from Gencove — 12 operation(s) for user.
+  humanURL: https://docs.gencove.com/base/getting-started/
+  baseURL: https://api.gencove.com/api/v2/
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/gencove-user-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +252,72 @@ maintainers:
 common:
 - type: Website
   url: https://gencove.com
+- type: DeveloperPortal
+  url: https://docs.gencove.com
+- type: Documentation
+  url: https://docs.gencove.com/base/getting-started/
+- type: APIReference
+  url: https://docs.gencove.com/base/getting-started/
+- type: GettingStarted
+  url: https://docs.gencove.com/base/getting-started/
+- type: Support
+  url: https://docs.gencove.com/general/support/
+- type: Blog
+  url: https://gencove.com/blog
+- type: GitHubOrganization
+  url: https://github.com/gncv
+- type: StatusPage
+  url: https://gencove.statuspage.io
+- type: SignUp
+  url: https://consumer.gencove.com/user/register/
+- type: Login
+  url: https://consumer.gencove.com/user/login/
+- type: TermsOfService
+  url: https://consumer.gencove.com/terms-and-conditions/
+- type: PrivacyPolicy
+  url: https://consumer.gencove.com/privacy-policy/
+- type: OpenAPI
+  url: openapi/gencove-openapi-original.json
+- type: Overlay
+  url: overlays/gencove-openapi-overlay.yaml
+- type: Authentication
+  url: authentication/gencove-authentication.yml
+- type: AgenticAccess
+  url: agentic-access/gencove-agentic-access.yml
+- type: DomainSecurity
+  url: security/gencove-domain-security.yml
+- type: Packages
+  url: packages/gencove-packages.yml
+- type: SDKs
+  url: packages/gencove-packages.yml
+- type: CLI
+  url: cli/gencove-cli.yml
+- type: Conventions
+  url: conventions/gencove-conventions.yml
+- type: ErrorCatalog
+  url: errors/gencove-error-codes.yml
+- type: DataModel
+  url: data-model/gencove-data-model.yml
+- type: Lifecycle
+  url: lifecycle/gencove-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/gencove-lifecycle.yml
+- type: Conformance
+  url: conformance/gencove-conformance.yml
+- type: ChangeLog
+  url: changelog/gencove-changelog.yml
+- type: MCPServer
+  url: mcp/gencove-mcp.yml
+- type: LLMsTxt
+  url: llms/gencove-llms.txt
+- type: WellKnown
+  url: well-known/gencove-well-known.yml
+- type: Webhooks
+  url: asyncapi/gencove-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

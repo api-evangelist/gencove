@@ -1,0 +1,22 @@
+generated: '2026-07-19'
+method: searched
+host: https://api.gencove.com
+note: >-
+  Probed the standard /.well-known/ discovery surface on the API and marketing
+  hosts. None are published (all 404). Recorded as valid empty result.
+documents:
+- path: /.well-known/security.txt
+  host: https://api.gencove.com
+  status: 404
+- path: /.well-known/security.txt
+  host: https://gencove.com
+  status: 404
+- path: /.well-known/openid-configuration
+  host: https://api.gencove.com
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  host: https://api.gencove.com
+  status: 404
+- path: /.well-known/api-catalog
+  host: https://api.gencove.com
+  status: 404

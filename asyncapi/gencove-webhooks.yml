@@ -1,0 +1,30 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/gencove-openapi-original.json
+spec_type: Webhooks
+docs: https://docs.gencove.com/base/getting-started/
+delivery:
+  transport: http-post
+  registration: >-
+    Set a `webhook_url` on a Project (Project.webhook_url); Gencove POSTs events
+    to that URL when they occur.
+  signature_header: Gencove-Signature
+  signature_algorithm: HMAC (verified with a shared secret)
+  verify_tool: gencove webhooks (CLI signature verification)
+events:
+- type: analysis_complete_v2
+  description: Submitted project samples have completed analysis (current format).
+- type: batch_final_report_complete_v2
+  description: A subset-of-variants batch final report has been created (current format).
+- type: samples_restored
+  description: Samples have been restored from archive.
+- type: explorer_s3_hot_storage_exceeded
+  description: Explorer S3 hot-storage threshold exceeded.
+- type: explorer_s3_cold_storage_exceeded
+  description: Explorer S3 cold-storage threshold exceeded.
+- type: analysis_complete
+  description: Legacy - submitted project samples completed analysis (old event format).
+  deprecated: true
+- type: batch_final_report
+  description: Legacy - batch final report created (old event format).
+  deprecated: true

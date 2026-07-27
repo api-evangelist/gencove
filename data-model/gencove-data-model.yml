@@ -1,0 +1,53 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gencove-openapi-original.json
+note: >-
+  Entity-relationship graph derived from OpenAPI component schemas and id-reference
+  fields. Gencove organizes genomic data as Organization -> Project -> Sample,
+  with pipeline capabilities, batches, uploads and files attached.
+entities:
+- name: Organization
+  schema: Organization
+  fields: [id, name]
+  relationships:
+  - has_many: Project (via organization)
+  - has_many: User (organization_users)
+- name: Project
+  schema: Project
+  fields: [id, name, description, organization, sample_count, pipeline_capabilities, roles, webhook_url, is_shared, locked]
+  relationships:
+  - belongs_to: Organization (via organization)
+  - has_many: Sample (via project)
+  - has_many: Batch (project_batches)
+  - has_many: PipelineCapability (via pipeline_capabilities)
+- name: Sample
+  schema: SampleDetails
+  fields: [id, project, run, client_id, physical_id, legacy_id, last_status, archive_last_status, files]
+  relationships:
+  - belongs_to: Project (via project)
+  - has_many: File (via files)
+  - has_one: SampleStatus (via last_status)
+- name: Batch
+  schema: BatchDetail
+  fields: [id, name, batch_type, files, status]
+  relationships:
+  - belongs_to: Project
+  - has_many: File
+- name: Pipeline
+  schema: Pipeline
+  fields: [id, version, capabilities]
+  relationships:
+  - has_many: PipelineCapability
+- name: Upload
+  schema: Upload
+  relationships:
+  - belongs_to: Project
+- name: ExplorerInstance
+  schema: ExplorerInstance
+  relationships:
+  - belongs_to: Organization
+- name: File
+  schema: File
+  fields: [id, file_type, download_url, checksum_sha256]
+  relationships:
+  - belongs_to: Sample

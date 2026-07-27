@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/gencove-openapi-original.json
+skills:
+- file: gencove-analyze-samples.md
+  name: Analyze samples through a Gencove project
+  api: openapi/gencove-openapi-original.json
+  operations: [pipeline_capabilities_list, projects_create, upload_credentials_create, project_samples_create, project_samples_list, samples_retrieve]
+- file: gencove-download-deliverables.md
+  name: Download Gencove analysis deliverables
+  api: openapi/gencove-openapi-original.json
+  operations: [projects_list, project_samples_list, samples_retrieve, project_merge_vcfs_retrieve, file_types_list]

@@ -1,0 +1,24 @@
+generated: '2026-07-19'
+method: searched
+source: https://pypi.org/project/gencove/
+packages:
+- language: python
+  registry: pypi
+  name: gencove
+  url: https://pypi.org/project/gencove/
+  install: pip install gencove
+  latest_version: 4.3.0
+  license: Apache-2.0
+  repository: https://gitlab.com/gencove/cli
+  mirror: https://github.com/gncv/gencove-cli
+  official: true
+  description: >-
+    Official Gencove API client and command-line tool (the `gencove` binary).
+    Maintained by the Gencove Engineering Team; supports Python >=3.9.
+- language: python
+  registry: bioconda
+  name: gencove
+  url: https://bioconda.github.io/recipes/gencove/README.html
+  install: conda install -c bioconda gencove
+  official: true
+  description: Bioconda distribution of the official Gencove CLI/SDK.

@@ -1,0 +1,57 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.gencove.com/base/cli-reference/
+name: gencove
+binary: gencove
+package: packages/gencove-packages.yml
+docs: https://docs.gencove.com/base/cli-reference/
+install:
+- pip install gencove
+- conda install -c bioconda gencove
+auth:
+  env:
+  - GENCOVE_API_KEY
+  - GENCOVE_EMAIL
+  - GENCOVE_PASSWORD
+  note: API key and email/password credentials cannot be used simultaneously.
+command_groups:
+- name: upload
+  summary: Submit FASTQ files to Gencove.
+- name: uploads
+  summary: Track and list upload operations.
+- name: download
+  summary: Retrieve project deliverables (supports file-type filtering).
+- name: projects
+  summary: Create, configure and manage projects and their samples.
+- name: samples
+  summary: Manage sample metadata and file downloads.
+- name: basespace
+  summary: Manage Illumina BaseSpace imports and biosample operations.
+- name: s3
+  summary: Manage S3-based imports and auto-imports.
+- name: sample-manifests
+  summary: Handle sample manifest operations.
+- name: explorer
+  summary: Access Gencove Explorer data and instance management.
+- name: reports
+  summary: Generate usage and quality-control reports.
+- name: file-types
+  summary: Display available file types in the system.
+- name: webhooks
+  summary: Verify webhook signatures/functionality.
+key_flows:
+- name: Create a project and analyze samples
+  steps:
+  - gencove projects create (with a pipeline capability ID)
+  - gencove upload
+  - gencove projects list-samples
+- name: Auto-import from S3
+  steps:
+  - gencove s3 autoimports
+- name: Import from BaseSpace
+  steps:
+  - gencove basespace projects import
+- name: Download deliverables
+  steps:
+  - gencove download
+  - gencove projects get-merged-vcf

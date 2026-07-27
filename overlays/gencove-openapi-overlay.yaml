@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Gencove Back API
+  version: 1.0.0
+extends: openapi/gencove-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: gencove
+    x-apievangelist-sector: health
+    x-apievangelist-base-url: https://api.gencove.com/api/v2/
+    x-apievangelist-auth: api-key-header
+    x-apievangelist-pagination: limit-offset (meta{count,next,previous}+results)
+    x-apievangelist-events: webhooks (Gencove-Signature)
+- target: $.servers
+  update:
+  - url: https://api.gencove.com
+    description: Primary US API host
+  - url: https://api.eu1.gencove.com
+    description: EU regional API host

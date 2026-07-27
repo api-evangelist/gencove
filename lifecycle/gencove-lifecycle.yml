@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.gencove.com/base/getting-started/
+versioning:
+  scheme: uri-path
+  current: v2
+  docs: https://docs.gencove.com/base/getting-started/
+deprecation:
+  policy_documented: false
+  deprecated_event_types:
+  - analysis_complete
+  - batch_final_report
+  note: >-
+    The webhook EventType enum marks `analysis_complete` and `batch_final_report`
+    as legacy (superseded by the *_v2 events). No formal API deprecation/Sunset
+    header policy is published.
+sla:
+  documented: false
+status_page: https://gencove.statuspage.io
+deprecated_operations: []
