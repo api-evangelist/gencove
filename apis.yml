@@ -277,7 +277,7 @@ common:
 - type: PrivacyPolicy
   url: https://consumer.gencove.com/privacy-policy/
 - type: OpenAPI
-  url: openapi/gencove-openapi-original.json
+  url: openapi/_original/gencove-openapi-original.json
 - type: Overlay
   url: overlays/gencove-openapi-overlay.yaml
 - type: Authentication
