@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array upload API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "upload_credentials_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/upload-credentials/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "uploads_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/uploads/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search uploads by id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter uploads by upload statuses"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve list of user uploads."
+        },
+        {
+          "info": {
+            "name": "uploads_delete_unassigned_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/uploads-delete-unassigned/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "uploads_post_data_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/uploads-post-data/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns info about initialized file upload based on posted file\ndestination path."
+        },
+        {
+          "info": {
+            "name": "uploads_presigned_post_data_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/uploads-presigned-post-data/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns S3 presigned parameters needed for file upload as response for\ngiven file attributes."
+        },
+        {
+          "info": {
+            "name": "uploads_url_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/uploads-url/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "uploads_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/uploads/:upload_id",
+            "params": [
+              {
+                "name": "upload_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch single upload details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

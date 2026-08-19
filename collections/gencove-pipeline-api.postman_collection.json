@@ -1,0 +1,633 @@
+{
+  "item": [
+    {
+      "id": "f0a5b734-ce44-4843-8801-1a5d68e73c47",
+      "name": "pipeline",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f62d4d8c-5668-4c12-bda8-5c40215f4108",
+          "name": "pipeline list",
+          "request": {
+            "name": "pipeline list",
+            "description": {
+              "content": "Retrieve list of user projects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "pipeline",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Sort results"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>",
+                  "description": "Sort direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b12c54e9-ccef-42f3-9fc7-6a87ae7269a8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "pipeline",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"86c29181-7bcd-d422-0440-10cdf63dfe70\",\n      \"version\": \"string\"\n    },\n    {\n      \"id\": \"f66afbf6-c071-130d-8264-d1c454dbcaa3\",\n      \"version\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"count\": 365,\n    \"next\": \"https://LQnV.wbksH6X75hRJCvT.fQAUN0AmTM3cBYh79u5c7QSJ9+48epRuabYGTPktx+vrCGdzsFhKms.k9NsrqPQxg\",\n    \"previous\": \"http://bGNPAByrGhhLslkCt.tljabAQWVNA04cuRIXoR1+8Wo8xSvxUFAbUY0-ue9-CHLOJzAfG-d\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ef7342e-c6ee-4007-9caa-bd02093788b3",
+          "name": "pipeline capabilities list",
+          "request": {
+            "name": "pipeline capabilities list",
+            "description": {
+              "content": "List pipeline capabilities",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "pipeline-capabilities",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search pipeline capabilities by id"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "35142461-3029-46d7-b902-889450f82c61",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "pipeline-capabilities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"datasets\": \"string\",\n      \"description_markdown\": \"string\",\n      \"id\": \"c5cdda5f-f6af-35a0-2df8-5bbef99137be\",\n      \"key\": \"string\",\n      \"modifications_enabled\": \"string\",\n      \"name\": \"string\",\n      \"species\": \"string\",\n      \"steps\": \"string\",\n      \"private\": false,\n      \"merge_vcfs_enabled\": false,\n      \"supported_project_modifications\": {},\n      \"pipeline_category\": \"Human Genomics\"\n    },\n    {\n      \"datasets\": \"string\",\n      \"description_markdown\": \"string\",\n      \"id\": \"c4d485e5-bd0c-e832-630a-13398009104d\",\n      \"key\": \"string\",\n      \"modifications_enabled\": \"string\",\n      \"name\": \"string\",\n      \"species\": \"string\",\n      \"steps\": \"string\",\n      \"private\": true,\n      \"merge_vcfs_enabled\": true,\n      \"supported_project_modifications\": {},\n      \"pipeline_category\": \"Other\"\n    }\n  ],\n  \"meta\": {\n    \"count\": 9367,\n    \"next\": \"http://XXbvCpTeRfOBdjwABOEd.qqoxplz4bevaC\",\n    \"previous\": \"http://cOjBBWEyS.ikGeePnLZeTmYsBZwx-OQszeuHqljlviDY0alhcG3b8fA5bnIjQSC0M\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f9f1d3d-d0e5-458d-a582-59af11cb65b0",
+          "name": "pipeline capabilities retrieve",
+          "request": {
+            "name": "pipeline capabilities retrieve",
+            "description": {
+              "content": "Fetch single pipeline capabilities details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "pipeline-capabilities",
+                ":pipeline_capabilities_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pipeline_capabilities_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d12eaae9-37cd-41bf-86dc-30347412b6da",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "pipeline-capabilities",
+                    ":pipeline_capabilities_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_capabilities_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"datasets\": \"string\",\n  \"description_markdown\": \"string\",\n  \"id\": \"59474d51-68c5-6923-5afa-18742f636650\",\n  \"key\": \"string\",\n  \"modifications_enabled\": \"string\",\n  \"name\": \"string\",\n  \"species\": \"string\",\n  \"steps\": \"string\",\n  \"private\": true,\n  \"merge_vcfs_enabled\": false,\n  \"supported_project_modifications\": {},\n  \"pipeline_category\": \"Companion Animals\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8698abe1-42ab-4a82-8f9d-3b60bb9ca2ea",
+          "name": "pipeline latest retrieve",
+          "request": {
+            "name": "pipeline latest retrieve",
+            "description": {
+              "content": "Returns latest (newest) Pipeline instance.\n\nretrieve: Fetch single newest pipeline details including it's capabilities",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "pipeline-latest",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cdde171e-a0dd-4118-abd3-909e7274e479",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "pipeline-latest",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"capabilities\": [\n    {\n      \"datasets\": \"string\",\n      \"description_markdown\": \"string\",\n      \"id\": \"9f8a180a-88fb-1244-a9e8-c605b7dfddad\",\n      \"key\": \"string\",\n      \"modifications_enabled\": \"string\",\n      \"name\": \"string\",\n      \"species\": \"string\",\n      \"steps\": \"string\",\n      \"private\": true,\n      \"merge_vcfs_enabled\": false,\n      \"supported_project_modifications\": {},\n      \"pipeline_category\": \"Agriculture Animals & Plant Genomics\"\n    },\n    {\n      \"datasets\": \"string\",\n      \"description_markdown\": \"string\",\n      \"id\": \"f4461e11-fbe1-2e8f-a5bd-986bf837a340\",\n      \"key\": \"string\",\n      \"modifications_enabled\": \"string\",\n      \"name\": \"string\",\n      \"species\": \"string\",\n      \"steps\": \"string\",\n      \"private\": true,\n      \"merge_vcfs_enabled\": false,\n      \"supported_project_modifications\": {},\n      \"pipeline_category\": \"Companion Animals\"\n    }\n  ],\n  \"id\": \"b4b3b35b-fa51-f61b-ae82-b7c5448e98e7\",\n  \"version\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b3a678d-705f-4bfd-bc5c-c715dda718db",
+          "name": "pipeline retrieve",
+          "request": {
+            "name": "pipeline retrieve",
+            "description": {
+              "content": "Fetch single pipeline details including it's capabilities",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "pipeline",
+                ":pipeline_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pipeline_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f09003c1-9132-431b-86aa-6d5b2271192c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "pipeline",
+                    ":pipeline_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"capabilities\": [\n    {\n      \"datasets\": \"string\",\n      \"description_markdown\": \"string\",\n      \"id\": \"695f6786-7268-eb6f-9ed2-65d2005a76fe\",\n      \"key\": \"string\",\n      \"modifications_enabled\": \"string\",\n      \"name\": \"string\",\n      \"species\": \"string\",\n      \"steps\": \"string\",\n      \"private\": false,\n      \"merge_vcfs_enabled\": false,\n      \"supported_project_modifications\": {},\n      \"pipeline_category\": \"Other\"\n    },\n    {\n      \"datasets\": \"string\",\n      \"description_markdown\": \"string\",\n      \"id\": \"61235a48-3b9a-7a0a-e087-58c4f4ae88e0\",\n      \"key\": \"string\",\n      \"modifications_enabled\": \"string\",\n      \"name\": \"string\",\n      \"species\": \"string\",\n      \"steps\": \"string\",\n      \"private\": true,\n      \"merge_vcfs_enabled\": false,\n      \"supported_project_modifications\": {},\n      \"pipeline_category\": \"Companion Animals\"\n    }\n  ],\n  \"id\": \"3d87dcd6-54bf-d2e8-ee31-4a77a7246c9d\",\n  \"version\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gencove.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f882f89f-d560-403d-8d4d-6e41ab83c4d0",
+    "name": "Gencove Back array pipeline API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>\n\nContact Support:\n Email: support@gencove.com",
+      "type": "text/plain"
+    }
+  }
+}

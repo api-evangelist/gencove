@@ -1,0 +1,208 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array s3 API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "s3",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "s3_external_id_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/s3-external-id/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve and store S3 external ID for User."
+        },
+        {
+          "info": {
+            "name": "s3_external_id_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/s3-external-id/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve and store S3 external ID for User."
+        },
+        {
+          "info": {
+            "name": "s3_role_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/s3-role/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve and store S3 role for User."
+        },
+        {
+          "info": {
+            "name": "s3_role_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/s3-role/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve and store S3 role for User."
+        },
+        {
+          "info": {
+            "name": "s3_role_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.gencove.com/api/v2/s3-role/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve and store S3 role for User."
+        },
+        {
+          "info": {
+            "name": "s3_uri_autoimport_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/s3-uri-autoimport/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Import samples from s3 uri automatically."
+        },
+        {
+          "info": {
+            "name": "s3_uri_autoimport_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/s3-uri-autoimport/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates new autoimport job, if the job already exists updates metadata."
+        },
+        {
+          "info": {
+            "name": "s3_uri_autoimport_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.gencove.com/api/v2/s3-uri-autoimport/:s3_uri_import_id",
+            "params": [
+              {
+                "name": "s3_uri_import_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Import samples from s3 uri automatically."
+        },
+        {
+          "info": {
+            "name": "s3_uri_import_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/s3-uri-import/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Import samples from s3 uri."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array firstmile API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "firstmile",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "firstmile_s3_role_element_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/firstmile-s3-role-element/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "firstmile_s3_role_element_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/firstmile-s3-role-element/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "firstmile_validate_illumina_samplesheet_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/firstmile-validate-illumina-samplesheet/",
+            "params": [
+              {
+                "name": "illumina_samplesheet",
+                "value": "",
+                "type": "query",
+                "description": "Illumina SampleSheet.csv file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload Illumina SampleSheet.csv and validate that it conforms with FirstMile demultiplexing\nrequirements. Under the `[Data]` section, a custom column called `Gencove_Project_ID` must\nbe present; each sample must contain a valid, existing Gencove project ID value in this\ncolumn."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

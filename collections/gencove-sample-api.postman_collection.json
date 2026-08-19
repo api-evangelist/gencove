@@ -1,0 +1,2641 @@
+{
+  "item": [
+    {
+      "id": "f4810d33-b9b7-4ef6-a49e-fe1ddfc66261",
+      "name": "sample",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e51af3f-d674-4749-b497-90dbac6166d6",
+          "name": "sample ancestry retrieve",
+          "request": {
+            "name": "sample ancestry retrieve",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-ancestry",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0eda108b-6725-4f92-b8ae-6342a9b1760c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-ancestry",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ancestry\": {\n    \"value\": \"\"\n  },\n  \"metadata\": {\n    \"value\": \"\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c23d447a-afef-4179-bc53-a61201b93570",
+          "name": "sample consumer report create",
+          "request": {
+            "name": "sample consumer report create",
+            "description": {
+              "content": "Generate presigned URL for consumer report.\n\nArgs:\n    request: HTTP request\n\nReturns:\n    Response with presigned URL and expiration time",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-consumer-report",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "report_type",
+                  "value": "prs",
+                  "description": "Type of report to generate\n\n* `prs` - prs"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_in",
+                  "value": "600",
+                  "description": "Token expiration time in seconds. Note that this value is for the JWT delivered in the URL. Once the URL is accessed, a fixed duration session (15 minutes) is created that may outlive this token"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2b92df17-852c-4445-84a8-145aae68a9d7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-consumer-report",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of report to generate\n\n* `prs` - prs",
+                        "type": "text/plain"
+                      },
+                      "key": "report_type",
+                      "value": "prs"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Token expiration time in seconds. Note that this value is for the JWT delivered in the URL. Once the URL is accessed, a fixed duration session (15 minutes) is created that may outlive this token",
+                        "type": "text/plain"
+                      },
+                      "key": "expires_in",
+                      "value": "600"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"expires_at\": \"1988-08-22T03:36:15.387Z\",\n  \"url\": \"https://xBUtEfNZFgsLUwVAzpAYleAh.cdlhyk8zrDAHvTnqgggorq2flYLBS\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14a87c57-0f0c-4334-bd79-0efddb1fa318",
+          "name": "sample genomic variants list",
+          "request": {
+            "name": "sample genomic variants list",
+            "description": {
+              "content": "Return variant-level results from a sample's imputed VCF.\n\nProvide exactly one of the three query modes:\n\n- point: `?chromosome=chr11&position=<pos>`\n- range: `?chromosome=chr11&start_position=<start>&end_position=<end>`\n- rsid:  `?rsid=rs1,rs2,...`\n\n`chromosome` must be an h38 contig name with the `chr` prefix\n(chr1..chr22, chrX, chrY, chrM).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-genomic-variants",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "chromosome",
+                  "value": "<string>",
+                  "description": "h38 contig name with the `chr` prefix, e.g. `chr1`, `chr11`, `chrX`, `chrY`, `chrM` (point and range queries)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_position",
+                  "value": "<integer>",
+                  "description": "Range end (1-based); use with `start_position`. The span may not exceed 100000 bp."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "position",
+                  "value": "<integer>",
+                  "description": "1-based position for a point query"
+                },
+                {
+                  "disabled": false,
+                  "key": "rsid",
+                  "value": "<string>",
+                  "description": "Comma-separated rsIDs, e.g. `rs429358,rs7412` (at most 50 per request)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_position",
+                  "value": "<integer>",
+                  "description": "Range start (1-based); use with `end_position`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "32c00996-35d9-49f2-a724-ab6dbc961dba",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-genomic-variants",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chromosome",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_position",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "position",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "rsid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_position",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"alt\": [\n        \"string\",\n        \"string\"\n      ],\n      \"chromosome\": \"string\",\n      \"genotype\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"genotype_confidence\": 7497.232383289002,\n      \"info\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"position\": 6597,\n      \"quality\": 4340.300602176232,\n      \"ref\": \"string\",\n      \"rsid\": \"string\"\n    },\n    {\n      \"alt\": [\n        \"string\",\n        \"string\"\n      ],\n      \"chromosome\": \"string\",\n      \"genotype\": {\n        \"key_0\": \"string\"\n      },\n      \"genotype_confidence\": 8255.009463831273,\n      \"info\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"position\": 2944,\n      \"quality\": 6502.136175352817,\n      \"ref\": \"string\",\n      \"rsid\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"count\": 6412,\n    \"next\": \"http://vRSOtDTrwKdkGYLZNqNPJR.nypBimVex8iJGANbsN,5NawUldjv7EqivFSQqki4jhINSD0y\",\n    \"previous\": \"http://TjpeGPxHNXPJJxcb.hcR+yKnVJ9b.-0X.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a7ba387-dcdd-4782-8075-542e2cd40653",
+          "name": "sample kit create",
+          "request": {
+            "name": "sample kit create",
+            "description": {
+              "content": "Order a new kit for a sample",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-kit",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_address_city",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_address_country_code",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_address_line1",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_address_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_address_postal_code",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_address_state_region",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_phone",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_address_line2",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_address_line3",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "recipient_instructions",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "test_mode",
+                  "value": "false",
+                  "description": "Set to true to create a test order that will not be shipped. Defaults to false."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a4716ca-a014-4239-af92-bec4e61d0ade",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-kit",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "project_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "recipient_address_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "recipient_address_country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "recipient_address_line1",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "recipient_address_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "recipient_address_postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "recipient_address_state_region",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "recipient_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "recipient_phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "recipient_address_line2",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "recipient_address_line3",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "recipient_instructions",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to true to create a test order that will not be shipped. Defaults to false.",
+                        "type": "text/plain"
+                      },
+                      "key": "test_mode",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sample_id\": \"08c653ff-af5e-af2b-3485-3b506c2c8aa5\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5833a0b7-fdd9-422f-8940-5ee1c4bc17fb",
+          "name": "sample kit form create",
+          "request": {
+            "name": "sample kit form create",
+            "description": {
+              "content": "Create a temporary, payment-free kit-order session.\n\nAuth-gated to ``consumer_provider`` orgs and the ``sample_kit_create`` role\n(project-scoped). Creates a placeholder ``samples.Sample`` (status\n``consumer_awaiting_kit_order``), pins the JWT ``jti`` on it for replay\nprotection, and returns a tokenized URL the partner hands to an end user.\nThe ``Kit`` is only created once the end user submits the form.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-kit-form",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<uuid>",
+                  "description": "(Required) UUID of the consumer project to create the kit order in."
+                },
+                {
+                  "disabled": false,
+                  "key": "test_mode",
+                  "value": "false",
+                  "description": "Set to true to create a test order that will not be shipped. Defaults to false."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_on_success",
+                  "value": "",
+                  "description": "URL the end-user is redirected to after a successful order."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_on_failure",
+                  "value": "",
+                  "description": "URL the end-user is redirected to after a failed order."
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_in",
+                  "value": "600",
+                  "description": "JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f7c4b2cc-df7b-4877-b6c8-5b0f9ce2b02c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-kit-form",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID of the consumer project to create the kit order in.",
+                        "type": "text/plain"
+                      },
+                      "key": "project_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to true to create a test order that will not be shipped. Defaults to false.",
+                        "type": "text/plain"
+                      },
+                      "key": "test_mode",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL the end-user is redirected to after a successful order.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_on_success",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL the end-user is redirected to after a failed order.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_on_failure",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token.",
+                        "type": "text/plain"
+                      },
+                      "key": "expires_in",
+                      "value": "600"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"expires_at\": \"2002-02-07T05:00:10.292Z\",\n  \"sample_id\": \"f9240b18-e7dc-8e51-1b91-ae4d250c0267\",\n  \"url\": \"https://yXEMwqfoojQlXJhmNJXhL.dxzfBiiKzVApfDGGB9pSOdOP5RU.6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20b13a73-9e68-449d-9e88-aa0151fca633",
+          "name": "sample manifests csv template retrieve",
+          "request": {
+            "name": "sample manifests csv template retrieve",
+            "description": {
+              "content": "Download a sample manifest CSV template file based on the template_type parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-manifests-csv-template",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "template_type",
+                  "value": "<string>",
+                  "description": "Type of the sample manifest CSV template. Options are 96_well, 384_well, tube."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d0de4cb4-ab27-4ce8-9417-19dfb24f3885",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-manifests-csv-template",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "template_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "225004d6-5b64-4056-b33c-52ae87baca57",
+          "name": "sample manifests xlsx template retrieve",
+          "request": {
+            "name": "sample manifests xlsx template retrieve",
+            "description": {
+              "content": "Download a sample manifest XLSX template file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-manifests-xlsx-template",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0a44bdaf-3e01-4a3c-b8c2-69a4fa52e328",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-manifests-xlsx-template",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12b5a45e-ae70-4f68-b587-27615377cc6c",
+          "name": "sample manifests retrieve",
+          "request": {
+            "name": "sample manifests retrieve",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-manifests",
+                ":sample_manifest_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_manifest_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "982fa5fc-07d1-412b-ae6b-8bbb07c72e6b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-manifests",
+                    ":sample_manifest_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_manifest_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"file\": \"string\",\n  \"file_name\": \"string\",\n  \"id\": \"5f28b29a-f4ce-d5ce-af79-146922f2716a\",\n  \"project\": \"0e031047-5c0e-bef9-c849-4db9e92c9afb\",\n  \"created\": \"2011-08-27T15:57:14.274Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "381befb2-0f51-4d57-bbcb-d8874990a669",
+          "name": "sample metadata retrieve",
+          "request": {
+            "name": "sample metadata retrieve",
+            "description": {
+              "content": "Return sample metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-metadata",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "11ac42b8-8781-4ca4-aa34-768df12aa6c3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-metadata",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c226f881-7135-47ba-a0b6-3d36778174a6",
+          "name": "sample metadata create",
+          "request": {
+            "name": "sample metadata create",
+            "description": {
+              "content": "Create sample metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-metadata",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": []
+            }
+          },
+          "response": [
+            {
+              "id": "98e37111-2eeb-4696-ba30-9711d79de9fc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-metadata",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2836d477-a5f9-4502-a8b9-ef04fa421473",
+          "name": "sample parentage retrieve",
+          "request": {
+            "name": "sample parentage retrieve",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-parentage",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "display_results",
+                  "value": "<string>",
+                  "description": "Display mode for parentage records. Options are:\n- 'matches': Only display records where a parent has been identified (default)\n- 'checks': Only display records where no parent has been identified\n- 'all': Display all parentage records"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a88de19b-a62a-478e-a27e-7124fb6e8f8a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-parentage",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "display_results",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parentage\": \"string\",\n  \"parentage_tested\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3fca6ab-da38-402b-9d69-a4000891625d",
+          "name": "sample quality controls list",
+          "request": {
+            "name": "sample quality controls list",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-quality-controls",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d17d3898-1d23-4305-8e1d-83847ff3fed4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-quality-controls",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"quality_control\": {\n        \"status\": \"skipped\",\n        \"value_expected\": 8584.848313236706,\n        \"value_measured\": 3700.6598844620653,\n        \"value_string\": \"string\"\n      },\n      \"quality_control_type\": {\n        \"description_markdown\": \"string\",\n        \"display_only_if_failed\": \"string\",\n        \"display_type\": \"string\",\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\"\n      }\n    },\n    {\n      \"quality_control\": {\n        \"status\": \"succeeded\",\n        \"value_expected\": 1946.4626153567865,\n        \"value_measured\": 6246.8664126716985,\n        \"value_string\": \"string\"\n      },\n      \"quality_control_type\": {\n        \"description_markdown\": \"string\",\n        \"display_only_if_failed\": \"string\",\n        \"display_type\": \"string\",\n        \"key\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"count\": 2939,\n    \"next\": \"https://UpBYYbNZC.lkLmc8mBNnBRSdMaasQQMPnxXmBto\",\n    \"previous\": \"https://rDknkQB.yyxczwt-E-pEjgJChrrru3GjzBSzgsiP9uUl+wpjokT.jFL\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f174207-e35c-4de2-be52-382ac859e114",
+          "name": "sample restore group list",
+          "request": {
+            "name": "sample restore group list",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-restore-group",
+                ":restore_group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "archive_status",
+                  "value": "<string>",
+                  "description": "Filter samples by their archive status"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<string>",
+                  "description": "Filter samples by created timestamp; use ISO8601 format"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<string>",
+                  "description": "Filter samples by created timestamp; use ISO8601 format"
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden_status",
+                  "value": "<string>",
+                  "description": "Filter samples by their hidden status"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_after",
+                  "value": "<string>",
+                  "description": "Filter samples by modified timestamp; use ISO8601 format"
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_before",
+                  "value": "<string>",
+                  "description": "Filter samples by modified timestamp; use ISO8601 format"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search samples by id or client id or metadata content"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter samples by their status"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "restore_group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c962028c-0ebd-4a80-8f53-c926cbaf641d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-restore-group",
+                    ":restore_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archive_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hidden_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "modified_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified_before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "restore_group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"archive_last_status\": {\n        \"created\": \"string\",\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"transition_cutoff\": \"1975-05-09T19:57:56.676Z\"\n      },\n      \"client_id\": \"string\",\n      \"failed_qc\": \"string\",\n      \"id\": \"340f011a-91cf-a267-1e09-0170b38c0e1f\",\n      \"last_status\": {\n        \"id\": \"48ba504c-3054-b883-227a-28444d97403e\",\n        \"status\": \"string\",\n        \"note\": \"string\",\n        \"created\": \"2013-07-03T06:29:54.983Z\"\n      },\n      \"legacy_id\": \"string\",\n      \"modified\": \"1998-10-05T06:01:06.667Z\",\n      \"physical_id\": \"string\",\n      \"run\": \"1a1dbe74-3ff0-ca8f-19a8-ebc2ed82d8c5\",\n      \"created\": \"1975-08-25T06:18:54.216Z\",\n      \"hidden\": true\n    },\n    {\n      \"archive_last_status\": {\n        \"created\": \"string\",\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"transition_cutoff\": \"1952-02-18T21:06:22.555Z\"\n      },\n      \"client_id\": \"string\",\n      \"failed_qc\": \"string\",\n      \"id\": \"e77b37a7-3627-d8f6-9bbf-584a7432d5fd\",\n      \"last_status\": {\n        \"id\": \"41abdc88-d141-d2b5-e38a-c6de64a948ce\",\n        \"status\": \"string\",\n        \"note\": \"string\",\n        \"created\": \"2005-07-09T05:30:22.502Z\"\n      },\n      \"legacy_id\": \"string\",\n      \"modified\": \"1974-06-14T05:03:19.232Z\",\n      \"physical_id\": \"string\",\n      \"run\": \"4191999f-c242-0f39-8e7b-c1718a6622f6\",\n      \"created\": \"1947-12-01T21:59:25.320Z\",\n      \"hidden\": false\n    }\n  ],\n  \"meta\": {\n    \"count\": 6628,\n    \"next\": \"https://YPtyp.nfmdvaLeXhUOLLZhaViqPgkrxHjgrqIwbntSgVmPCTYdnJOxxca\",\n    \"previous\": \"https://EFkqUqDqZQxsnNavZ.kkKc8soHM8IN8t+QjgCnrxhadlueSni+A9.Au3frFZROAsGdyjvv8Arr9E6VcZ\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fa71641-6de0-41f7-b5c0-5a1d7a50f330",
+          "name": "sample sheet list",
+          "request": {
+            "name": "sample sheet list",
+            "description": {
+              "content": "Return generated sample sheet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-sheet",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "gncv:// notated sample path to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Sort results"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>",
+                  "description": "Sort direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "One of: assigned, unassigned, all; default is 'all'"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4bac775b-78cc-462e-8c1e-cb6f6eac3c67",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-sheet",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"client_id\": \"string\",\n      \"fastq\": {\n        \"last_status\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"source_url\": \"string\",\n        \"upload\": \"560ca090-bb69-81f6-d23a-f65b132db10b\",\n        \"destination_path\": \"string\"\n      }\n    },\n    {\n      \"client_id\": \"string\",\n      \"fastq\": {\n        \"last_status\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"source_url\": \"string\",\n        \"upload\": \"090adaea-d078-f0fe-b06d-c0fd43d781db\",\n        \"destination_path\": \"string\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"count\": 5477,\n    \"next\": \"https://pZwBuuUzFmtMrU.sklSDlcY2d4rxBnmZpHb0dpEZZI9u73\",\n    \"previous\": \"http://fqi.fhagRS-h--gpJp5tv-frm.zmjnq474ZMyauvkRAyrKcg6bZD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a90ffc2-7b7e-4841-96a2-c388079cc712",
+          "name": "sample stats retrieve",
+          "request": {
+            "name": "sample stats retrieve",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-stats",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8ab5aa54-384a-45d0-bb9c-c9f62a7df7ae",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-stats",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_size\": 250\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b85ae256-2c03-46cc-ab13-5b59435d54bd",
+          "name": "sample statuses list",
+          "request": {
+            "name": "sample statuses list",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-statuses",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "59a7be7a-d453-4215-ac00-61d50241ac18",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-statuses",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"status\": \"string\",\n      \"note\": \"string\",\n      \"created\": \"2012-03-19T12:01:33.748Z\"\n    },\n    {\n      \"status\": \"string\",\n      \"note\": \"string\",\n      \"created\": \"1991-11-18T03:45:08.490Z\"\n    }\n  ],\n  \"meta\": {\n    \"count\": 8712,\n    \"next\": \"https://IqgtSXosvhmvKMqPqH.wfslmaOY8P1Ge,2j9IiIuPWmY8seJQ6Zgk6gQACttUzo8Gur5rhPly.5u4qc\",\n    \"previous\": \"http://mZWUGIcQnK.vgaoV2pDaUYmbMkS0qjb2tvlibZgzR7wvUcOx,UFraUdqXetYZbYG3pLSJqu,b4GynBTaN31BK2B\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee2b5245-807a-4072-a862-b40c703adda3",
+          "name": "sample trait scores list",
+          "request": {
+            "name": "sample trait scores list",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "sample-trait-scores",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4540c30d-1db5-46b3-8876-a932ad82f54a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "sample-trait-scores",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"risk\": \"string\",\n      \"trait\": {\n        \"key\": \"string\"\n      },\n      \"trait_distribution\": {\n        \"version\": \"string\",\n        \"value\": \"\"\n      },\n      \"trait_score\": {\n        \"value\": 4075.0193577522377,\n        \"percentile\": 1009.3352374363029\n      },\n      \"trait_unit\": {\n        \"key\": \"string\"\n      }\n    },\n    {\n      \"risk\": \"string\",\n      \"trait\": {\n        \"key\": \"string\"\n      },\n      \"trait_distribution\": {\n        \"version\": \"string\",\n        \"value\": \"\"\n      },\n      \"trait_score\": {\n        \"value\": 3882.1500669676934,\n        \"percentile\": 582.6862052836512\n      },\n      \"trait_unit\": {\n        \"key\": \"string\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"count\": 1585,\n    \"next\": \"http://ZKI.nzO,m9UGgzuj0pVLr5q,pAT\",\n    \"previous\": \"https://fcl.aqte780hE85uTB\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "496e0f0e-821a-4b03-8c5a-5d53c0a358ef",
+          "name": "samples retrieve",
+          "request": {
+            "name": "samples retrieve",
+            "description": {
+              "content": "Retrieve sample model. Overridden to store audit action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "samples",
+                ":sample_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sample_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da6e94c0-1a4f-4b17-8f99-5af80a731c6a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "samples",
+                    ":sample_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sample_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archive_last_status\": {\n    \"created\": \"string\",\n    \"id\": \"string\",\n    \"status\": \"string\",\n    \"transition_cutoff\": \"2000-08-24T19:36:29.432Z\"\n  },\n  \"client_id\": \"string\",\n  \"files\": [\n    {\n      \"download_url\": \"https://IW.ncvSqgMAhtpM03QVJo3RylTkH3VHvnXxz\",\n      \"file_type\": \"string\",\n      \"id\": \"d066c946-ea7b-5d62-0b3a-8e0dcbc30a3c\",\n      \"s3_path\": \"string\",\n      \"size\": -1576016595884472300,\n      \"checksum_sha256\": \"string\",\n      \"shadow_mode\": true\n    },\n    {\n      \"download_url\": \"https://XBuVpQZzQPu.jzfgD8NTRgkmRlkxtbaUwCv7Nu.ZfiPFe,CH4f9UV+M,ok8AFmeRc1tUJhhM57Ejwxd9RWgq\",\n      \"file_type\": \"string\",\n      \"id\": \"07b9cb24-92fa-9a9a-ce80-92c11524c380\",\n      \"s3_path\": \"string\",\n      \"size\": -1282878435812792300,\n      \"checksum_sha256\": \"string\",\n      \"shadow_mode\": false\n    }\n  ],\n  \"id\": \"5b91a3bb-2a29-64fe-40c2-add30f6e3a25\",\n  \"last_status\": {\n    \"id\": \"e88e5495-d632-d9dc-9640-724981abada4\",\n    \"status\": \"string\",\n    \"note\": \"string\",\n    \"created\": \"1967-03-02T11:29:28.734Z\"\n  },\n  \"legacy_id\": \"string\",\n  \"modified\": \"1998-03-29T00:34:18.796Z\",\n  \"physical_id\": \"string\",\n  \"project\": \"e42d2cf1-8877-bf20-db5b-6ca2126db04c\",\n  \"run\": \"de7c9e64-bae3-88fc-ea79-c947bc0889c8\",\n  \"created\": \"1976-03-02T21:17:36.442Z\",\n  \"hidden\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gencove.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "121342ea-7e56-4a2b-9c3c-b8cb033d24f8",
+    "name": "Gencove Back array sample API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>\n\nContact Support:\n Email: support@gencove.com",
+      "type": "text/plain"
+    }
+  }
+}

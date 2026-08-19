@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array jwt API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "jwt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jwt_create_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/jwt-create/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Takes a set of user credentials and returns an access and refresh JSON web\ntoken pair to prove the authentication of those credentials."
+        },
+        {
+          "info": {
+            "name": "jwt_logout_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/jwt-logout/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Logout user and blacklist current JWT refresh token."
+        },
+        {
+          "info": {
+            "name": "jwt_refresh_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/jwt-refresh/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Takes a refresh type JSON web token and returns an access type JSON web\ntoken if the refresh token is valid."
+        },
+        {
+          "info": {
+            "name": "jwt_verify_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/jwt-verify/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Takes a token and indicates if it is valid.  This view provides no\ninformation about a token's fitness for a particular use."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "6abd665f-c750-45a9-9e34-19056eafe760",
+      "name": "batch",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c19ad187-3a6e-44e5-af83-c802db2d8a1a",
+          "name": "batches retrieve",
+          "request": {
+            "name": "batches retrieve",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "batches",
+                ":batch_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "batch_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3004d0ee-7c59-4a54-9811-ecd2c2113043",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "batches",
+                    ":batch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "batch_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batch_type\": \"string\",\n  \"files\": [\n    {\n      \"download_url\": \"http://rQBzXdu.viemWH2miJsBTFw\",\n      \"file_type\": \"string\",\n      \"id\": \"15b2670e-6446-8448-16c6-67662ebee718\",\n      \"s3_path\": \"string\",\n      \"size\": 3620909841898842000,\n      \"checksum_sha256\": \"string\",\n      \"shadow_mode\": true\n    },\n    {\n      \"download_url\": \"https://WkrUHyEygggO.eiiTBakIU9h2QZEeMIYVI-+4BIj1dYVLbBTwn2j9beeWbDhqnNm,TJVKrgbd\",\n      \"file_type\": \"string\",\n      \"id\": \"1a2ae969-6f1a-a247-5080-26e01a7f4098\",\n      \"s3_path\": \"string\",\n      \"size\": 6659812305281593000,\n      \"checksum_sha256\": \"string\",\n      \"shadow_mode\": true\n    }\n  ],\n  \"id\": \"59260b43-610a-7101-69db-7971cfbe736c\",\n  \"last_status\": {\n    \"id\": \"240f688f-4664-40ea-e755-916be25b640d\",\n    \"status\": \"string\",\n    \"created\": \"1976-11-03T21:12:55.744Z\"\n  },\n  \"sample_ids\": [\n    \"c0970020-9361-d4e3-f7e0-cf759a90bedc\",\n    \"6ad9068a-f9b1-4328-9767-eafc683d19dc\"\n  ],\n  \"name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gencove.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f01be107-4508-492b-bdf5-a0e9724fae80",
+    "name": "Gencove Back array batch API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>\n\nContact Support:\n Email: support@gencove.com",
+      "type": "text/plain"
+    }
+  }
+}

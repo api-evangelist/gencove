@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array role API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "role",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "roles_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/roles/:applies_to",
+            "params": [
+              {
+                "name": "applies_to",
+                "value": "",
+                "type": "path",
+                "description": "Filter roles by permission being applied to."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Method used to retrieve paginated roles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

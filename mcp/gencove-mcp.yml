@@ -2,10 +2,8 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: openapi/gencove-openapi-original.json
-note: >-
-  No official hosted Gencove MCP server was found. This is a candidate tool list
-  derived from key OpenAPI operations, offered as a starting point for exposing
-  the Gencove API to agents.
+note: No official hosted Gencove MCP server was found. This is a candidate tool list derived from key
+  OpenAPI operations, offered as a starting point for exposing the Gencove API to agents.
 server:
   name: gencove
   transport: http
@@ -40,3 +38,9 @@ tools:
 - name: create_batch
   description: Create a batch within a project.
   source_operation: openapi/gencove-openapi-original.json#project_batches_create
+deployment:
+  mode: none
+  verified: derived
+  tools: 10
+  checked: '2026-08-12'
+  source: catalog MCP census

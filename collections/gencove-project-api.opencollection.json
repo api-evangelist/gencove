@@ -1,0 +1,1466 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array project API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "project",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "project_batch_types_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-batch-types/:project_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List batch types that are available for current project."
+        },
+        {
+          "info": {
+            "name": "project_batches_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-batches/:project_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_batches_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-batches/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Handles batch creation for current project."
+        },
+        {
+          "info": {
+            "name": "project_cancel_samples_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-cancel-samples/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "View for canceling sample submission to analysis in a project."
+        },
+        {
+          "info": {
+            "name": "project_delete_samples_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.gencove.com/api/v2/project-delete-samples/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_hide_samples_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-hide-samples/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_merge_vcfs_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-merge-vcfs/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return last known merge_vcfs job."
+        },
+        {
+          "info": {
+            "name": "project_merge_vcfs_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-merge-vcfs/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Post takes no parameters since merge_vcfs job parameters are constructed\nby the backend."
+        },
+        {
+          "info": {
+            "name": "project_organization_users_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-organization-users/:project_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search users by name, email or id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get organization users."
+        },
+        {
+          "info": {
+            "name": "project_qc_report_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-qc-report/:project_id",
+            "params": [
+              {
+                "name": "columns",
+                "value": "",
+                "type": "query",
+                "description": "Specify one or more column names to include in the report."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a CSV QC report for the supplied project ID"
+        },
+        {
+          "info": {
+            "name": "project_qc_types_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-qc-types/:project_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all available QC types for current project"
+        },
+        {
+          "info": {
+            "name": "project_quality_control_histogram_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-quality-control-histogram/:project_id",
+            "params": [
+              {
+                "name": "archive_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter QC results by samples and their archived status"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by created timestamp; use ISO8601 format"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by created timestamp; use ISO8601 format"
+              },
+              {
+                "name": "hidden_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter QC results by samples and their hidden status"
+              },
+              {
+                "name": "modified_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by modified timestamp; use ISO8601 format"
+              },
+              {
+                "name": "modified_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by modified timestamp; use ISO8601 format"
+              },
+              {
+                "name": "number_of_results",
+                "value": "",
+                "type": "query",
+                "description": "Number of results"
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "qc_type",
+                "value": "",
+                "type": "query",
+                "description": "Quality control type key"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search QC results by samples and their id or client id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter QC results by samples and their status"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve user project and desired qc results histogram."
+        },
+        {
+          "info": {
+            "name": "project_restore_samples_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-restore-samples/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Handles sample restore process for given sample ids in current project."
+        },
+        {
+          "info": {
+            "name": "project_roles_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-roles/:role_id",
+            "params": [
+              {
+                "name": "role_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_roles_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.gencove.com/api/v2/project-roles/:role_id",
+            "params": [
+              {
+                "name": "role_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_sample_manifests_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-sample-manifests/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_sample_manifests_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-sample-manifests/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Project ID to add manifest to"
+              },
+              {
+                "name": "sample_manifest",
+                "value": "",
+                "type": "query",
+                "description": "Sample manifest CSV or XLSX file"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload sample manifest file for project"
+        },
+        {
+          "info": {
+            "name": "project_samples_copy_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-samples-copy/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Copy samples from another project into this one.\n\nCreates independent copies of the source samples in the destination\nproject, producing new sample records. Only available when the\norganization has sample copying enabled."
+        },
+        {
+          "info": {
+            "name": "project_samples_import_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-samples-import/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Import samples from another project into this one.\n\nReferences the source samples in the destination project without\nduplicating the underlying data. Sample metadata can optionally be\noverridden as part of the import."
+        },
+        {
+          "info": {
+            "name": "project_samples_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-samples/:project_id",
+            "params": [
+              {
+                "name": "archive_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by their archive status"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by created timestamp; use ISO8601 format"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by created timestamp; use ISO8601 format"
+              },
+              {
+                "name": "hidden_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by their hidden status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "modified_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by modified timestamp; use ISO8601 format"
+              },
+              {
+                "name": "modified_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by modified timestamp; use ISO8601 format"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search samples by id or client id or metadata content"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort results"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by their status"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List single project's associated samples."
+        },
+        {
+          "info": {
+            "name": "project_samples_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-samples/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add samples to the project.\n\nSamples are added formatted as the `results` response value that was returned from\n`/sample-sheet/` endpoint."
+        },
+        {
+          "info": {
+            "name": "project_share_exit_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-share-exit/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_share_revoke_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-share-revoke/:project_share_id",
+            "params": [
+              {
+                "name": "project_share_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_shares_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-shares/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_shares_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-shares/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_shares_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-shares/:project_share_id",
+            "params": [
+              {
+                "name": "project_share_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_stats_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-stats/:project_id",
+            "params": [
+              {
+                "name": "archive_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter stats by samples and their archived status"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by created timestamp; use ISO8601 format"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by created timestamp; use ISO8601 format"
+              },
+              {
+                "name": "hidden_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter stats by samples and their hidden status"
+              },
+              {
+                "name": "modified_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by modified timestamp; use ISO8601 format"
+              },
+              {
+                "name": "modified_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by modified timestamp; use ISO8601 format"
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search stats by samples and their id or client id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter stats by samples and their status"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve user project and it's sample stats."
+        },
+        {
+          "info": {
+            "name": "project_subscription_details_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-subscription-details/:subscription_id",
+            "params": [
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Details of a single subscription for project related events."
+        },
+        {
+          "info": {
+            "name": "project_subscription_details_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.gencove.com/api/v2/project-subscription-details/:subscription_id",
+            "params": [
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Details of a single subscription for project related events."
+        },
+        {
+          "info": {
+            "name": "project_subscription_event_types_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-subscription-event-types/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List subscription event types that are available for all projects."
+        },
+        {
+          "info": {
+            "name": "project_subscription_notifications_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-subscription-notifications/:subscription_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all available subscriptions for given project or create a new\nsubscription."
+        },
+        {
+          "info": {
+            "name": "project_subscription_secret_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-subscription-secret/:subscription_id",
+            "params": [
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Set webhook secret for given subscription.\n\nWebhook secret is requested by the user and generated by Gencove."
+        },
+        {
+          "info": {
+            "name": "project_subscription_test_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-subscription-test/:subscription_id",
+            "params": [
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Send a dummy event for given subscription to test notifications integration.\nBy default, there are no retries for this test endpoint."
+        },
+        {
+          "info": {
+            "name": "project_subscriptions_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-subscriptions/:project_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all available subscriptions for given project or create a new\nsubscription."
+        },
+        {
+          "info": {
+            "name": "project_subscriptions_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-subscriptions/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add subscription to project events."
+        },
+        {
+          "info": {
+            "name": "project_unhide_samples_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-unhide-samples/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "project_users_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/project-users/:project_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "only_explicit_roles",
+                "value": "",
+                "type": "query",
+                "description": "Show only project level granted roles"
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search users by name, email or id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get project users by project id."
+        },
+        {
+          "info": {
+            "name": "project_users_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/project-users/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "projects_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/projects/",
+            "params": [
+              {
+                "name": "additional_permission",
+                "value": "",
+                "type": "query",
+                "description": "Additional permission"
+              },
+              {
+                "name": "hidden_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter projects by their hidden status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "locked",
+                "value": "",
+                "type": "query",
+                "description": "Filter projects by locked status"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "shared",
+                "value": "",
+                "type": "query",
+                "description": "Filter projects by shared status"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort results"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter projects by sample statuses"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve list of user projects."
+        },
+        {
+          "info": {
+            "name": "projects_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/projects/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create project"
+        },
+        {
+          "info": {
+            "name": "projects_delete_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.gencove.com/api/v2/projects-delete/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "projects_hide_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/projects-hide/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "projects_unhide_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/projects-unhide/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "projects_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch single project details"
+        },
+        {
+          "info": {
+            "name": "projects_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.gencove.com/api/v2/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update single project details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

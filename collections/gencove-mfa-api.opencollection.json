@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array mfa API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "mfa",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "mfa_disable_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.gencove.com/api/v2/mfa-disable/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Disable MFA for your account."
+        },
+        {
+          "info": {
+            "name": "mfa_setup_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/mfa-setup/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Initial step to add MFA to your account."
+        },
+        {
+          "info": {
+            "name": "mfa_status_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/mfa-status/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns the status of MFA of the user."
+        },
+        {
+          "info": {
+            "name": "mfa_validate_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/mfa-validate/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Second step to add MFA to your account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

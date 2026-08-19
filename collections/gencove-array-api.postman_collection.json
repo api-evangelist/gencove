@@ -1,0 +1,204 @@
+{
+  "item": [
+    {
+      "id": "b91b333c-0229-4960-862c-17ee9cac4bc4",
+      "name": "array",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "327eb573-6f29-4b90-a7a7-6c9cca9cb9d8",
+          "name": "array data upload form create",
+          "request": {
+            "name": "array data upload form create",
+            "description": {
+              "content": "Create a temporary consumer-data upload session.\n\nAuth-gated to ``consumer_provider`` orgs (``org.consumer_mode_enabled``)\nand requires the ``upload_create`` role. Each call creates a\n``samples.Sample`` in the org's consumer-array-data project and returns a\ntokenized URL that the partner hands off to one of their end users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "array-data-upload-form",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<uuid>",
+                  "description": "Optional UUID of the project the uploaded sample should land in. When omitted, the sample falls back to the organization's consumer array-data project."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_on_success",
+                  "value": "",
+                  "description": "URL the end-user is redirected to after a successful upload."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_on_failure",
+                  "value": "",
+                  "description": "URL the end-user is redirected to after a failed upload."
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_in",
+                  "value": "600",
+                  "description": "JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3996347c-bbbd-4cfb-bc6e-c23f05abe063",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "array-data-upload-form",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Optional UUID of the project the uploaded sample should land in. When omitted, the sample falls back to the organization's consumer array-data project.",
+                        "type": "text/plain"
+                      },
+                      "key": "project_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL the end-user is redirected to after a successful upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_on_success",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL the end-user is redirected to after a failed upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "redirect_on_failure",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token.",
+                        "type": "text/plain"
+                      },
+                      "key": "expires_in",
+                      "value": "600"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"expires_at\": \"1980-12-15T16:36:08.729Z\",\n  \"sample_id\": \"f2f94740-52c4-7d6e-c88b-d42c26d687b4\",\n  \"url\": \"https://whEIGkdbkuSHGP.yepuDbERidtazPg5YJGI7ghY4afpF8p26an3J0zyWI8.tRkk2MNaCEj\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gencove.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a95fc484-af63-45f0-be9e-db06de42c4a8",
+    "name": "Gencove Back array API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>\n\nContact Support:\n Email: support@gencove.com",
+      "type": "text/plain"
+    }
+  }
+}

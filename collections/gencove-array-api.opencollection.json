@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "array",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "array_data_upload_form_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/array-data-upload-form/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a temporary consumer-data upload session.\n\nAuth-gated to ``consumer_provider`` orgs (``org.consumer_mode_enabled``)\nand requires the ``upload_create`` role. Each call creates a\n``samples.Sample`` in the org's consumer-array-data project and returns a\ntokenized URL that the partner hands off to one of their end users."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,613 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gencove Back array sample API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sample",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "sample_ancestry_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-ancestry/:sample_id",
+            "params": [
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sample_consumer_report_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/sample-consumer-report/:sample_id",
+            "params": [
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Generate presigned URL for consumer report.\n\nArgs:\n    request: HTTP request\n\nReturns:\n    Response with presigned URL and expiration time"
+        },
+        {
+          "info": {
+            "name": "sample_genomic_variants_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-genomic-variants/:sample_id",
+            "params": [
+              {
+                "name": "chromosome",
+                "value": "",
+                "type": "query",
+                "description": "h38 contig name with the `chr` prefix, e.g. `chr1`, `chr11`, `chrX`, `chrY`, `chrM` (point and range queries)"
+              },
+              {
+                "name": "end_position",
+                "value": "",
+                "type": "query",
+                "description": "Range end (1-based); use with `start_position`. The span may not exceed 100000 bp."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "position",
+                "value": "",
+                "type": "query",
+                "description": "1-based position for a point query"
+              },
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated rsIDs, e.g. `rs429358,rs7412` (at most 50 per request)."
+              },
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "start_position",
+                "value": "",
+                "type": "query",
+                "description": "Range start (1-based); use with `end_position`"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return variant-level results from a sample's imputed VCF.\n\nProvide exactly one of the three query modes:\n\n- point: `?chromosome=chr11&position=<pos>`\n- range: `?chromosome=chr11&start_position=<start>&end_position=<end>`\n- rsid:  `?rsid=rs1,rs2,...`\n\n`chromosome` must be an h38 contig name with the `chr` prefix\n(chr1..chr22, chrX, chrY, chrM)."
+        },
+        {
+          "info": {
+            "name": "sample_kit_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/sample-kit/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Order a new kit for a sample"
+        },
+        {
+          "info": {
+            "name": "sample_kit_form_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/sample-kit-form/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a temporary, payment-free kit-order session.\n\nAuth-gated to ``consumer_provider`` orgs and the ``sample_kit_create`` role\n(project-scoped). Creates a placeholder ``samples.Sample`` (status\n``consumer_awaiting_kit_order``), pins the JWT ``jti`` on it for replay\nprotection, and returns a tokenized URL the partner hands to an end user.\nThe ``Kit`` is only created once the end user submits the form."
+        },
+        {
+          "info": {
+            "name": "sample_manifests_csv_template_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-manifests-csv-template/",
+            "params": [
+              {
+                "name": "template_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of the sample manifest CSV template. Options are 96_well, 384_well, tube."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Download a sample manifest CSV template file based on the template_type parameter."
+        },
+        {
+          "info": {
+            "name": "sample_manifests_xlsx_template_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-manifests-xlsx-template/",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Download a sample manifest XLSX template file."
+        },
+        {
+          "info": {
+            "name": "sample_manifests_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-manifests/:sample_manifest_id",
+            "params": [
+              {
+                "name": "sample_manifest_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sample_metadata_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-metadata/:sample_id",
+            "params": [
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return sample metadata."
+        },
+        {
+          "info": {
+            "name": "sample_metadata_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gencove.com/api/v2/sample-metadata/:sample_id",
+            "params": [
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create sample metadata."
+        },
+        {
+          "info": {
+            "name": "sample_parentage_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-parentage/:sample_id",
+            "params": [
+              {
+                "name": "display_results",
+                "value": "",
+                "type": "query",
+                "description": "Display mode for parentage records. Options are:\n- 'matches': Only display records where a parent has been identified (default)\n- 'checks': Only display records where no parent has been identified\n- 'all': Display all parentage records"
+              },
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sample_quality_controls_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-quality-controls/:sample_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sample_restore_group_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-restore-group/:restore_group_id",
+            "params": [
+              {
+                "name": "archive_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by their archive status"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by created timestamp; use ISO8601 format"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by created timestamp; use ISO8601 format"
+              },
+              {
+                "name": "hidden_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by their hidden status"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "modified_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by modified timestamp; use ISO8601 format"
+              },
+              {
+                "name": "modified_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by modified timestamp; use ISO8601 format"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "restore_group_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search samples by id or client id or metadata content"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter samples by their status"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sample_sheet_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-sheet/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "gncv:// notated sample path to search for"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort results"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "One of: assigned, unassigned, all; default is 'all'"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return generated sample sheet."
+        },
+        {
+          "info": {
+            "name": "sample_stats_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-stats/:sample_id",
+            "params": [
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sample_statuses_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-statuses/:sample_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sample_trait_scores_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/sample-trait-scores/:sample_id",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "samples_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gencove.com/api/v2/samples/:sample_id",
+            "params": [
+              {
+                "name": "sample_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve sample model. Overridden to store audit action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
