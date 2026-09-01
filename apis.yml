@@ -106,7 +106,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - explorer
+  - Explorer
   tags_raw:
   - explorer
   properties:
@@ -130,7 +130,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - firstmile
+  - First-Mile
   tags_raw:
   - firstmile
   properties:
@@ -142,7 +142,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - invitation
+  - Invitation
   tags_raw:
   - invitation
   properties:
@@ -154,7 +154,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - jwt
+  - JWT
   tags_raw:
   - jwt
   properties:
@@ -166,7 +166,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - mfa
+  - MFA
   tags_raw:
   - mfa
   properties:
@@ -238,7 +238,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - s3
+  - S3
   tags_raw:
   - s3
   properties:
@@ -250,7 +250,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - sample
+  - Sample
   tags_raw:
   - sample
   properties:
@@ -262,7 +262,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - social
+  - Social
   tags_raw:
   - social
   properties:
