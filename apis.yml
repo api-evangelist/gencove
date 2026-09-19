@@ -203,7 +203,7 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
-  - Pipeline
+  - Pipelines
   tags_raw:
   - pipeline
   properties:
