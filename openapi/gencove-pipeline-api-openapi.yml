@@ -1,16 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array pipeline API
+  title: Gencove Back Pipeline API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: pipeline
+- name: Pipeline
 paths:
   /api/v2/pipeline/:
     get:
@@ -45,7 +50,7 @@ paths:
           - desc
         description: Sort direction
       tags:
-      - pipeline
+      - Pipeline
       security:
       - JWT: []
       - API key: []
@@ -56,6 +61,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPipelineListList'
           description: ''
+      summary: Pipeline list
+      x-summary-source: derived
   /api/v2/pipeline-capabilities/:
     get:
       operationId: pipeline_capabilities_list
@@ -79,7 +86,7 @@ paths:
           type: string
         description: Search pipeline capabilities by id
       tags:
-      - pipeline
+      - Pipeline
       security:
       - JWT: []
       - API key: []
@@ -90,6 +97,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPipelineCapabilitiesList'
           description: ''
+      summary: Pipeline capabilities list
+      x-summary-source: derived
   /api/v2/pipeline-capabilities/{pipeline_capabilities_id}:
     get:
       operationId: pipeline_capabilities_retrieve
@@ -102,7 +111,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - pipeline
+      - Pipeline
       security:
       - JWT: []
       - API key: []
@@ -113,6 +122,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PipelineCapabilities'
           description: ''
+      summary: Pipeline capabilities retrieve
+      x-summary-source: derived
   /api/v2/pipeline-latest/:
     get:
       operationId: pipeline_latest_retrieve
@@ -121,7 +132,7 @@ paths:
 
         retrieve: Fetch single newest pipeline details including it''s capabilities'
       tags:
-      - pipeline
+      - Pipeline
       security:
       - JWT: []
       - API key: []
@@ -132,6 +143,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PipelineDetail'
           description: ''
+      summary: Pipeline latest retrieve
+      x-summary-source: derived
   /api/v2/pipeline/{pipeline_id}:
     get:
       operationId: pipeline_retrieve
@@ -144,7 +157,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - pipeline
+      - Pipeline
       security:
       - JWT: []
       - API key: []
@@ -155,8 +168,68 @@ paths:
               schema:
                 $ref: '#/components/schemas/PipelineDetail'
           description: ''
+      summary: Pipeline retrieve
+      x-summary-source: derived
 components:
   schemas:
+    PipelineDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        version:
+          type: string
+          maxLength: 100
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineCapabilities'
+      required:
+      - capabilities
+      - id
+      - version
+    PaginatedPipelineListList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineList'
+    PipelineCategoryEnum:
+      enum:
+      - Human Genomics
+      - Agriculture Animals & Plant Genomics
+      - Companion Animals
+      - Other
+      type: string
+      description: '* `Human Genomics` - human genomics
+
+        * `Agriculture Animals & Plant Genomics` - animals plants
+
+        * `Companion Animals` - companion animals
+
+        * `Other` - other'
     PipelineCapabilities:
       type: object
       properties:
@@ -179,7 +252,6 @@ components:
           type: boolean
           description: Set to True if MergeVCFs can be run
         supported_project_modifications:
-          nullable: true
           description: List of project modification objects supported by the pipeline. Only the modifications listed under 'key' can be used. Note that 'value' is only used by the front-end to determine whether the check box should be set to True or False by default.
         modifications_enabled:
           type: string
@@ -189,7 +261,6 @@ components:
           readOnly: true
           description: Species
         pipeline_category:
-          nullable: true
           description: 'Category of the pipeline capability
 
 
@@ -225,6 +296,12 @@ components:
       - name
       - species
       - steps
+    NullEnum:
+      enum:
+      - null
+    BlankEnum:
+      enum:
+      - ''
     PaginatedPipelineCapabilitiesList:
       type: object
       required:
@@ -236,57 +313,21 @@ components:
             count:
               type: integer
             next:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
             previous:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
           required:
           - count
         results:
           type: array
           items:
             $ref: '#/components/schemas/PipelineCapabilities'
-    NullEnum:
-      enum:
-      - null
-    PipelineDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        version:
-          type: string
-          maxLength: 100
-        capabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/PipelineCapabilities'
-      required:
-      - capabilities
-      - id
-      - version
-    PipelineCategoryEnum:
-      enum:
-      - Human Genomics
-      - Agriculture Animals & Plant Genomics
-      - Companion Animals
-      - Other
-      type: string
-      description: '* `Human Genomics` - human genomics
-
-        * `Agriculture Animals & Plant Genomics` - animals plants
-
-        * `Companion Animals` - companion animals
-
-        * `Other` - other'
-    BlankEnum:
-      enum:
-      - ''
     PipelineList:
       type: object
       properties:
@@ -300,32 +341,8 @@ components:
       required:
       - id
       - version
-    PaginatedPipelineListList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PipelineList'
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

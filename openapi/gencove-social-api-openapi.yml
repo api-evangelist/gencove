@@ -1,23 +1,28 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array social API
+  title: Gencove Back Social API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: social
+- name: Social
 paths:
   /api/v2/social-disconnect/:
     post:
       operationId: social_disconnect_create
       description: Disconnect given providers' social account from current user.
       tags:
-      - social
+      - Social
       requestBody:
         content:
           application/json:
@@ -40,6 +45,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SocialDisconnect'
           description: ''
+      summary: Social disconnect create
+      x-summary-source: derived
   /api/v2/social-providers/:
     get:
       operationId: social_providers_list
@@ -65,7 +72,7 @@ paths:
         schema:
           type: integer
       tags:
-      - social
+      - Social
       security:
       - JWT: []
       - API key: []
@@ -76,12 +83,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedSocialProviderList'
           description: ''
+      summary: Social providers list
+      x-summary-source: derived
   /api/v2/social-signup/:
     post:
       operationId: social_signup_create
-      description: "Associate Social user with logged in Django user.\n\nIn social provider's config, `redirect_uri` or a similar setting should\nbe pointed to a url managed by the frontend app.\nFrontend app should pass on the info from social provider ie.\n```\n    {\n        \"provider\": \"basespace\",\n        \"code\": \"foobar\"\n    }\n```"
+      description: 'Associate Social user with logged in Django user.
+
+
+        In social provider''s config, `redirect_uri` or a similar setting should
+
+        be pointed to a url managed by the frontend app.
+
+        Frontend app should pass on the info from social provider ie.
+
+        ```
+
+        {
+
+        "provider": "basespace",
+
+        "code": "foobar"
+
+        }
+
+        ```'
       tags:
-      - social
+      - Social
       requestBody:
         content:
           application/json:
@@ -104,6 +132,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SocialSignUp'
           description: ''
+      summary: Social signup create
+      x-summary-source: derived
 components:
   schemas:
     SocialAccountNested:
@@ -119,9 +149,10 @@ components:
         social_account_id:
           type: string
         auth_time:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
       required:
       - auth_time
       - id
@@ -137,13 +168,15 @@ components:
             count:
               type: integer
             next:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
             previous:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
           required:
           - count
         results:
@@ -156,17 +189,6 @@ components:
         provider:
           type: string
       required:
-      - provider
-    SocialSignUp:
-      type: object
-      properties:
-        provider:
-          type: string
-        code:
-          type: string
-          description: Authorization code
-      required:
-      - code
       - provider
     SocialProvider:
       type: object
@@ -186,8 +208,19 @@ components:
       - accounts
       - authorization_uri
       - name
+    SocialSignUp:
+      type: object
+      properties:
+        provider:
+          type: string
+        code:
+          type: string
+          description: Authorization code
+      required:
+      - code
+      - provider
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

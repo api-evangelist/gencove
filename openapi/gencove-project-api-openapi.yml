@@ -1,16 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array project API
+  title: Gencove Back Project API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: project
+- name: Project
 paths:
   /api/v2/project-batch-types/{project_id}:
     get:
@@ -36,7 +41,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -47,6 +52,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedBatchTypeList'
           description: ''
+      summary: Project batch types list
+      x-summary-source: derived
   /api/v2/project-batches/{project_id}:
     get:
       operationId: project_batches_list
@@ -70,7 +77,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -81,6 +88,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedBatchListList'
           description: ''
+      summary: Project batches list
+      x-summary-source: derived
     post:
       operationId: project_batches_create
       description: Handles batch creation for current project.
@@ -92,7 +101,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -115,6 +124,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/BatchDetail'
           description: ''
+      summary: Project batches create
+      x-summary-source: derived
   /api/v2/project-cancel-samples/{project_id}:
     post:
       operationId: project_cancel_samples_create
@@ -127,7 +138,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -150,6 +161,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectCancelSamples'
           description: ''
+      summary: Project cancel samples create
+      x-summary-source: derived
   /api/v2/project-delete-samples/{project_id}:
     delete:
       operationId: project_delete_samples_destroy
@@ -161,13 +174,15 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
       responses:
         '204':
           description: No response body
+      summary: Project delete samples destroy
+      x-summary-source: derived
   /api/v2/project-hide-samples/{project_id}:
     post:
       operationId: project_hide_samples_create
@@ -179,7 +194,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -198,6 +213,8 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Project hide samples create
+      x-summary-source: derived
   /api/v2/project-merge-vcfs/{project_id}:
     get:
       operationId: project_merge_vcfs_retrieve
@@ -210,7 +227,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -221,6 +238,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectMergeVCFsJob'
           description: ''
+      summary: Project merge vcfs retrieve
+      x-summary-source: derived
     post:
       operationId: project_merge_vcfs_create
       description: 'Post takes no parameters since merge_vcfs job parameters are constructed
@@ -234,7 +253,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -245,6 +264,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectMergeVCFsJob'
           description: ''
+      summary: Project merge vcfs create
+      x-summary-source: derived
   /api/v2/project-organization-users/{project_id}:
     get:
       operationId: project_organization_users_list
@@ -274,7 +295,7 @@ paths:
           type: string
         description: Search users by name, email or id
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -285,6 +306,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedOrganizationUserList'
           description: ''
+      summary: Project organization users list
+      x-summary-source: derived
   /api/v2/project-qc-report/{project_id}:
     get:
       operationId: project_qc_report_retrieve
@@ -345,13 +368,15 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
       responses:
         '200':
           description: No response body
+      summary: Project qc report retrieve
+      x-summary-source: derived
   /api/v2/project-qc-types/{project_id}:
     get:
       operationId: project_qc_types_list
@@ -376,7 +401,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -387,6 +412,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedQualityControlTypeList'
           description: ''
+      summary: Project qc types list
+      x-summary-source: derived
   /api/v2/project-quality-control-histogram/{project_id}:
     get:
       operationId: project_quality_control_histogram_retrieve
@@ -466,7 +493,7 @@ paths:
           - succeeded
         description: Filter QC results by samples and their status
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -477,6 +504,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectQualityControlHistogram'
           description: ''
+      summary: Project quality control histogram retrieve
+      x-summary-source: derived
   /api/v2/project-restore-samples/{project_id}:
     post:
       operationId: project_restore_samples_create
@@ -489,7 +518,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -512,6 +541,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleRestore'
           description: ''
+      summary: Project restore samples create
+      x-summary-source: derived
   /api/v2/project-roles/{role_id}:
     get:
       operationId: project_roles_retrieve
@@ -523,7 +554,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -534,6 +565,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserRoleObject'
           description: ''
+      summary: Project roles retrieve
+      x-summary-source: derived
     delete:
       operationId: project_roles_destroy
       parameters:
@@ -544,13 +577,15 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
       responses:
         '204':
           description: No response body
+      summary: Project roles destroy
+      x-summary-source: derived
   /api/v2/project-sample-manifests/{project_id}:
     get:
       operationId: project_sample_manifests_retrieve
@@ -562,7 +597,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -573,6 +608,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleManifestUpload'
           description: ''
+      summary: Project sample manifests retrieve
+      x-summary-source: derived
     post:
       operationId: project_sample_manifests_create
       description: Upload sample manifest file for project
@@ -590,7 +627,7 @@ paths:
         description: Sample manifest CSV or XLSX file
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           multipart/form-data:
@@ -607,6 +644,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleManifestUpload'
           description: ''
+      summary: Project sample manifests create
+      x-summary-source: derived
   /api/v2/project-samples-copy/:
     post:
       operationId: project_samples_copy_create
@@ -619,7 +658,7 @@ paths:
 
         organization has sample copying enabled.'
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -642,6 +681,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectSamplesImport'
           description: ''
+      summary: Project samples copy create
+      x-summary-source: derived
   /api/v2/project-samples-import/:
     post:
       operationId: project_samples_import_create
@@ -654,7 +695,7 @@ paths:
 
         overridden as part of the import.'
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -677,6 +718,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectSamplesImport'
           description: ''
+      summary: Project samples import create
+      x-summary-source: derived
   /api/v2/project-samples/{project_id}:
     get:
       operationId: project_samples_list
@@ -775,7 +818,7 @@ paths:
           - succeeded
         description: Filter samples by their status
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -786,6 +829,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedSampleListList'
           description: ''
+      summary: Project samples list
+      x-summary-source: derived
     post:
       operationId: project_samples_create
       description: 'Add samples to the project.
@@ -802,7 +847,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -825,11 +870,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExtendedSampleSheetCreate'
           description: ''
+      summary: Project samples create
+      x-summary-source: derived
   /api/v2/project-share-exit/:
     post:
       operationId: project_share_exit_create
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -848,6 +895,8 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Project share exit create
+      x-summary-source: derived
   /api/v2/project-share-revoke/{project_share_id}:
     post:
       operationId: project_share_revoke_create
@@ -859,7 +908,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -882,6 +931,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectShareRevoke'
           description: ''
+      summary: Project share revoke create
+      x-summary-source: derived
   /api/v2/project-shares/:
     get:
       operationId: project_shares_list
@@ -899,7 +950,7 @@ paths:
         schema:
           type: integer
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -910,10 +961,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProjectShareList'
           description: ''
+      summary: Project shares list
+      x-summary-source: derived
     post:
       operationId: project_shares_create
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -936,6 +989,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectShare'
           description: ''
+      summary: Project shares create
+      x-summary-source: derived
   /api/v2/project-shares/{project_share_id}:
     get:
       operationId: project_shares_retrieve
@@ -947,7 +1002,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -958,6 +1013,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectShare'
           description: ''
+      summary: Project shares retrieve
+      x-summary-source: derived
   /api/v2/project-stats/{project_id}:
     get:
       operationId: project_stats_retrieve
@@ -1025,7 +1082,7 @@ paths:
           - succeeded
         description: Filter stats by samples and their status
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1036,6 +1093,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectStats'
           description: ''
+      summary: Project stats retrieve
+      x-summary-source: derived
   /api/v2/project-subscription-details/{subscription_id}:
     get:
       operationId: project_subscription_details_retrieve
@@ -1048,7 +1107,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1059,6 +1118,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectSubscription'
           description: ''
+      summary: Project subscription details retrieve
+      x-summary-source: derived
     delete:
       operationId: project_subscription_details_destroy
       description: Details of a single subscription for project related events.
@@ -1070,13 +1131,15 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
       responses:
         '204':
           description: No response body
+      summary: Project subscription details destroy
+      x-summary-source: derived
   /api/v2/project-subscription-event-types/:
     get:
       operationId: project_subscription_event_types_list
@@ -1095,7 +1158,7 @@ paths:
         schema:
           type: integer
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1106,6 +1169,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedEventTypeList'
           description: ''
+      summary: Project subscription event types list
+      x-summary-source: derived
   /api/v2/project-subscription-notifications/{subscription_id}:
     get:
       operationId: project_subscription_notifications_list
@@ -1132,7 +1197,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1143,6 +1208,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProjectSubscriptionNotificationList'
           description: ''
+      summary: Project subscription notifications list
+      x-summary-source: derived
   /api/v2/project-subscription-secret/{subscription_id}:
     post:
       operationId: project_subscription_secret_create
@@ -1158,7 +1225,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1169,6 +1236,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SubscriptionSecret'
           description: ''
+      summary: Project subscription secret create
+      x-summary-source: derived
   /api/v2/project-subscription-test/{subscription_id}:
     post:
       operationId: project_subscription_test_create
@@ -1183,7 +1252,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -1201,6 +1270,8 @@ paths:
       responses:
         '202':
           description: No response body
+      summary: Project subscription test create
+      x-summary-source: derived
   /api/v2/project-subscriptions/{project_id}:
     get:
       operationId: project_subscriptions_list
@@ -1227,7 +1298,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1238,6 +1309,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProjectSubscriptionList'
           description: ''
+      summary: Project subscriptions list
+      x-summary-source: derived
     post:
       operationId: project_subscriptions_create
       description: Add subscription to project events.
@@ -1249,7 +1322,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -1272,6 +1345,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SubscriptionCreate'
           description: ''
+      summary: Project subscriptions create
+      x-summary-source: derived
   /api/v2/project-unhide-samples/{project_id}:
     post:
       operationId: project_unhide_samples_create
@@ -1283,7 +1358,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -1302,6 +1377,8 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Project unhide samples create
+      x-summary-source: derived
   /api/v2/project-users/{project_id}:
     get:
       operationId: project_users_list
@@ -1336,7 +1413,7 @@ paths:
           type: string
         description: Search users by name, email or id
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1347,6 +1424,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProjectUsersList'
           description: ''
+      summary: Project users list
+      x-summary-source: derived
     post:
       operationId: project_users_create
       parameters:
@@ -1357,7 +1436,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -1380,6 +1459,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserRoleObject'
           description: ''
+      summary: Project users create
+      x-summary-source: derived
   /api/v2/projects/:
     get:
       operationId: projects_list
@@ -1459,7 +1540,7 @@ paths:
           - running
         description: Filter projects by sample statuses
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1470,11 +1551,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProjectList'
           description: ''
+      summary: Projects list
+      x-summary-source: derived
     post:
       operationId: projects_create
       description: Create project
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -1497,22 +1580,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/Project'
           description: ''
+      summary: Projects create
+      x-summary-source: derived
   /api/v2/projects-delete/:
     delete:
       operationId: projects_delete_destroy
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
       responses:
         '204':
           description: No response body
+      summary: Projects delete destroy
+      x-summary-source: derived
   /api/v2/projects-hide/:
     post:
       operationId: projects_hide_create
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -1531,11 +1618,13 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Projects hide create
+      x-summary-source: derived
   /api/v2/projects-unhide/:
     post:
       operationId: projects_unhide_create
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -1554,6 +1643,8 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Projects unhide create
+      x-summary-source: derived
   /api/v2/projects/{project_id}:
     get:
       operationId: projects_retrieve
@@ -1566,7 +1657,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       security:
       - JWT: []
       - API key: []
@@ -1577,6 +1668,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProjectDetail'
           description: ''
+      summary: Projects retrieve
+      x-summary-source: derived
     patch:
       operationId: projects_partial_update
       description: Update single project details
@@ -1588,7 +1681,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - project
+      - Project
       requestBody:
         content:
           application/json:
@@ -1610,769 +1703,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Project'
           description: ''
+      summary: Projects partial update
+      x-summary-source: derived
 components:
   schemas:
-    ProjectHideUnhide:
-      type: object
-      description: Serializer for hiding or unhiding a list of projects
-      properties:
-        project_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: List of project IDs
-      required:
-      - project_ids
-    BatchType:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Key from pipeline config
-          maxLength: 254
-        description:
-          type: string
-      required:
-      - key
-    ExistingSample:
-      type: object
-      properties:
-        client_id:
-          type: string
-        sample_id:
-          type: string
-          format: uuid
-      required:
-      - sample_id
-    BatchDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 254
-        batch_type:
-          type: string
-          description: Key from pipeline config
-          readOnly: true
-        sample_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/BatchStatusNested'
-          readOnly: true
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchFileNested'
-          readOnly: true
-          description: Batch files
-      required:
-      - batch_type
-      - files
-      - id
-      - last_status
-      - sample_ids
-    ProjectSamplesImport:
-      type: object
-      properties:
-        project_id:
-          type: string
-          format: uuid
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExistingSample'
-        metadata: {}
-      required:
-      - project_id
-      - samples
-    FastqsNestedCreate:
-      type: object
-      description: 'Serialized multiple uploads.models.Uploads objects with r1 and r2 names
-
-        hardcoded.'
-      properties:
-        r1:
-          $ref: '#/components/schemas/UploadNestedCreate'
-        r2:
-          allOf:
-          - $ref: '#/components/schemas/UploadNestedCreate'
-          nullable: true
-      required:
-      - r1
-    PaginatedBatchTypeList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchType'
-    PaginatedOrganizationUserList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrganizationUser'
-    ProjectShare:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-        shared_with_org:
-          type: string
-          readOnly: true
-        shared_with_org_name:
-          type: string
-          readOnly: true
-        shared_with_user_emails:
-          type: array
-          items:
-            type: string
-            format: email
-          writeOnly: true
-        shared_with_user_email:
-          type: string
-          format: email
-          readOnly: true
-        shared_by_user_email:
-          type: string
-          readOnly: true
-        share_level:
-          $ref: '#/components/schemas/ShareLevelEnum'
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/ProjectShareStatus'
-          readOnly: true
-      required:
-      - id
-      - last_status
-      - project
-      - share_level
-      - shared_by_user_email
-      - shared_with_org
-      - shared_with_org_name
-      - shared_with_user_email
-      - shared_with_user_emails
-    PaginatedProjectList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
-    SampleRestore:
-      type: object
-      description: 'Serializer for restoring samples from archived state.
-
-
-        Initially samples are set as `restore_requested` and a celery task is kicked off
-
-        that starts restore process by kicking off an S3 batch job and marking samples
-
-        as `restore_accepted`. `restore_started` is set when S3 notification is sent
-
-        on `s3:ObjectRestore:Post` event.
-
-        Samples are marked as `restored` in a separate celery task once the info
-
-        gets passed down by an `s3:ObjectRestore:Completed` S3 event.'
-      properties:
-        sample_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          writeOnly: true
-          description: List of sample IDs or if empty all archived samples will be used
-        restore_group_id:
-          type: string
-          format: uuid
-          readOnly: true
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - created
-      - restore_group_id
-      - sample_ids
-    PaginatedProjectShareList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectShare'
-    ArchiveSampleStatus:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-        created:
-          type: string
-        transition_cutoff:
-          type: string
-          format: date-time
-          nullable: true
-          description: Denotes the transition time for calculated states
-      required:
-      - created
-      - id
-      - status
-    PaginatedSampleListList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SampleList'
-    JobStatusNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-        note:
-          type: string
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-      - status
-    SampleCounts:
-      type: object
-      properties:
-        total_samples:
-          type: integer
-        running_samples:
-          type: integer
-        scheduled_samples:
-          type: integer
-        succeeded_samples:
-          type: integer
-        failed_samples:
-          type: integer
-        kit_processing_samples:
-          type: integer
-          description: Only available for organizations that support kit delivery and processing.
-      required:
-      - failed_samples
-      - kit_processing_samples
-      - running_samples
-      - scheduled_samples
-      - succeeded_samples
-      - total_samples
-    SampleStatusNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-        note:
-          type: string
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-      - status
-    PaginatedProjectSubscriptionNotificationList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectSubscriptionNotification'
-    PaginatedQualityControlTypeList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/QualityControlType'
-    UploadNestedCreate:
-      type: object
-      description: Used for adding samples using sample sheet to a project.
-      properties:
-        upload:
-          type: string
-          format: uuid
-      required:
-      - upload
-    BatchCreate:
-      type: object
-      properties:
-        name:
-          type: string
-        batch_type:
-          type: string
-        sample_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: List of sample IDs or if empty all available samples will be used
-      required:
-      - batch_type
-      - name
-      - sample_ids
-    ProjectUsers:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        is_active:
-          type: boolean
-          title: Active
-          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-        name:
-          type: string
-          maxLength: 254
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UserRoleObject'
-          readOnly: true
-          description: Roles for the project in the organization.
-        is_support:
-          type: boolean
-          readOnly: true
-          title: Support
-          description: Designates whether this user should be treated as a support.
-      required:
-      - email
-      - id
-      - is_support
-      - roles
-    SubscriptionTest:
-      type: object
-      description: Used to accept requests to test subscriptions.
-      properties:
-        event_type:
-          nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/EventTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        retry:
-          type: boolean
-          default: false
-    BatchStatusNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-      - status
-    EventTypeEnum:
-      enum:
-      - analysis_complete_v2
-      - batch_final_report_complete_v2
-      - samples_restored
-      - analysis_complete
-      - batch_final_report
-      - explorer_s3_hot_storage_exceeded
-      - explorer_s3_cold_storage_exceeded
-      type: string
-      description: '* `analysis_complete_v2` - submitted project samples have completed analysis
-
-        * `batch_final_report_complete_v2` - created subset of variants batch
-
-        * `samples_restored` - samples are restored from archive
-
-        * `analysis_complete` - legacy: submitted project samples have completed analysis - uses old event format
-
-        * `batch_final_report` - legacy: created subset of variants batch - uses old event format
-
-        * `explorer_s3_hot_storage_exceeded` - Explorer S3 hot storage threshold exceeded
-
-        * `explorer_s3_cold_storage_exceeded` - Explorer S3 cold storage threshold exceeded'
-    PaginatedProjectSubscriptionList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectSubscription'
-    BatchList:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 254
-        batch_type:
-          type: string
-          description: Key from pipeline config
-          readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/BatchStatusNested'
-          readOnly: true
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchFileNested'
-          readOnly: true
-          description: Batch files
-      required:
-      - batch_type
-      - files
-      - id
-      - last_status
-    SampleList:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        run:
-          type: string
-          format: uuid
-          nullable: true
-        created:
-          type: string
-          format: date-time
-        hidden:
-          type: boolean
-          description: Flag to hide the sample.
-        modified:
-          type: string
-          format: date-time
-        client_id:
-          type: string
-          description: 'Legacy: external_id'
-          maxLength: 250
-        physical_id:
-          type: string
-          description: 'Legacy: external_id, external_barcode and sample_barcode'
-          maxLength: 250
-        legacy_id:
-          type: string
-          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
-          maxLength: 250
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/SampleStatusNested'
-          readOnly: true
-        archive_last_status:
-          allOf:
-          - $ref: '#/components/schemas/ArchiveSampleStatus'
-          readOnly: true
-        failed_qc:
-          type: string
-          readOnly: true
-          description: Description of failed_qc status if present
-      required:
-      - archive_last_status
-      - client_id
-      - failed_qc
-      - id
-      - last_status
-      - legacy_id
-      - modified
-      - physical_id
-    PaginatedBatchListList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchList'
-    SampleManifestUpload:
-      type: object
-      properties:
-        sample_manifest:
-          type: string
-          format: uri
-          writeOnly: true
-      required:
-      - sample_manifest
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 254
-        description:
-          type: string
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        modified:
-          type: string
-          readOnly: true
-          description: Sample's last non-internal status that was added.
-        hidden:
-          type: boolean
-          readOnly: true
-          description: Flag to hide the project.
-        organization:
-          type: string
-          format: uuid
-          readOnly: true
-        organization_name:
-          type: string
-          readOnly: true
-          description: Organization name
-        sample_count:
-          type: string
-          readOnly: true
-        hidden_sample_count:
-          type: string
-          readOnly: true
-        pipeline_capabilities:
-          type: string
-          format: uuid
-          description: Versioned pipeline capabilities
-        project_modifications:
-          description: Allows for pipeline modifications e.g. disabling QC
-        roles:
-          type: string
-          readOnly: true
-          description: Roles for the project in the organization.
-        webhook_url:
-          type: string
-          readOnly: true
-          description: 'Legacy: this field is not used anymore, it is present in the response for the sake of backwards compatility with clients.'
-        is_shared:
-          type: boolean
-          description: Return whether the project is shared with other organizations
-          readOnly: true
-        locked:
-          type: boolean
-          readOnly: true
-          description: Flag to set the project to locked mode.
-      required:
-      - created
-      - hidden
-      - hidden_sample_count
-      - id
-      - is_shared
-      - locked
-      - modified
-      - name
-      - organization
-      - organization_name
-      - pipeline_capabilities
-      - roles
-      - sample_count
-      - webhook_url
-    ProjectQualityControlHistogram:
-      type: object
-      properties:
-        bin_edges:
-          type: array
-          items:
-            type: number
-            format: double
-        hist:
-          type: array
-          items:
-            type: number
-            format: double
-      required:
-      - bin_edges
-      - hist
     ProjectSubscription:
       type: object
       description: Subscription serializer where the scope is a project.
@@ -2418,6 +1752,169 @@ components:
       - project
       - protocol
       - target
+    ProjectQualityControlHistogram:
+      type: object
+      properties:
+        bin_edges:
+          type: array
+          items:
+            type: number
+            format: double
+        hist:
+          type: array
+          items:
+            type: number
+            format: double
+      required:
+      - bin_edges
+      - hist
+    PaginatedProjectSubscriptionNotificationList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectSubscriptionNotification'
+    EventType:
+      type: object
+      description: Serializing event types using EventType choices options.
+      properties:
+        key:
+          type: string
+        description:
+          type: string
+      required:
+      - description
+      - key
+    BatchCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        batch_type:
+          type: string
+        sample_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of sample IDs or if empty all available samples will be used
+      required:
+      - batch_type
+      - name
+      - sample_ids
+    PaginatedProjectShareList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectShare'
+    SubscriptionCreate:
+      type: object
+      description: Generic Subscription serializer without scope object.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        target:
+          type: string
+          description: URL if webhook, e-mail address if email
+          maxLength: 255
+        event_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventTypesEnum'
+      required:
+      - event_types
+      - id
+      - target
+    ShareLevelEnum:
+      enum:
+      - viewer
+      - analyst
+      type: string
+      description: '* `viewer` - viewer
+
+        * `analyst` - analyst'
+    BatchType:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key from pipeline config
+          maxLength: 254
+        description:
+          type: string
+      required:
+      - key
+    PaginatedProjectSubscriptionList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectSubscription'
     PatchedProject:
       type: object
       properties:
@@ -2554,67 +2051,101 @@ components:
       - roles
       - sample_count
       - webhook_url
-    UserRoleObjectCreate:
+    ProjectShare:
       type: object
       properties:
-        user:
+        id:
           type: string
           format: uuid
-        role:
+          readOnly: true
+        project:
           type: string
-          maxLength: 255
-      required:
-      - role
-      - user
-    ProjectShareStatusStatusEnum:
-      enum:
-      - shared
-      - exited
-      - revoked
-      type: string
-      description: '* `shared` - shared
-
-        * `exited` - exited
-
-        * `revoked` - revoked'
-    ProtocolEnum:
-      enum:
-      - webhook
-      - email
-      type: string
-      description: '* `webhook` - webhook
-
-        * `email` - email'
-    ProjectStats:
-      type: object
-      properties:
-        counts:
-          $ref: '#/components/schemas/SampleCounts'
-        total_size:
-          type: integer
-        failed_counts:
-          type: object
-          additionalProperties: {}
-        failed_qc_counts:
-          type: object
-          additionalProperties: {}
-      required:
-      - counts
-      - failed_counts
-      - failed_qc_counts
-      - total_size
-    ProjectShareExit:
-      type: object
-      description: Serializer for exiting multiple project shares
-      properties:
-        project_ids:
+          format: uuid
+        shared_with_org:
+          type: string
+          readOnly: true
+        shared_with_org_name:
+          type: string
+          readOnly: true
+        shared_with_user_emails:
           type: array
           items:
             type: string
-            format: uuid
-          description: List of project IDs to exit
+            format: email
+          writeOnly: true
+        shared_with_user_email:
+          type: string
+          format: email
+          readOnly: true
+        shared_by_user_email:
+          type: string
+          readOnly: true
+        share_level:
+          $ref: '#/components/schemas/ShareLevelEnum'
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/ProjectShareStatus'
+          readOnly: true
       required:
-      - project_ids
+      - id
+      - last_status
+      - project
+      - share_level
+      - shared_by_user_email
+      - shared_with_org
+      - shared_with_org_name
+      - shared_with_user_email
+      - shared_with_user_emails
+    PaginatedProjectUsersList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectUsers'
+    ExtendedSampleSheetCreate:
+      type: object
+      description: 'Adds samples with their uploads to the project and attaches same
+
+        metadata to all of them.'
+      properties:
+        uploads:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleSheetCreate'
+        metadata: {}
+      required:
+      - uploads
+    SubscriptionTest:
+      type: object
+      description: Used to accept requests to test subscriptions.
+      properties:
+        event_type:
+          oneOf:
+          - $ref: '#/components/schemas/EventTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        retry:
+          type: boolean
+          default: false
     ProjectMergeVCFsJob:
       type: object
       properties:
@@ -2662,29 +2193,299 @@ components:
       - client_id
       - fastq
       - sample
-    EventType:
+    ProtocolEnum:
+      enum:
+      - webhook
+      - email
+      type: string
+      description: '* `webhook` - webhook
+
+        * `email` - email'
+    UserRoleObject:
       type: object
-      description: Serializing event types using EventType choices options.
       properties:
-        key:
+        id:
           type: string
-        description:
+          format: uuid
+          readOnly: true
+        name:
           type: string
       required:
-      - description
-      - key
-    SampleHideUnhide:
+      - id
+      - name
+    PaginatedBatchTypeList:
       type: object
-      description: Serializer for hiding or unhidden a list of samples
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchType'
+    ProjectShareStatusStatusEnum:
+      enum:
+      - shared
+      - exited
+      - revoked
+      type: string
+      description: '* `shared` - shared
+
+        * `exited` - exited
+
+        * `revoked` - revoked'
+    SampleManifestUpload:
+      type: object
+      properties:
+        sample_manifest:
+          type: string
+          format: uri
+          writeOnly: true
+      required:
+      - sample_manifest
+    PaginatedQualityControlTypeList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityControlType'
+    NullEnum:
+      enum:
+      - null
+    ProjectShareStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/ProjectShareStatusStatusEnum'
+        note:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+    JobStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        description:
+          type: string
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          type: string
+          readOnly: true
+          description: Sample's last non-internal status that was added.
+        hidden:
+          type: boolean
+          readOnly: true
+          description: Flag to hide the project.
+        organization:
+          type: string
+          format: uuid
+          readOnly: true
+        organization_name:
+          type: string
+          readOnly: true
+          description: Organization name
+        sample_count:
+          type: string
+          readOnly: true
+        hidden_sample_count:
+          type: string
+          readOnly: true
+        pipeline_capabilities:
+          type: string
+          format: uuid
+          description: Versioned pipeline capabilities
+        project_modifications:
+          description: Allows for pipeline modifications e.g. disabling QC
+        roles:
+          type: string
+          readOnly: true
+          description: Roles for the project in the organization.
+        webhook_url:
+          type: string
+          readOnly: true
+          description: 'Legacy: this field is not used anymore, it is present in the response for the sake of backwards compatility with clients.'
+        is_shared:
+          type: boolean
+          description: Return whether the project is shared with other organizations
+          readOnly: true
+        locked:
+          type: boolean
+          readOnly: true
+          description: Flag to set the project to locked mode.
+      required:
+      - created
+      - hidden
+      - hidden_sample_count
+      - id
+      - is_shared
+      - locked
+      - modified
+      - name
+      - organization
+      - organization_name
+      - pipeline_capabilities
+      - roles
+      - sample_count
+      - webhook_url
+    ProjectHideUnhide:
+      type: object
+      description: Serializer for hiding or unhiding a list of projects
+      properties:
+        project_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of project IDs
+      required:
+      - project_ids
+    SampleRestore:
+      type: object
+      description: 'Serializer for restoring samples from archived state.
+
+
+        Initially samples are set as `restore_requested` and a celery task is kicked off
+
+        that starts restore process by kicking off an S3 batch job and marking samples
+
+        as `restore_accepted`. `restore_started` is set when S3 notification is sent
+
+        on `s3:ObjectRestore:Post` event.
+
+        Samples are marked as `restored` in a separate celery task once the info
+
+        gets passed down by an `s3:ObjectRestore:Completed` S3 event.'
       properties:
         sample_ids:
           type: array
           items:
             type: string
             format: uuid
-          description: List of sample IDs
+          writeOnly: true
+          description: List of sample IDs or if empty all archived samples will be used
+        restore_group_id:
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
       required:
+      - created
+      - restore_group_id
       - sample_ids
+    ProjectShareRevoke:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required:
+      - id
+    ProjectShareExit:
+      type: object
+      description: Serializer for exiting multiple project shares
+      properties:
+        project_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of project IDs to exit
+      required:
+      - project_ids
+    ArchiveSampleStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        created:
+          type: string
+        transition_cutoff:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Denotes the transition time for calculated states
+      required:
+      - created
+      - id
+      - status
     QualityControlType:
       type: object
       properties:
@@ -2712,42 +2513,261 @@ components:
       - key
       - name
       - type
-    ExtendedSampleSheetCreate:
+    SubscriptionSecret:
       type: object
-      description: 'Adds samples with their uploads to the project and attaches same
+      description: 'Serialize secret of a subscription.
 
-        metadata to all of them.'
+
+        Used only for returning the secret, not reading it because the secret is
+
+        safely encypted in the db.'
       properties:
-        uploads:
+        secret:
+          type: string
+          maxLength: 32
+      required:
+      - secret
+    PaginatedProjectList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
           type: array
           items:
-            $ref: '#/components/schemas/SampleSheetCreate'
-        metadata:
-          nullable: true
-      required:
-      - uploads
-    ProjectSubscriptionNotification:
+            $ref: '#/components/schemas/Project'
+    BatchDetail:
       type: object
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        batch_type:
+          type: string
+          description: Key from pipeline config
+          readOnly: true
+        sample_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/BatchStatusNested'
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchFileNested'
+          readOnly: true
+          description: Batch files
+      required:
+      - batch_type
+      - files
+      - id
+      - last_status
+      - sample_ids
+    EventTypesEnum:
+      enum:
+      - analysis_complete_v2
+      - batch_final_report_complete_v2
+      - samples_restored
+      - analysis_complete
+      - batch_final_report
+      - explorer_s3_hot_storage_exceeded
+      - explorer_s3_cold_storage_exceeded
+      type: string
+      description: '* `analysis_complete_v2` - submitted project samples have completed analysis
+
+        * `batch_final_report_complete_v2` - created subset of variants batch
+
+        * `samples_restored` - samples are restored from archive
+
+        * `analysis_complete` - legacy: submitted project samples have completed analysis - uses old event format
+
+        * `batch_final_report` - legacy: created subset of variants batch - uses old event format
+
+        * `explorer_s3_hot_storage_exceeded` - Explorer S3 hot storage threshold exceeded
+
+        * `explorer_s3_cold_storage_exceeded` - Explorer S3 cold storage threshold exceeded'
+    SampleCounts:
+      type: object
+      properties:
+        total_samples:
+          type: integer
+        running_samples:
+          type: integer
+        scheduled_samples:
+          type: integer
+        succeeded_samples:
+          type: integer
+        failed_samples:
+          type: integer
+        kit_processing_samples:
+          type: integer
+          description: Only available for organizations that support kit delivery and processing.
+      required:
+      - failed_samples
+      - kit_processing_samples
+      - running_samples
+      - scheduled_samples
+      - succeeded_samples
+      - total_samples
+    SampleList:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        run:
+          type:
+          - string
+          - 'null'
+          format: uuid
         created:
           type: string
           format: date-time
-        response_status:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-          nullable: true
-        notification_event_type:
+        hidden:
+          type: boolean
+          description: Flag to hide the sample.
+        modified:
+          type: string
+          format: date-time
+        client_id:
+          type: string
+          description: 'Legacy: external_id'
+          maxLength: 250
+        physical_id:
+          type: string
+          description: 'Legacy: external_id, external_barcode and sample_barcode'
+          maxLength: 250
+        legacy_id:
+          type: string
+          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
+          maxLength: 250
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/SampleStatusNested'
+          readOnly: true
+        archive_last_status:
+          allOf:
+          - $ref: '#/components/schemas/ArchiveSampleStatus'
+          readOnly: true
+        failed_qc:
           type: string
           readOnly: true
-          description: notification event type
+          description: Description of failed_qc status if present
       required:
+      - archive_last_status
+      - client_id
+      - failed_qc
       - id
-      - notification_event_type
+      - last_status
+      - legacy_id
+      - modified
+      - physical_id
+    PaginatedBatchListList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchList'
+    ProjectFileNested:
+      type: object
+      description: Used for all nested files except for files associated with sample.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        s3_path:
+          type: string
+          description: S3 object key
+          maxLength: 1024
+        size:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Size as reported by AWS in bytes
+        download_url:
+          type: string
+          format: uri
+          readOnly: true
+          description: Download url
+        file_type:
+          type: string
+          description: File extension
+          readOnly: true
+        checksum_sha256:
+          type: string
+          description: Object's sha256 Checksum
+          maxLength: 64
+        shadow_mode:
+          type:
+          - boolean
+          - 'null'
+          description: If true, file is only accessible by organizations with shadow mode access enabled.
+      required:
+      - download_url
+      - file_type
+      - id
+    SampleHideUnhide:
+      type: object
+      description: Serializer for hiding or unhidden a list of samples
+      properties:
+        sample_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of sample IDs
+      required:
+      - sample_ids
     OrganizationUser:
       type: object
       properties:
@@ -2787,7 +2807,163 @@ components:
       - id
       - is_support
       - roles
-    PaginatedProjectUsersList:
+    UserRoleObjectCreate:
+      type: object
+      properties:
+        user:
+          type: string
+          format: uuid
+        role:
+          type: string
+          maxLength: 255
+      required:
+      - role
+      - user
+    BatchFileNested:
+      type: object
+      description: Sets batch.id as filename in file download_url.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        s3_path:
+          type: string
+          description: S3 object key
+          maxLength: 1024
+        size:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Size as reported by AWS in bytes
+        download_url:
+          type: string
+          format: uri
+          readOnly: true
+          description: Download url
+        file_type:
+          type: string
+          description: File extension
+          readOnly: true
+        checksum_sha256:
+          type: string
+          description: Object's sha256 Checksum
+          maxLength: 64
+        shadow_mode:
+          type:
+          - boolean
+          - 'null'
+          description: If true, file is only accessible by organizations with shadow mode access enabled.
+      required:
+      - download_url
+      - file_type
+      - id
+    BatchList:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        batch_type:
+          type: string
+          description: Key from pipeline config
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/BatchStatusNested'
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchFileNested'
+          readOnly: true
+          description: Batch files
+      required:
+      - batch_type
+      - files
+      - id
+      - last_status
+    BatchStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    ProjectUsers:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+        name:
+          type: string
+          maxLength: 254
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles for the project in the organization.
+        is_support:
+          type: boolean
+          readOnly: true
+          title: Support
+          description: Designates whether this user should be treated as a support.
+      required:
+      - email
+      - id
+      - is_support
+      - roles
+    ProjectSubscriptionNotification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+        response_status:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        notification_event_type:
+          type: string
+          readOnly: true
+          description: notification event type
+      required:
+      - id
+      - notification_event_type
+    PaginatedEventTypeList:
       type: object
       required:
       - results
@@ -2798,77 +2974,22 @@ components:
             count:
               type: integer
             next:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
             previous:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
           required:
           - count
         results:
           type: array
           items:
-            $ref: '#/components/schemas/ProjectUsers'
-    SubscriptionSecret:
-      type: object
-      description: 'Serialize secret of a subscription.
-
-
-        Used only for returning the secret, not reading it because the secret is
-
-        safely encypted in the db.'
-      properties:
-        secret:
-          type: string
-          maxLength: 32
-      required:
-      - secret
-    SubscriptionCreate:
-      type: object
-      description: Generic Subscription serializer without scope object.
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-        target:
-          type: string
-          description: URL if webhook, e-mail address if email
-          maxLength: 255
-        event_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/EventTypesEnum'
-      required:
-      - event_types
-      - id
-      - target
-    ProjectShareStatus:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          $ref: '#/components/schemas/ProjectShareStatusStatusEnum'
-        note:
-          type: string
-          nullable: true
-          maxLength: 512
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-    NullEnum:
-      enum:
-      - null
-    EventTypesEnum:
+            $ref: '#/components/schemas/EventType'
+    EventTypeEnum:
       enum:
       - analysis_complete_v2
       - batch_final_report_complete_v2
@@ -2891,106 +3012,95 @@ components:
         * `explorer_s3_hot_storage_exceeded` - Explorer S3 hot storage threshold exceeded
 
         * `explorer_s3_cold_storage_exceeded` - Explorer S3 cold storage threshold exceeded'
-    ShareLevelEnum:
-      enum:
-      - viewer
-      - analyst
-      type: string
-      description: '* `viewer` - viewer
+    SampleStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    PaginatedSampleListList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleList'
+    ProjectSamplesImport:
+      type: object
+      properties:
+        project_id:
+          type: string
+          format: uuid
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExistingSample'
+        metadata: {}
+      required:
+      - project_id
+      - samples
+    FastqsNestedCreate:
+      type: object
+      description: 'Serialized multiple uploads.models.Uploads objects with r1 and r2 names
 
-        * `analyst` - analyst'
-    BatchFileNested:
-      type: object
-      description: Sets batch.id as filename in file download_url.
+        hardcoded.'
       properties:
-        id:
+        r1:
+          $ref: '#/components/schemas/UploadNestedCreate'
+        r2:
+          allOf:
+          - $ref: '#/components/schemas/UploadNestedCreate'
+      required:
+      - r1
+    UploadNestedCreate:
+      type: object
+      description: Used for adding samples using sample sheet to a project.
+      properties:
+        upload:
           type: string
           format: uuid
-          readOnly: true
-        s3_path:
-          type: string
-          description: S3 object key
-          maxLength: 1024
-        size:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-          nullable: true
-          description: Size as reported by AWS in bytes
-        download_url:
-          type: string
-          format: uri
-          readOnly: true
-          description: Download url
-        file_type:
-          type: string
-          description: File extension
-          readOnly: true
-        checksum_sha256:
-          type: string
-          description: Object's sha256 Checksum
-          maxLength: 64
-        shadow_mode:
-          type: boolean
-          nullable: true
-          description: If true, file is only accessible by organizations with shadow mode access enabled.
       required:
-      - download_url
-      - file_type
-      - id
-    UserRoleObject:
+      - upload
+    ExistingSample:
       type: object
       properties:
-        id:
+        client_id:
+          type: string
+        sample_id:
           type: string
           format: uuid
-          readOnly: true
-        name:
-          type: string
       required:
-      - id
-      - name
-    ProjectFileNested:
-      type: object
-      description: Used for all nested files except for files associated with sample.
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        s3_path:
-          type: string
-          description: S3 object key
-          maxLength: 1024
-        size:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-          nullable: true
-          description: Size as reported by AWS in bytes
-        download_url:
-          type: string
-          format: uri
-          readOnly: true
-          description: Download url
-        file_type:
-          type: string
-          description: File extension
-          readOnly: true
-        checksum_sha256:
-          type: string
-          description: Object's sha256 Checksum
-          maxLength: 64
-        shadow_mode:
-          type: boolean
-          nullable: true
-          description: If true, file is only accessible by organizations with shadow mode access enabled.
-      required:
-      - download_url
-      - file_type
-      - id
+      - sample_id
     ProjectCancelSamples:
       type: object
       description: Serializer for canceling samples submitted to a project.
@@ -3003,7 +3113,7 @@ components:
           maxItems: 20
       required:
       - sample_ids
-    PaginatedEventTypeList:
+    PaginatedOrganizationUserList:
       type: object
       required:
       - results
@@ -3014,29 +3124,41 @@ components:
             count:
               type: integer
             next:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
             previous:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
           required:
           - count
         results:
           type: array
           items:
-            $ref: '#/components/schemas/EventType'
-    ProjectShareRevoke:
+            $ref: '#/components/schemas/OrganizationUser'
+    ProjectStats:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
+        counts:
+          $ref: '#/components/schemas/SampleCounts'
+        total_size:
+          type: integer
+        failed_counts:
+          type: object
+          additionalProperties: {}
+        failed_qc_counts:
+          type: object
+          additionalProperties: {}
       required:
-      - id
+      - counts
+      - failed_counts
+      - failed_qc_counts
+      - total_size
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

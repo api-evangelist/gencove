@@ -1,35 +1,42 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array mfa API
+  title: Gencove Back Mfa API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: mfa
+- name: MFA
 paths:
   /api/v2/mfa-disable/:
     delete:
       operationId: mfa_disable_destroy
       description: Disable MFA for your account.
       tags:
-      - mfa
+      - MFA
       security:
       - JWT: []
       - API key: []
       responses:
         '204':
           description: No response body
+      summary: Mfa disable destroy
+      x-summary-source: derived
   /api/v2/mfa-setup/:
     post:
       operationId: mfa_setup_create
       description: Initial step to add MFA to your account.
       tags:
-      - mfa
+      - MFA
       requestBody:
         content:
           application/json:
@@ -52,12 +59,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/SetUpMFA'
           description: ''
+      summary: Mfa setup create
+      x-summary-source: derived
   /api/v2/mfa-status/:
     get:
       operationId: mfa_status_retrieve
       description: Returns the status of MFA of the user.
       tags:
-      - mfa
+      - MFA
       security:
       - JWT: []
       - API key: []
@@ -68,12 +77,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/MFAStatus'
           description: ''
+      summary: Mfa status retrieve
+      x-summary-source: derived
   /api/v2/mfa-validate/:
     post:
       operationId: mfa_validate_create
       description: Second step to add MFA to your account.
       tags:
-      - mfa
+      - MFA
       requestBody:
         content:
           application/json:
@@ -96,6 +107,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidateSetUpMFA'
           description: ''
+      summary: Mfa validate create
+      x-summary-source: derived
 components:
   schemas:
     ValidateSetUpMFA:
@@ -150,7 +163,7 @@ components:
       - device_type
       - secret
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

@@ -1,12 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array API
+  title: Gencove Back Array API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
@@ -48,6 +53,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ArrayDataUploadFormResponse'
           description: ''
+      summary: Array data upload form create
+      x-summary-source: derived
 components:
   schemas:
     ArrayDataUploadFormCreate:
@@ -55,9 +62,10 @@ components:
       description: Request body for ``POST /api/v2/array-data-upload-form``.
       properties:
         project_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: Optional UUID of the project the uploaded sample should land in. When omitted, the sample falls back to the organization's consumer array-data project.
         metadata:
           description: Free-form JSON object.
@@ -98,7 +106,7 @@ components:
       - sample_id
       - url
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

@@ -1,22 +1,23 @@
 generated: '2026-07-19'
 method: searched
 host: https://api.gencove.com
-note: >-
-  Probed the standard /.well-known/ discovery surface on the API and marketing
-  hosts. None are published (all 404). Recorded as valid empty result.
-documents:
-- path: /.well-known/security.txt
-  host: https://api.gencove.com
-  status: 404
-- path: /.well-known/security.txt
-  host: https://gencove.com
-  status: 404
-- path: /.well-known/openid-configuration
-  host: https://api.gencove.com
-  status: 404
-- path: /.well-known/oauth-authorization-server
-  host: https://api.gencove.com
-  status: 404
-- path: /.well-known/api-catalog
-  host: https://api.gencove.com
-  status: 404
+note: Probed the standard /.well-known/ discovery surface on the API and marketing hosts. None are published
+  (all 404). Recorded as valid empty result.
+hosts:
+- host: https://api.gencove.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

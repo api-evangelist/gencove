@@ -1,16 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array sample API
+  title: Gencove Back Sample API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: sample
+- name: Sample
 paths:
   /api/v2/sample-ancestry/{sample_id}:
     get:
@@ -23,7 +28,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -34,10 +39,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleAncestry'
           description: ''
+      summary: Sample ancestry retrieve
+      x-summary-source: derived
   /api/v2/sample-consumer-report/{sample_id}:
     post:
       operationId: sample_consumer_report_create
-      description: "Generate presigned URL for consumer report.\n\nArgs:\n    request: HTTP request\n\nReturns:\n    Response with presigned URL and expiration time"
+      description: 'Generate presigned URL for consumer report.
+
+
+        Args:
+
+        request: HTTP request
+
+
+        Returns:
+
+        Response with presigned URL and expiration time'
       parameters:
       - in: path
         name: sample_id
@@ -46,7 +63,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       requestBody:
         content:
           application/json:
@@ -68,6 +85,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleConsumerReportResponse'
           description: ''
+      summary: Sample consumer report create
+      x-summary-source: derived
   /api/v2/sample-genomic-variants/{sample_id}:
     get:
       operationId: sample_genomic_variants_list
@@ -77,11 +96,11 @@ paths:
         Provide exactly one of the three query modes:
 
 
-        - point: `?chromosome=chr11&position=<pos>`
+        - point: `?chromosome=chr11&position=`
 
-        - range: `?chromosome=chr11&start_position=<start>&end_position=<end>`
+        - range: `?chromosome=chr11&start_position=&end_position=`
 
-        - rsid:  `?rsid=rs1,rs2,...`
+        - rsid: `?rsid=rs1,rs2,...`
 
 
         `chromosome` must be an h38 contig name with the `chr` prefix
@@ -132,7 +151,7 @@ paths:
           type: integer
         description: Range start (1-based); use with `end_position`
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -143,12 +162,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedGenomicVariantList'
           description: ''
+      summary: Sample genomic variants list
+      x-summary-source: derived
   /api/v2/sample-kit/:
     post:
       operationId: sample_kit_create
       description: Order a new kit for a sample
       tags:
-      - sample
+      - Sample
       requestBody:
         content:
           application/json:
@@ -171,6 +192,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleKitResponse'
           description: ''
+      summary: Sample kit create
+      x-summary-source: derived
   /api/v2/sample-kit-form/:
     post:
       operationId: sample_kit_form_create
@@ -187,7 +210,7 @@ paths:
 
         The ``Kit`` is only created once the end user submits the form.'
       tags:
-      - sample
+      - Sample
       requestBody:
         content:
           application/json:
@@ -210,6 +233,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleKitFormResponse'
           description: ''
+      summary: Sample kit form create
+      x-summary-source: derived
   /api/v2/sample-manifests-csv-template/:
     get:
       operationId: sample_manifests_csv_template_retrieve
@@ -225,7 +250,7 @@ paths:
           - tube
         description: Type of the sample manifest CSV template. Options are 96_well, 384_well, tube.
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -233,12 +258,14 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Sample manifests csv template retrieve
+      x-summary-source: derived
   /api/v2/sample-manifests-xlsx-template/:
     get:
       operationId: sample_manifests_xlsx_template_retrieve
       description: Download a sample manifest XLSX template file.
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -246,6 +273,8 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Sample manifests xlsx template retrieve
+      x-summary-source: derived
   /api/v2/sample-manifests/{sample_manifest_id}:
     get:
       operationId: sample_manifests_retrieve
@@ -257,7 +286,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -268,6 +297,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleManifest'
           description: ''
+      summary: Sample manifests retrieve
+      x-summary-source: derived
   /api/v2/sample-metadata/{sample_id}:
     get:
       operationId: sample_metadata_retrieve
@@ -280,7 +311,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -291,6 +322,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleMetadata'
           description: ''
+      summary: Sample metadata retrieve
+      x-summary-source: derived
     post:
       operationId: sample_metadata_create
       description: Create sample metadata.
@@ -302,7 +335,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       requestBody:
         content:
           application/json:
@@ -324,6 +357,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleMetadata'
           description: ''
+      summary: Sample metadata create
+      x-summary-source: derived
   /api/v2/sample-parentage/{sample_id}:
     get:
       operationId: sample_parentage_retrieve
@@ -350,7 +385,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -361,6 +396,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleParentage'
           description: ''
+      summary: Sample parentage retrieve
+      x-summary-source: derived
   /api/v2/sample-quality-controls/{sample_id}:
     get:
       operationId: sample_quality_controls_list
@@ -384,7 +421,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -395,6 +432,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedQualityControlList'
           description: ''
+      summary: Sample quality controls list
+      x-summary-source: derived
   /api/v2/sample-restore-group/{restore_group_id}:
     get:
       operationId: sample_restore_group_list
@@ -473,7 +512,7 @@ paths:
           - succeeded
         description: Filter samples by their status
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -484,6 +523,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedSampleListList'
           description: ''
+      summary: Sample restore group list
+      x-summary-source: derived
   /api/v2/sample-sheet/:
     get:
       operationId: sample_sheet_list
@@ -532,7 +573,7 @@ paths:
           - unassigned
         description: 'One of: assigned, unassigned, all; default is ''all'''
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -543,6 +584,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedSampleSheetList'
           description: ''
+      summary: Sample sheet list
+      x-summary-source: derived
   /api/v2/sample-stats/{sample_id}:
     get:
       operationId: sample_stats_retrieve
@@ -554,7 +597,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -565,6 +608,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleStats'
           description: ''
+      summary: Sample stats retrieve
+      x-summary-source: derived
   /api/v2/sample-statuses/{sample_id}:
     get:
       operationId: sample_statuses_list
@@ -588,7 +633,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -599,6 +644,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedSampleStatusListList'
           description: ''
+      summary: Sample statuses list
+      x-summary-source: derived
   /api/v2/sample-trait-scores/{sample_id}:
     get:
       operationId: sample_trait_scores_list
@@ -622,7 +669,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -633,6 +680,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedTraitScoreList'
           description: ''
+      summary: Sample trait scores list
+      x-summary-source: derived
   /api/v2/samples/{sample_id}:
     get:
       operationId: samples_retrieve
@@ -645,7 +694,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - sample
+      - Sample
       security:
       - JWT: []
       - API key: []
@@ -656,69 +705,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/SampleDetails'
           description: ''
+      summary: Samples retrieve
+      x-summary-source: derived
 components:
   schemas:
-    SampleStatusList:
-      type: object
-      properties:
-        status:
-          type: string
-        note:
-          type: string
-        created:
-          type: string
-          format: date-time
-      required:
-      - status
-    SampleManifest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        file_name:
-          type: string
-          maxLength: 256
-        file:
-          type: string
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-        created:
-          type: string
-          format: date-time
-      required:
-      - file
-      - file_name
-      - id
-      - project
-    PaginatedGenomicVariantList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenomicVariant'
     TraitScore:
       type: object
       description: 'Serializer trait score and associated trait metadata models.
@@ -737,8 +727,9 @@ components:
         trait_unit:
           $ref: '#/components/schemas/TraitUnit'
         risk:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: "Return risk level for the trait score.\n\nReturns:\n    Optional[str]: \"high_risk\" if the value is greater than or equal to the risk threshold,\n    \"not_high_risk\" otherwise. If the risk threshold or percentile is None, return None."
           readOnly: true
       required:
@@ -747,6 +738,44 @@ components:
       - trait_distribution
       - trait_score
       - trait_unit
+    SampleParentage:
+      type: object
+      properties:
+        parentage_tested:
+          type: string
+          readOnly: true
+        parentage:
+          type: string
+          readOnly: true
+      required:
+      - parentage
+      - parentage_tested
+    PaginatedGenomicVariantList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenomicVariant'
     SampleStats:
       type: object
       properties:
@@ -754,107 +783,37 @@ components:
           type: integer
       required:
       - total_size
-    PaginatedTraitScoreList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/TraitScore'
-    TraitUnit:
+    SampleConsumerReportResponse:
       type: object
       properties:
-        key:
-          type: string
-          maxLength: 254
-      required:
-      - key
-    SampleKitFormResponse:
-      type: object
-      description: Response body for ``POST /api/v2/sample-kit-form/``.
-      properties:
-        sample_id:
-          type: string
-          format: uuid
-          description: UUID of the placeholder ``samples.Sample`` created for the order.
         url:
           type: string
           format: uri
-          description: Tokenized kit-order form URL for the end-user.
+          description: Presigned URL for accessing the consumer report
         expires_at:
           type: string
           format: date-time
-          description: When the embedded JWT expires (ISO-8601).
+          description: When the presigned URL will expire
       required:
       - expires_at
-      - sample_id
       - url
-    ArchiveSampleStatus:
+    SampleSheet:
       type: object
       properties:
-        id:
+        client_id:
           type: string
-        status:
-          type: string
-        created:
-          type: string
-        transition_cutoff:
-          type: string
-          format: date-time
-          nullable: true
-          description: Denotes the transition time for calculated states
-      required:
-      - created
-      - id
-      - status
-    PaginatedSampleListList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SampleList'
-    SampleStatusNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
+          maxLength: 250
+        fastq:
+          allOf:
+          - $ref: '#/components/schemas/UploadNestedList'
           readOnly: true
+          description: Uploaded fastq
+      required:
+      - client_id
+      - fastq
+    SampleStatusList:
+      type: object
+      properties:
         status:
           type: string
         note:
@@ -863,101 +822,21 @@ components:
           type: string
           format: date-time
       required:
-      - id
       - status
-    PaginatedQualityControlList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/QualityControl'
-    AncestrySelfNested:
-      type: object
-      description: Serializer used to nest ancestry data within other ancestry serializer.
-      properties:
-        value: {}
-    SampleFileNested:
-      type: object
-      description: 'Sets sample.id as filename in file download_url and skips displaying
-
-        download url if file is not available.'
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        s3_path:
-          type: string
-          description: S3 object key
-          maxLength: 1024
-        size:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-          nullable: true
-          description: Size as reported by AWS in bytes
-        download_url:
-          type: string
-          format: uri
-          readOnly: true
-          description: Download url
-        file_type:
-          type: string
-          description: File extension
-          readOnly: true
-        checksum_sha256:
-          type: string
-          description: Object's sha256 Checksum
-          maxLength: 64
-        shadow_mode:
-          type: boolean
-          nullable: true
-          description: If true, file is only accessible by organizations with shadow mode access enabled.
-      required:
-      - download_url
-      - file_type
-      - id
-    SampleAncestry:
-      type: object
-      properties:
-        ancestry:
-          $ref: '#/components/schemas/AncestrySelfNested'
-        metadata:
-          $ref: '#/components/schemas/AncestryMetadata'
-      required:
-      - ancestry
-      - metadata
     QualityControlSelfNested:
       type: object
       description: Serializer used to nest QC data within other QC serializer.
       properties:
         value_expected:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         value_measured:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         value_string:
           type: string
           maxLength: 128
@@ -965,6 +844,21 @@ components:
           $ref: '#/components/schemas/QualityControlSelfNestedStatusEnum'
       required:
       - status
+    AncestryMetadata:
+      type: object
+      properties:
+        value: {}
+    QualityControlSelfNestedStatusEnum:
+      enum:
+      - succeeded
+      - failed
+      - skipped
+      type: string
+      description: '* `succeeded` - succeeded
+
+        * `failed` - failed
+
+        * `skipped` - skipped'
     TraitDistribution:
       type: object
       properties:
@@ -974,59 +868,28 @@ components:
           maxLength: 100
       required:
       - version
-    SampleList:
+    UploadNestedList:
       type: object
+      description: Used in sample sheet creation.
       properties:
-        id:
+        upload:
           type: string
           format: uuid
-          readOnly: true
-        run:
+        destination_path:
           type: string
-          format: uuid
-          nullable: true
-        created:
-          type: string
-          format: date-time
-        hidden:
-          type: boolean
-          description: Flag to hide the sample.
-        modified:
-          type: string
-          format: date-time
-        client_id:
-          type: string
-          description: 'Legacy: external_id'
-          maxLength: 250
-        physical_id:
-          type: string
-          description: 'Legacy: external_id, external_barcode and sample_barcode'
-          maxLength: 250
-        legacy_id:
-          type: string
-          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
-          maxLength: 250
+          description: Destination path given by the user as an optional argument
+          maxLength: 1024
         last_status:
           allOf:
-          - $ref: '#/components/schemas/SampleStatusNested'
+          - $ref: '#/components/schemas/UploadStatusNested'
           readOnly: true
-        archive_last_status:
-          allOf:
-          - $ref: '#/components/schemas/ArchiveSampleStatus'
-          readOnly: true
-        failed_qc:
+        source_url:
           type: string
           readOnly: true
-          description: Description of failed_qc status if present
       required:
-      - archive_last_status
-      - client_id
-      - failed_qc
-      - id
       - last_status
-      - legacy_id
-      - modified
-      - physical_id
+      - source_url
+      - upload
     SampleKit:
       type: object
       description: Serializer for creating kit orders in consumer mode.
@@ -1037,7 +900,6 @@ components:
           writeOnly: true
         metadata:
           writeOnly: true
-          nullable: true
         sample_id:
           type: string
           format: uuid
@@ -1090,6 +952,139 @@ components:
       - recipient_email
       - recipient_phone
       - sample_id
+    SampleConsumerReportCreate:
+      type: object
+      properties:
+        report_type:
+          allOf:
+          - $ref: '#/components/schemas/ReportTypeEnum'
+          default: prs
+          description: 'Type of report to generate
+
+
+            * `prs` - prs'
+        expires_in:
+          type: integer
+          maximum: 3600
+          minimum: 60
+          default: 600
+          description: Token expiration time in seconds. Note that this value is for the JWT delivered in the URL. Once the URL is accessed, a fixed duration session (15 minutes) is created that may outlive this token
+    PaginatedQualityControlList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityControl'
+    PaginatedSampleStatusListList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleStatusList'
+    SampleKitFormCreate:
+      type: object
+      description: 'Request body for ``POST /api/v2/sample-kit-form/``.
+
+
+        Mirrors ``ArrayDataUploadFormCreateSerializer`` but is project-scoped: the
+
+        partner names the consumer project the kit''s sample lands in. The end user
+
+        supplies the shipping address later, in the form itself.'
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          description: UUID of the consumer project to create the kit order in.
+        metadata:
+          description: Free-form JSON object stored on the created sample.
+        test_mode:
+          type: boolean
+          default: false
+          description: Set to true to create a test order that will not be shipped. Defaults to false.
+        redirect_on_success:
+          type: string
+          format: uri
+          default: ''
+          description: URL the end-user is redirected to after a successful order.
+        redirect_on_failure:
+          type: string
+          format: uri
+          default: ''
+          description: URL the end-user is redirected to after a failed order.
+        expires_in:
+          type: integer
+          maximum: 3600
+          minimum: 60
+          default: 600
+          description: JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token.
+      required:
+      - project_id
+    SampleAncestry:
+      type: object
+      properties:
+        ancestry:
+          $ref: '#/components/schemas/AncestrySelfNested'
+        metadata:
+          $ref: '#/components/schemas/AncestryMetadata'
+      required:
+      - ancestry
+      - metadata
+    QualityControl:
+      type: object
+      properties:
+        quality_control_type:
+          $ref: '#/components/schemas/QualityControlType'
+        quality_control:
+          $ref: '#/components/schemas/QualityControlSelfNested'
+      required:
+      - quality_control
+      - quality_control_type
+    ReportTypeEnum:
+      enum:
+      - prs
+      type: string
+      description: '* `prs` - prs'
     PaginatedSampleSheetList:
       type: object
       required:
@@ -1101,29 +1096,175 @@ components:
             count:
               type: integer
             next:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
             previous:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
           required:
           - count
         results:
           type: array
           items:
             $ref: '#/components/schemas/SampleSheet'
-    SampleKitResponse:
+    AncestrySelfNested:
       type: object
+      description: Serializer used to nest ancestry data within other ancestry serializer.
       properties:
-        sample_id:
+        value: {}
+    SampleFileNested:
+      type: object
+      description: 'Sets sample.id as filename in file download_url and skips displaying
+
+        download url if file is not available.'
+      properties:
+        id:
           type: string
           format: uuid
           readOnly: true
+        s3_path:
+          type: string
+          description: S3 object key
+          maxLength: 1024
+        size:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Size as reported by AWS in bytes
+        download_url:
+          type: string
+          format: uri
+          readOnly: true
+          description: Download url
+        file_type:
+          type: string
+          description: File extension
+          readOnly: true
+        checksum_sha256:
+          type: string
+          description: Object's sha256 Checksum
+          maxLength: 64
+        shadow_mode:
+          type:
+          - boolean
+          - 'null'
+          description: If true, file is only accessible by organizations with shadow mode access enabled.
       required:
-      - sample_id
-    Trait:
+      - download_url
+      - file_type
+      - id
+    ArchiveSampleStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        created:
+          type: string
+        transition_cutoff:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Denotes the transition time for calculated states
+      required:
+      - created
+      - id
+      - status
+    SampleDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        project:
+          type: string
+          format: uuid
+        run:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        hidden:
+          type: boolean
+          description: Flag to hide the sample.
+        client_id:
+          type: string
+          description: 'Legacy: external_id'
+          maxLength: 250
+        physical_id:
+          type: string
+          description: 'Legacy: external_id, external_barcode and sample_barcode'
+          maxLength: 250
+        legacy_id:
+          type: string
+          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
+          maxLength: 250
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/SampleStatusNested'
+          readOnly: true
+        archive_last_status:
+          allOf:
+          - $ref: '#/components/schemas/ArchiveSampleStatus'
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleFileNested'
+          readOnly: true
+          description: Sample files
+      required:
+      - archive_last_status
+      - client_id
+      - files
+      - id
+      - last_status
+      - legacy_id
+      - modified
+      - physical_id
+      - project
+    SampleManifest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        file_name:
+          type: string
+          maxLength: 256
+        file:
+          type: string
+          readOnly: true
+        project:
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+      required:
+      - file
+      - file_name
+      - id
+      - project
+    TraitUnit:
       type: object
       properties:
         key:
@@ -1131,52 +1272,32 @@ components:
           maxLength: 254
       required:
       - key
-    QualityControlSelfNestedStatusEnum:
-      enum:
-      - succeeded
-      - failed
-      - skipped
-      type: string
-      description: '* `succeeded` - succeeded
-
-        * `failed` - failed
-
-        * `skipped` - skipped'
-    UploadStatusNested:
+    PaginatedTraitScoreList:
       type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-        note:
-          type: string
-        created:
-          type: string
-          format: date-time
       required:
-      - id
-      - status
-    AncestryMetadata:
-      type: object
+      - results
       properties:
-        value: {}
-    SampleConsumerReportResponse:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: Presigned URL for accessing the consumer report
-        expires_at:
-          type: string
-          format: date-time
-          description: When the presigned URL will expire
-      required:
-      - expires_at
-      - url
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TraitScore'
     QualityControlType:
       type: object
       properties:
@@ -1204,6 +1325,168 @@ components:
       - key
       - name
       - type
+    SampleKitFormResponse:
+      type: object
+      description: Response body for ``POST /api/v2/sample-kit-form/``.
+      properties:
+        sample_id:
+          type: string
+          format: uuid
+          description: UUID of the placeholder ``samples.Sample`` created for the order.
+        url:
+          type: string
+          format: uri
+          description: Tokenized kit-order form URL for the end-user.
+        expires_at:
+          type: string
+          format: date-time
+          description: When the embedded JWT expires (ISO-8601).
+      required:
+      - expires_at
+      - sample_id
+      - url
+    SampleList:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        run:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        hidden:
+          type: boolean
+          description: Flag to hide the sample.
+        modified:
+          type: string
+          format: date-time
+        client_id:
+          type: string
+          description: 'Legacy: external_id'
+          maxLength: 250
+        physical_id:
+          type: string
+          description: 'Legacy: external_id, external_barcode and sample_barcode'
+          maxLength: 250
+        legacy_id:
+          type: string
+          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
+          maxLength: 250
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/SampleStatusNested'
+          readOnly: true
+        archive_last_status:
+          allOf:
+          - $ref: '#/components/schemas/ArchiveSampleStatus'
+          readOnly: true
+        failed_qc:
+          type: string
+          readOnly: true
+          description: Description of failed_qc status if present
+      required:
+      - archive_last_status
+      - client_id
+      - failed_qc
+      - id
+      - last_status
+      - legacy_id
+      - modified
+      - physical_id
+    UploadStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    GenomicVariant:
+      type: object
+      description: 'Serializes a `genomic_variants.services.Variant` record.
+
+
+        `genotype` is an object keyed by the VCF FORMAT field names, e.g.
+
+        `{"GT": "0|0", "DS": "0", "GP": "1,0,0", "RC": "1", "AC": "0", "DP": "1"}`.
+
+        All values are kept as raw strings so the payload mirrors the VCF exactly;
+
+        callers interpret `GT` allele indexes against `alt`.
+
+
+        `genotype_confidence` is the confidence of the called genotype: the max of
+
+        the `GP` posteriors (the same quantity the VCF''s LOWCONF filter thresholds
+
+        at 0.9), a probability in [0, 1] or null when the record has no `GP` field.'
+      properties:
+        chromosome:
+          type: string
+        position:
+          type: integer
+        rsid:
+          type:
+          - string
+          - 'null'
+        ref:
+          type: string
+        alt:
+          type: array
+          items:
+            type: string
+        genotype:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        genotype_confidence:
+          type:
+          - number
+          - 'null'
+          format: double
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+        info:
+          type: object
+          additionalProperties: {}
+      required:
+      - alt
+      - chromosome
+      - genotype
+      - genotype_confidence
+      - info
+      - position
+      - quality
+      - ref
+      - rsid
+    Trait:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 254
+      required:
+      - key
     RecipientAddressCountryCodeEnum:
       enum:
       - AF
@@ -1953,34 +2236,24 @@ components:
         * `ZM` - Zambia
 
         * `ZW` - Zimbabwe'
-    ReportTypeEnum:
-      enum:
-      - prs
-      type: string
-      description: '* `prs` - prs'
-    UploadNestedList:
+    SampleStatusNested:
       type: object
-      description: Used in sample sheet creation.
       properties:
-        upload:
+        id:
           type: string
           format: uuid
-        destination_path:
-          type: string
-          description: Destination path given by the user as an optional argument
-          maxLength: 1024
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/UploadStatusNested'
           readOnly: true
-        source_url:
+        status:
           type: string
-          readOnly: true
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
       required:
-      - last_status
-      - source_url
-      - upload
-    PaginatedSampleStatusListList:
+      - id
+      - status
+    PaginatedSampleListList:
       type: object
       required:
       - results
@@ -1991,147 +2264,21 @@ components:
             count:
               type: integer
             next:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
             previous:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
           required:
           - count
         results:
           type: array
           items:
-            $ref: '#/components/schemas/SampleStatusList'
-    QualityControl:
-      type: object
-      properties:
-        quality_control_type:
-          $ref: '#/components/schemas/QualityControlType'
-        quality_control:
-          $ref: '#/components/schemas/QualityControlSelfNested'
-      required:
-      - quality_control
-      - quality_control_type
-    SampleSheet:
-      type: object
-      properties:
-        client_id:
-          type: string
-          maxLength: 250
-        fastq:
-          allOf:
-          - $ref: '#/components/schemas/UploadNestedList'
-          readOnly: true
-          description: Uploaded fastq
-      required:
-      - client_id
-      - fastq
-    SampleMetadata:
-      type: object
-      properties:
-        metadata:
-          nullable: true
-    SampleKitFormCreate:
-      type: object
-      description: 'Request body for ``POST /api/v2/sample-kit-form/``.
-
-
-        Mirrors ``ArrayDataUploadFormCreateSerializer`` but is project-scoped: the
-
-        partner names the consumer project the kit''s sample lands in. The end user
-
-        supplies the shipping address later, in the form itself.'
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          description: UUID of the consumer project to create the kit order in.
-        metadata:
-          nullable: true
-          description: Free-form JSON object stored on the created sample.
-        test_mode:
-          type: boolean
-          default: false
-          description: Set to true to create a test order that will not be shipped. Defaults to false.
-        redirect_on_success:
-          type: string
-          format: uri
-          default: ''
-          description: URL the end-user is redirected to after a successful order.
-        redirect_on_failure:
-          type: string
-          format: uri
-          default: ''
-          description: URL the end-user is redirected to after a failed order.
-        expires_in:
-          type: integer
-          maximum: 3600
-          minimum: 60
-          default: 600
-          description: JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token.
-      required:
-      - project_id
-    SampleDetails:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-        run:
-          type: string
-          format: uuid
-          nullable: true
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
-        hidden:
-          type: boolean
-          description: Flag to hide the sample.
-        client_id:
-          type: string
-          description: 'Legacy: external_id'
-          maxLength: 250
-        physical_id:
-          type: string
-          description: 'Legacy: external_id, external_barcode and sample_barcode'
-          maxLength: 250
-        legacy_id:
-          type: string
-          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
-          maxLength: 250
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/SampleStatusNested'
-          readOnly: true
-        archive_last_status:
-          allOf:
-          - $ref: '#/components/schemas/ArchiveSampleStatus'
-          readOnly: true
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/SampleFileNested'
-          readOnly: true
-          description: Sample files
-      required:
-      - archive_last_status
-      - client_id
-      - files
-      - id
-      - last_status
-      - legacy_id
-      - modified
-      - physical_id
-      - project
+            $ref: '#/components/schemas/SampleList'
     TraitScoreSelfNested:
       type: object
       description: Serializer used to nest trait score data within other trait score serializer.
@@ -2140,101 +2287,27 @@ components:
           type: number
           format: double
         percentile:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
       required:
       - value
-    SampleConsumerReportCreate:
+    SampleMetadata:
       type: object
       properties:
-        report_type:
-          allOf:
-          - $ref: '#/components/schemas/ReportTypeEnum'
-          default: prs
-          description: 'Type of report to generate
-
-
-            * `prs` - prs'
-        expires_in:
-          type: integer
-          maximum: 3600
-          minimum: 60
-          default: 600
-          description: Token expiration time in seconds. Note that this value is for the JWT delivered in the URL. Once the URL is accessed, a fixed duration session (15 minutes) is created that may outlive this token
-    SampleParentage:
+        metadata: {}
+    SampleKitResponse:
       type: object
       properties:
-        parentage_tested:
+        sample_id:
           type: string
-          readOnly: true
-        parentage:
-          type: string
+          format: uuid
           readOnly: true
       required:
-      - parentage
-      - parentage_tested
-    GenomicVariant:
-      type: object
-      description: 'Serializes a `genomic_variants.services.Variant` record.
-
-
-        `genotype` is an object keyed by the VCF FORMAT field names, e.g.
-
-        `{"GT": "0|0", "DS": "0", "GP": "1,0,0", "RC": "1", "AC": "0", "DP": "1"}`.
-
-        All values are kept as raw strings so the payload mirrors the VCF exactly;
-
-        callers interpret `GT` allele indexes against `alt`.
-
-
-        `genotype_confidence` is the confidence of the called genotype: the max of
-
-        the `GP` posteriors (the same quantity the VCF''s LOWCONF filter thresholds
-
-        at 0.9), a probability in [0, 1] or null when the record has no `GP` field.'
-      properties:
-        chromosome:
-          type: string
-        position:
-          type: integer
-        rsid:
-          type: string
-          nullable: true
-        ref:
-          type: string
-        alt:
-          type: array
-          items:
-            type: string
-        genotype:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        genotype_confidence:
-          type: number
-          format: double
-          nullable: true
-        quality:
-          type: number
-          format: double
-          nullable: true
-        info:
-          type: object
-          additionalProperties: {}
-      required:
-      - alt
-      - chromosome
-      - genotype
-      - genotype_confidence
-      - info
-      - position
-      - quality
-      - ref
-      - rsid
+      - sample_id
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

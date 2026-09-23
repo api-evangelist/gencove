@@ -1,23 +1,28 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array s3 API
+  title: Gencove Back S3 API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: s3
+- name: S3
 paths:
   /api/v2/s3-external-id/:
     get:
       operationId: s3_external_id_retrieve
       description: Retrieve and store S3 external ID for User.
       tags:
-      - s3
+      - S3
       security:
       - JWT: []
       - API key: []
@@ -28,11 +33,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/S3ExternalID'
           description: ''
+      summary: S3 external id retrieve
+      x-summary-source: derived
     post:
       operationId: s3_external_id_create
       description: Retrieve and store S3 external ID for User.
       tags:
-      - s3
+      - S3
       requestBody:
         content:
           application/json:
@@ -54,12 +61,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/S3ExternalID'
           description: ''
+      summary: S3 external id create
+      x-summary-source: derived
   /api/v2/s3-role/:
     get:
       operationId: s3_role_retrieve
       description: Retrieve and store S3 role for User.
       tags:
-      - s3
+      - S3
       security:
       - JWT: []
       - API key: []
@@ -70,11 +79,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/S3Role'
           description: ''
+      summary: S3 role retrieve
+      x-summary-source: derived
     post:
       operationId: s3_role_create
       description: Retrieve and store S3 role for User.
       tags:
-      - s3
+      - S3
       requestBody:
         content:
           application/json:
@@ -97,17 +108,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/S3Role'
           description: ''
+      summary: S3 role create
+      x-summary-source: derived
     delete:
       operationId: s3_role_destroy
       description: Retrieve and store S3 role for User.
       tags:
-      - s3
+      - S3
       security:
       - JWT: []
       - API key: []
       responses:
         '204':
           description: No response body
+      summary: S3 role destroy
+      x-summary-source: derived
   /api/v2/s3-uri-autoimport/:
     get:
       operationId: s3_uri_autoimport_list
@@ -126,7 +141,7 @@ paths:
         schema:
           type: integer
       tags:
-      - s3
+      - S3
       security:
       - JWT: []
       - API key: []
@@ -137,11 +152,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedS3URIAutoimportList'
           description: ''
+      summary: S3 uri autoimport list
+      x-summary-source: derived
     post:
       operationId: s3_uri_autoimport_create
       description: Creates new autoimport job, if the job already exists updates metadata.
       tags:
-      - s3
+      - S3
       requestBody:
         content:
           application/json:
@@ -164,6 +181,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/S3ProjectsAutoimportCreate'
           description: ''
+      summary: S3 uri autoimport create
+      x-summary-source: derived
   /api/v2/s3-uri-autoimport/{s3_uri_import_id}:
     delete:
       operationId: s3_uri_autoimport_destroy
@@ -176,19 +195,21 @@ paths:
           format: uuid
         required: true
       tags:
-      - s3
+      - S3
       security:
       - JWT: []
       - API key: []
       responses:
         '204':
           description: No response body
+      summary: S3 uri autoimport destroy
+      x-summary-source: derived
   /api/v2/s3-uri-import/:
     post:
       operationId: s3_uri_import_create
       description: Import samples from s3 uri.
       tags:
-      - s3
+      - S3
       requestBody:
         content:
           application/json:
@@ -207,53 +228,20 @@ paths:
       responses:
         '202':
           description: No response body
+      summary: S3 uri import create
+      x-summary-source: derived
 components:
   schemas:
-    InputFormatEnum:
-      enum:
-      - cram
-      - fastq
-      - autodetect
-      type: string
-      description: '* `cram` - cram
-
-        * `fastq` - fastq
-
-        * `autodetect` - autodetect'
-    S3Role:
+    S3ExternalID:
       type: object
-      description: Role ARN for S3 imports serializer.
+      description: External ID for S3 imports serializer.
       properties:
-        role_arn:
+        external_id:
           type: string
-          maxLength: 2048
-          minLength: 20
+          format: uuid
+          readOnly: true
       required:
-      - role_arn
-    PaginatedS3URIAutoimportList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/S3URIAutoimport'
+      - external_id
     S3ProjectsAutoimportCreate:
       type: object
       properties:
@@ -267,16 +255,45 @@ components:
           maxLength: 768
       required:
       - id
-    S3ExternalID:
+    S3Role:
       type: object
-      description: External ID for S3 imports serializer.
+      description: Role ARN for S3 imports serializer.
       properties:
-        external_id:
+        role_arn:
+          type: string
+          maxLength: 2048
+          minLength: 20
+      required:
+      - role_arn
+    InputFormatEnum:
+      enum:
+      - cram
+      - fastq
+      - autodetect
+      type: string
+      description: '* `cram` - cram
+
+        * `fastq` - fastq
+
+        * `autodetect` - autodetect'
+    S3URIImport:
+      type: object
+      description: S3 URI import serializer.
+      properties:
+        s3_uri:
+          type: string
+          maxLength: 734
+        project_id:
           type: string
           format: uuid
-          readOnly: true
+        metadata: {}
+        input_format:
+          allOf:
+          - $ref: '#/components/schemas/InputFormatEnum'
+          default: autodetect
       required:
-      - external_id
+      - project_id
+      - s3_uri
     S3URIAutoimport:
       type: object
       description: S3 URI auto import serializer.
@@ -291,33 +308,39 @@ components:
         s3_uri:
           type: string
           maxLength: 734
-        metadata:
-          nullable: true
+        metadata: {}
       required:
       - id
       - project_id
       - s3_uri
-    S3URIImport:
+    PaginatedS3URIAutoimportList:
       type: object
-      description: S3 URI import serializer.
-      properties:
-        s3_uri:
-          type: string
-          maxLength: 734
-        project_id:
-          type: string
-          format: uuid
-        metadata:
-          nullable: true
-        input_format:
-          allOf:
-          - $ref: '#/components/schemas/InputFormatEnum'
-          default: autodetect
       required:
-      - project_id
-      - s3_uri
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/S3URIAutoimport'
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

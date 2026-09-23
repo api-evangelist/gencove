@@ -1,23 +1,28 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array explorer API
+  title: Gencove Back Explorer API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: explorer
+- name: Explorer
 paths:
   /api/v2/explorer-access-url/:
     post:
       operationId: explorer_access_url_create
       description: Retrieves the Access URL for the given instance.
       tags:
-      - explorer
+      - Explorer
       requestBody:
         content:
           application/json:
@@ -36,6 +41,8 @@ paths:
       responses:
         '202':
           description: No response body
+      summary: Explorer access url create
+      x-summary-source: derived
   /api/v2/explorer-cost-reporting/:
     get:
       operationId: explorer_cost_reporting_list
@@ -53,7 +60,7 @@ paths:
         schema:
           type: integer
       tags:
-      - explorer
+      - Explorer
       security:
       - JWT: []
       - API key: []
@@ -64,11 +71,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedExplorerCostReportRecordList'
           description: ''
+      summary: Explorer cost reporting list
+      x-summary-source: derived
   /api/v2/explorer-data-credentials/:
     post:
       operationId: explorer_data_credentials_create
       tags:
-      - explorer
+      - Explorer
       requestBody:
         content:
           application/json:
@@ -91,6 +100,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetExplorerDataCredentialsResponse'
           description: ''
+      summary: Explorer data credentials create
+      x-summary-source: derived
   /api/v2/explorer-instances/:
     get:
       operationId: explorer_instances_list
@@ -108,7 +119,7 @@ paths:
         schema:
           type: integer
       tags:
-      - explorer
+      - Explorer
       security:
       - JWT: []
       - API key: []
@@ -119,12 +130,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedExplorerInstanceList'
           description: ''
+      summary: Explorer instances list
+      x-summary-source: derived
   /api/v2/explorer-instances-inactivity-stop/:
     post:
       operationId: explorer_instances_inactivity_stop_create
       description: Sets the inactivity threshold for the given instances.
       tags:
-      - explorer
+      - Explorer
       requestBody:
         content:
           application/json:
@@ -143,11 +156,13 @@ paths:
       responses:
         '202':
           description: No response body
+      summary: Explorer instances inactivity stop create
+      x-summary-source: derived
   /api/v2/explorer-instances-inactivity-stop-organization/:
     get:
       operationId: explorer_instances_inactivity_stop_organization_retrieve
       tags:
-      - explorer
+      - Explorer
       security:
       - JWT: []
       - API key: []
@@ -158,11 +173,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExplorerInstancesInactivityStopOrganization'
           description: ''
+      summary: Explorer instances inactivity stop organization retrieve
+      x-summary-source: derived
     post:
       operationId: explorer_instances_inactivity_stop_organization_create
       description: Sets the inactivity treshold for the user's organization.
       tags:
-      - explorer
+      - Explorer
       requestBody:
         content:
           application/json:
@@ -181,12 +198,14 @@ paths:
       responses:
         '202':
           description: No response body
+      summary: Explorer instances inactivity stop organization create
+      x-summary-source: derived
   /api/v2/explorer-session-start/:
     post:
       operationId: explorer_session_start_create
       description: Start an Explorer session by setting the user_session cookie and returning a clean Explorer URL.
       tags:
-      - explorer
+      - Explorer
       requestBody:
         content:
           application/json:
@@ -209,11 +228,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExplorerSessionStartResponse'
           description: ''
+      summary: Explorer session start create
+      x-summary-source: derived
   /api/v2/explorer-shell-session-credentials/:
     post:
       operationId: explorer_shell_session_credentials_create
       tags:
-      - explorer
+      - Explorer
       requestBody:
         content:
           application/json:
@@ -236,12 +257,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExplorerShellSessionCredentialsResponse'
           description: ''
+      summary: Explorer shell session credentials create
+      x-summary-source: derived
   /api/v2/explorer-start-instances/:
     post:
       operationId: explorer_start_instances_create
       description: Starts the given instances.
       tags:
-      - explorer
+      - Explorer
       requestBody:
         content:
           application/json:
@@ -260,12 +283,14 @@ paths:
       responses:
         '202':
           description: No response body
+      summary: Explorer start instances create
+      x-summary-source: derived
   /api/v2/explorer-stop-instances/:
     post:
       operationId: explorer_stop_instances_create
       description: Stops the given instances.
       tags:
-      - explorer
+      - Explorer
       requestBody:
         content:
           application/json:
@@ -284,21 +309,51 @@ paths:
       responses:
         '202':
           description: No response body
+      summary: Explorer stop instances create
+      x-summary-source: derived
 components:
   schemas:
-    ExplorerSessionStartResponse:
+    FileNested:
       type: object
+      description: Used for all nested files except for files associated with sample.
       properties:
-        explorer_url:
+        id:
           type: string
-          description: Clean Explorer URL to open after the session cookie is set.
-        expires_in:
-          type: integer
-          description: Explorer session duration in seconds.
+          format: uuid
+          readOnly: true
+        s3_path:
+          type: string
+          description: S3 object key
+          maxLength: 1024
+        size:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Size as reported by AWS in bytes
+        download_url:
+          type: string
+          readOnly: true
+        file_type:
+          type: string
+          description: File extension
+          readOnly: true
+        checksum_sha256:
+          type: string
+          description: Object's sha256 Checksum
+          maxLength: 64
+        shadow_mode:
+          type:
+          - boolean
+          - 'null'
+          description: If true, file is only accessible by organizations with shadow mode access enabled.
       required:
-      - expires_in
-      - explorer_url
-    ExplorerInstancesInactivityStop:
+      - download_url
+      - file_type
+      - id
+    ExplorerInstancesStart:
       type: object
       properties:
         instance_ids:
@@ -308,111 +363,8 @@ components:
             format: uuid
           maxItems: 100
           minItems: 1
-        stop_after_inactivity_hours:
-          type: integer
-          nullable: true
-          description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
       required:
       - instance_ids
-      - stop_after_inactivity_hours
-    GetExplorerDataCredentialsResponse:
-      type: object
-      properties:
-        version:
-          type: integer
-        access_key:
-          type: string
-        secret_key:
-          type: string
-        token:
-          type: string
-        expiry_time:
-          type: string
-          format: date-time
-        region_name:
-          type: string
-      required:
-      - access_key
-      - expiry_time
-      - region_name
-      - secret_key
-      - token
-      - version
-    ExplorerSessionStart:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      required:
-      - id
-    ExplorerShellSessionCredentialsResponse:
-      type: object
-      properties:
-        version:
-          type: integer
-        access_key:
-          type: string
-        secret_key:
-          type: string
-        token:
-          type: string
-        expiry_time:
-          type: string
-          format: date-time
-        region_name:
-          type: string
-        ec2_instance_id:
-          type: string
-        shell_session_ssm_document_name:
-          type: string
-        network_activity_ssm_document_name:
-          type: string
-      required:
-      - access_key
-      - ec2_instance_id
-      - expiry_time
-      - network_activity_ssm_document_name
-      - region_name
-      - secret_key
-      - shell_session_ssm_document_name
-      - token
-      - version
-    ExplorerInstancesInactivityStopOrganization:
-      type: object
-      properties:
-        explorer_override_stop_after_inactivity_hours:
-          type: boolean
-        explorer_stop_after_inactivity_hours:
-          type: integer
-          description: 'After how many hours of inactivity should an explorer instance be stopped. If org.explorer_override_stop_after_inactivity_hours or instance.stop_after_inactivity_hours is None, then: 0 -> do not stop instances; Any number -> amount of hours to wait before stopping instances. Otherwise, use instance.stop_after_inactivity_hours.'
-      required:
-      - explorer_override_stop_after_inactivity_hours
-      - explorer_stop_after_inactivity_hours
-    PaginatedExplorerCostReportRecordList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type: string
-              format: uri
-              nullable: true
-            previous:
-              type: string
-              format: uri
-              nullable: true
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExplorerCostReportRecord'
     ExplorerCostReportRecord:
       type: object
       properties:
@@ -455,6 +407,14 @@ components:
       - is_current_report
       - last_updated
       - start_date
+    ExplorerSessionStart:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required:
+      - id
     ExplorerInstanceAccessURL:
       type: object
       properties:
@@ -468,45 +428,126 @@ components:
           description: Number of seconds before the URL expires. Maximum is 86400 seconds.
       required:
       - id
-    FileNested:
+    ExplorerShellSessionCredentials:
       type: object
-      description: Used for all nested files except for files associated with sample.
       properties:
-        id:
+        instance_id:
           type: string
           format: uuid
-          readOnly: true
-        s3_path:
-          type: string
-          description: S3 object key
-          maxLength: 1024
-        size:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-          nullable: true
-          description: Size as reported by AWS in bytes
-        download_url:
-          type: string
-          readOnly: true
-        file_type:
-          type: string
-          description: File extension
-          readOnly: true
-        checksum_sha256:
-          type: string
-          description: Object's sha256 Checksum
-          maxLength: 64
-        shadow_mode:
-          type: boolean
-          nullable: true
-          description: If true, file is only accessible by organizations with shadow mode access enabled.
       required:
-      - download_url
-      - file_type
-      - id
-    ExplorerInstancesStart:
+      - instance_id
+    ExplorerSessionStartResponse:
+      type: object
+      properties:
+        explorer_url:
+          type: string
+          description: Clean Explorer URL to open after the session cookie is set.
+        expires_in:
+          type: integer
+          description: Explorer session duration in seconds.
+      required:
+      - expires_in
+      - explorer_url
+    ExplorerShellSessionCredentialsResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+        access_key:
+          type: string
+        secret_key:
+          type: string
+        token:
+          type: string
+        expiry_time:
+          type: string
+          format: date-time
+        region_name:
+          type: string
+        ec2_instance_id:
+          type: string
+        shell_session_ssm_document_name:
+          type: string
+        network_activity_ssm_document_name:
+          type: string
+      required:
+      - access_key
+      - ec2_instance_id
+      - expiry_time
+      - network_activity_ssm_document_name
+      - region_name
+      - secret_key
+      - shell_session_ssm_document_name
+      - token
+      - version
+    PaginatedExplorerCostReportRecordList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExplorerCostReportRecord'
+    GetExplorerDataCredentialsResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+        access_key:
+          type: string
+        secret_key:
+          type: string
+        token:
+          type: string
+        expiry_time:
+          type: string
+          format: date-time
+        region_name:
+          type: string
+      required:
+      - access_key
+      - expiry_time
+      - region_name
+      - secret_key
+      - token
+      - version
+    ExplorerInstancesInactivityStop:
+      type: object
+      properties:
+        instance_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          maxItems: 100
+          minItems: 1
+        stop_after_inactivity_hours:
+          type:
+          - integer
+          - 'null'
+          description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
+      required:
+      - instance_ids
+      - stop_after_inactivity_hours
+    ExplorerInstancesStop:
       type: object
       properties:
         instance_ids:
@@ -529,23 +570,16 @@ components:
           type: string
           readOnly: true
         stop_after_inactivity_hours:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 4294967295
           minimum: 0
           format: int64
-          nullable: true
           description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
       required:
       - id
       - status
-    ExplorerShellSessionCredentials:
-      type: object
-      properties:
-        instance_id:
-          type: string
-          format: uuid
-      required:
-      - instance_id
     PaginatedExplorerInstanceList:
       type: object
       required:
@@ -557,33 +591,34 @@ components:
             count:
               type: integer
             next:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
             previous:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
           required:
           - count
         results:
           type: array
           items:
             $ref: '#/components/schemas/ExplorerInstance'
-    ExplorerInstancesStop:
+    ExplorerInstancesInactivityStopOrganization:
       type: object
       properties:
-        instance_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          maxItems: 100
-          minItems: 1
+        explorer_override_stop_after_inactivity_hours:
+          type: boolean
+        explorer_stop_after_inactivity_hours:
+          type: integer
+          description: 'After how many hours of inactivity should an explorer instance be stopped. If org.explorer_override_stop_after_inactivity_hours or instance.stop_after_inactivity_hours is None, then: 0 -> do not stop instances; Any number -> amount of hours to wait before stopping instances. Otherwise, use instance.stop_after_inactivity_hours.'
       required:
-      - instance_ids
+      - explorer_override_stop_after_inactivity_hours
+      - explorer_stop_after_inactivity_hours
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

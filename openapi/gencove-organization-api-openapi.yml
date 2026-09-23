@@ -1,23 +1,28 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array organization API
+  title: Gencove Back Organization API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: organization
+- name: Organization
 paths:
   /api/v2/organization/:
     get:
       operationId: organization_retrieve
       description: Fetch organization details
       tags:
-      - organization
+      - Organization
       security:
       - JWT: []
       - API key: []
@@ -28,11 +33,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Organization'
           description: ''
+      summary: Organization retrieve
+      x-summary-source: derived
     patch:
       operationId: organization_partial_update
       description: Update organization details
       tags:
-      - organization
+      - Organization
       requestBody:
         content:
           application/json:
@@ -54,6 +61,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Organization'
           description: ''
+      summary: Organization partial update
+      x-summary-source: derived
   /api/v2/organization-monthly-usage-report/:
     get:
       operationId: organization_monthly_usage_report_retrieve
@@ -70,13 +79,15 @@ paths:
           type: string
         description: End date for report. Format is YYYY-MM, e.g. 2023-05. Must supply both 'from' and 'to' parameters.
       tags:
-      - organization
+      - Organization
       security:
       - JWT: []
       - API key: []
       responses:
         '200':
           description: No response body
+      summary: Organization monthly usage report retrieve
+      x-summary-source: derived
   /api/v2/organization-roles/{role_id}:
     get:
       operationId: organization_roles_retrieve
@@ -88,7 +99,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - organization
+      - Organization
       security:
       - JWT: []
       - API key: []
@@ -99,6 +110,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserRoleObject'
           description: ''
+      summary: Organization roles retrieve
+      x-summary-source: derived
   /api/v2/organization-users/:
     get:
       operationId: organization_users_list
@@ -122,7 +135,7 @@ paths:
           type: string
         description: Search users by name, email or id
       tags:
-      - organization
+      - Organization
       security:
       - JWT: []
       - API key: []
@@ -133,10 +146,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedOrganizationUserList'
           description: ''
+      summary: Organization users list
+      x-summary-source: derived
     post:
       operationId: organization_users_create
       tags:
-      - organization
+      - Organization
       requestBody:
         content:
           application/json:
@@ -159,6 +174,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserRoleObject'
           description: ''
+      summary: Organization users create
+      x-summary-source: derived
   /api/v2/organization-users/{user_id}:
     patch:
       operationId: organization_users_partial_update
@@ -170,7 +187,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - organization
+      - Organization
       requestBody:
         content:
           application/json:
@@ -192,92 +209,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/OrganizationUser'
           description: ''
+      summary: Organization users partial update
+      x-summary-source: derived
 components:
   schemas:
-    PatchedOrganizationUser:
+    UserRoleObject:
       type: object
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        is_active:
-          type: boolean
-          title: Active
-          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-        has_mfa_device:
-          type: boolean
-          readOnly: true
         name:
           type: string
-          maxLength: 254
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UserRoleObject'
-          readOnly: true
-          description: Roles in the organization.
-        is_support:
-          type: boolean
-          readOnly: true
-          title: Support
-          description: Designates whether this user should be treated as a support.
-    UserRoleObjectCreate:
-      type: object
-      properties:
-        user:
-          type: string
-          format: uuid
-        role:
-          type: string
-          maxLength: 255
       required:
-      - role
-      - user
-    OrganizationUser:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        is_active:
-          type: boolean
-          title: Active
-          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-        has_mfa_device:
-          type: boolean
-          readOnly: true
-        name:
-          type: string
-          maxLength: 254
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UserRoleObject'
-          readOnly: true
-          description: Roles in the organization.
-        is_support:
-          type: boolean
-          readOnly: true
-          title: Support
-          description: Designates whether this user should be treated as a support.
-      required:
-      - email
-      - has_mfa_device
       - id
-      - is_support
-      - roles
+      - name
     Organization:
       type: object
       properties:
@@ -289,17 +236,20 @@ components:
           type: string
           maxLength: 254
         expire_uploads_period_days:
-          type: integer
+          type:
+          - integer
+          - 'null'
           readOnly: true
-          nullable: true
         archive_period_days:
-          type: integer
+          type:
+          - integer
+          - 'null'
           readOnly: true
-          nullable: true
         archive_restore_period_days:
-          type: integer
+          type:
+          - integer
+          - 'null'
           readOnly: true
-          nullable: true
         roles:
           type: object
           additionalProperties:
@@ -346,6 +296,39 @@ components:
       - project_sharing_enabled
       - roles
       - uploads_enabled
+    PatchedOrganizationUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+        has_mfa_device:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        is_support:
+          type: boolean
+          readOnly: true
+          title: Support
+          description: Designates whether this user should be treated as a support.
     PaginatedOrganizationUserList:
       type: object
       required:
@@ -357,31 +340,21 @@ components:
             count:
               type: integer
             next:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
             previous:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uri
-              nullable: true
           required:
           - count
         results:
           type: array
           items:
             $ref: '#/components/schemas/OrganizationUser'
-    UserRoleObject:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-      required:
-      - id
-      - name
     PatchedOrganization:
       type: object
       properties:
@@ -393,17 +366,20 @@ components:
           type: string
           maxLength: 254
         expire_uploads_period_days:
-          type: integer
+          type:
+          - integer
+          - 'null'
           readOnly: true
-          nullable: true
         archive_period_days:
-          type: integer
+          type:
+          - integer
+          - 'null'
           readOnly: true
-          nullable: true
         archive_restore_period_days:
-          type: integer
+          type:
+          - integer
+          - 'null'
           readOnly: true
-          nullable: true
         roles:
           type: object
           additionalProperties:
@@ -449,8 +425,59 @@ components:
         * `consumer` - consumer
 
         * `consumer_provider` - consumer provider'
+    OrganizationUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+        has_mfa_device:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        is_support:
+          type: boolean
+          readOnly: true
+          title: Support
+          description: Designates whether this user should be treated as a support.
+      required:
+      - email
+      - has_mfa_device
+      - id
+      - is_support
+      - roles
+    UserRoleObjectCreate:
+      type: object
+      properties:
+        user:
+          type: string
+          format: uuid
+        role:
+          type: string
+          maxLength: 255
+      required:
+      - role
+      - user
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 

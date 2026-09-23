@@ -1,16 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gencove Back array jwt API
+  title: Gencove Back JWT API
   version: v2
   contact:
     email: support@gencove.com
   license:
     name: Proprietary
-  description: API for Gencove REST service. Visit <a href='https://enterprise.gencove.com/'>enterprise.gencove.com</a> and <a href='https://docs.gencove.com/'>docs.gencove.com</a> for more information. <br><hr><p>To work with Insomnia, you can generate a Gencove API key by <a target='_blank' href='https://web.gencove.com/account?filter=api-keys'>clicking here</a>. Once you have the API key and have imported the project in Insomnia as a <i>Request Collection</i>, enter the key in Insomnia under <i>Manage Environment</i>.</p><a href='https://insomnia.rest/run/?label=back_api2&uri=https%3A%2F%2Fv2-api-files-prod.s3.amazonaws.com%2Fpublic%2Finsomnia%2Finsomnia_gencove_prod.json' target='_blank'>Run in Insomnia</a><hr>
+  description: 'API for Gencove REST service. Visit enterprise.gencove.com and docs.gencove.com for more information.
+
+
+    To work with Insomnia, you can generate a Gencove API key by clicking here. Once you have the API key and have imported the project in Insomnia as a Request Collection, enter the key in Insomnia under Manage Environment.
+
+    Run in Insomnia'
 servers:
 - url: https://api.gencove.com
 tags:
-- name: jwt
+- name: JWT
 paths:
   /api/v2/jwt-create/:
     post:
@@ -19,7 +24,7 @@ paths:
 
         token pair to prove the authentication of those credentials.'
       tags:
-      - jwt
+      - JWT
       requestBody:
         content:
           application/json:
@@ -42,12 +47,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenPair'
           description: ''
+      summary: Jwt create create
+      x-summary-source: derived
   /api/v2/jwt-logout/:
     post:
       operationId: jwt_logout_create
       description: Logout user and blacklist current JWT refresh token.
       tags:
-      - jwt
+      - JWT
       requestBody:
         content:
           application/json:
@@ -70,6 +77,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/BlacklistRefreshToken'
           description: ''
+      summary: Jwt logout create
+      x-summary-source: derived
   /api/v2/jwt-refresh/:
     post:
       operationId: jwt_refresh_create
@@ -77,7 +86,7 @@ paths:
 
         token if the refresh token is valid.'
       tags:
-      - jwt
+      - JWT
       requestBody:
         content:
           application/json:
@@ -100,14 +109,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenRefresh'
           description: ''
+      summary: Jwt refresh create
+      x-summary-source: derived
   /api/v2/jwt-verify/:
     post:
       operationId: jwt_verify_create
-      description: 'Takes a token and indicates if it is valid.  This view provides no
+      description: 'Takes a token and indicates if it is valid. This view provides no
 
         information about a token''s fitness for a particular use.'
       tags:
-      - jwt
+      - JWT
       requestBody:
         content:
           application/json:
@@ -130,6 +141,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenVerify'
           description: ''
+      summary: Jwt verify create
+      x-summary-source: derived
 components:
   schemas:
     TokenRefresh:
@@ -141,16 +154,6 @@ components:
         refresh:
           type: string
           writeOnly: true
-      required:
-      - access
-      - refresh
-    TokenPair:
-      type: object
-      properties:
-        refresh:
-          type: string
-        access:
-          type: string
       required:
       - access
       - refresh
@@ -181,6 +184,16 @@ components:
           writeOnly: true
       required:
       - token
+    TokenPair:
+      type: object
+      properties:
+        refresh:
+          type: string
+        access:
+          type: string
+      required:
+      - access
+      - refresh
     BlacklistRefreshToken:
       type: object
       description: Blacklist provided JWT refresh token.
@@ -190,7 +203,7 @@ components:
       required:
       - refresh
   securitySchemes:
-    API key:
+    API_key:
       type: apiKey
       description: 'Authorization header content formated as: `Api-Key <API-key>`
 
