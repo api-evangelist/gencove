@@ -228,57 +228,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UploadURLCreate:
-      type: object
-      properties:
-        destination_path:
-          type: string
-        source_url:
-          type: string
-          writeOnly: true
-      required:
-      - destination_path
-      - source_url
-    FileNested:
-      type: object
-      description: Used for all nested files except for files associated with sample.
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        s3_path:
-          type: string
-          description: S3 object key
-          maxLength: 1024
-        size:
-          type:
-          - integer
-          - 'null'
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-          description: Size as reported by AWS in bytes
-        download_url:
-          type: string
-          readOnly: true
-        file_type:
-          type: string
-          description: File extension
-          readOnly: true
-        checksum_sha256:
-          type: string
-          description: Object's sha256 Checksum
-          maxLength: 64
-        shadow_mode:
-          type:
-          - boolean
-          - 'null'
-          description: If true, file is only accessible by organizations with shadow mode access enabled.
-      required:
-      - download_url
-      - file_type
-      - id
     Upload:
       type: object
       properties:
@@ -315,34 +264,17 @@ components:
       - last_status
       - organization
       - source
-    SourceEnum:
-      enum:
-      - cli
-      - cli url
-      - basespace
-      - s3
-      - array data
-      type: string
-      description: '* `cli` - cli
-
-        * `cli url` - cli url
-
-        * `basespace` - basespace
-
-        * `s3` - s3
-
-        * `array data` - array data'
-    UploadPresignedPostDataResponse:
+    UploadURLCreate:
       type: object
       properties:
-        url:
+        destination_path:
           type: string
-          format: uri
-        fields:
-          $ref: '#/components/schemas/AWSPresignedPostData'
+        source_url:
+          type: string
+          writeOnly: true
       required:
-      - fields
-      - url
+      - destination_path
+      - source_url
     UploadPostDataCreate:
       type: object
       description: Used for both normal post data and presigned post data.
@@ -351,37 +283,13 @@ components:
           type: string
       required:
       - destination_path
-    UploadPostDataResponse:
+    S3ObjectNested:
       type: object
       properties:
-        id:
+        bucket:
           type: string
-          format: uuid
-          readOnly: true
-        destination_path:
+        object_name:
           type: string
-        s3:
-          allOf:
-          - $ref: '#/components/schemas/S3ObjectNested'
-          readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/UploadStatusNested'
-          readOnly: true
-      required:
-      - id
-      - last_status
-      - s3
-    DeletedUnassignedUploads:
-      type: object
-      properties:
-        upload_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-      required:
-      - upload_ids
     GetUploadCredentialsResponse:
       type: object
       properties:
@@ -418,6 +326,72 @@ components:
       - key
       - policy
       - signature
+    SourceEnum:
+      enum:
+      - cli
+      - cli url
+      - basespace
+      - s3
+      - array data
+      type: string
+      description: '* `cli` - cli
+
+        * `cli url` - cli url
+
+        * `basespace` - basespace
+
+        * `s3` - s3
+
+        * `array data` - array data'
+    UploadPresignedPostDataResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        fields:
+          $ref: '#/components/schemas/AWSPresignedPostData'
+      required:
+      - fields
+      - url
+    UploadStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    UploadPostDataResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        destination_path:
+          type: string
+        s3:
+          allOf:
+          - $ref: '#/components/schemas/S3ObjectNested'
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/UploadStatusNested'
+          readOnly: true
+      required:
+      - id
+      - last_status
+      - s3
     PaginatedUploadList:
       type: object
       required:
@@ -472,30 +446,56 @@ components:
       - s3
       - source
       - source_url
-    S3ObjectNested:
+    DeletedUnassignedUploads:
       type: object
       properties:
-        bucket:
-          type: string
-        object_name:
-          type: string
-    UploadStatusNested:
+        upload_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+      - upload_ids
+    FileNested:
       type: object
+      description: Used for all nested files except for files associated with sample.
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
-        status:
+        s3_path:
           type: string
-        note:
+          description: S3 object key
+          maxLength: 1024
+        size:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Size as reported by AWS in bytes
+        download_url:
           type: string
-        created:
+          readOnly: true
+        file_type:
           type: string
-          format: date-time
+          description: File extension
+          readOnly: true
+        checksum_sha256:
+          type: string
+          description: Object's sha256 Checksum
+          maxLength: 64
+        shadow_mode:
+          type:
+          - boolean
+          - 'null'
+          description: If true, file is only accessible by organizations with shadow mode access enabled.
       required:
+      - download_url
+      - file_type
       - id
-      - status
   securitySchemes:
     API_key:
       type: apiKey

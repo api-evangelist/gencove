@@ -78,21 +78,6 @@ components:
       - id
       - last_status
       - sample_ids
-    BatchStatusNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-      - status
     BatchFileNested:
       type: object
       description: Sets batch.id as filename in file download_url.
@@ -135,6 +120,21 @@ components:
       - download_url
       - file_type
       - id
+    BatchStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
   securitySchemes:
     API_key:
       type: apiKey

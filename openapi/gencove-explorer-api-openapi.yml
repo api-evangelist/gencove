@@ -313,46 +313,136 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    FileNested:
+    PaginatedExplorerCostReportRecordList:
       type: object
-      description: Used for all nested files except for files associated with sample.
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExplorerCostReportRecord'
+    ExplorerInstance:
+      type: object
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
-        s3_path:
+        status:
           type: string
-          description: S3 object key
-          maxLength: 1024
-        size:
+          readOnly: true
+        stop_after_inactivity_hours:
           type:
           - integer
           - 'null'
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
+          maximum: 4294967295
+          minimum: 0
           format: int64
-          description: Size as reported by AWS in bytes
-        download_url:
-          type: string
-          readOnly: true
-        file_type:
-          type: string
-          description: File extension
-          readOnly: true
-        checksum_sha256:
-          type: string
-          description: Object's sha256 Checksum
-          maxLength: 64
-        shadow_mode:
-          type:
-          - boolean
-          - 'null'
-          description: If true, file is only accessible by organizations with shadow mode access enabled.
+          description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
       required:
-      - download_url
-      - file_type
       - id
+      - status
+    ExplorerShellSessionCredentials:
+      type: object
+      properties:
+        instance_id:
+          type: string
+          format: uuid
+      required:
+      - instance_id
+    ExplorerShellSessionCredentialsResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+        access_key:
+          type: string
+        secret_key:
+          type: string
+        token:
+          type: string
+        expiry_time:
+          type: string
+          format: date-time
+        region_name:
+          type: string
+        ec2_instance_id:
+          type: string
+        shell_session_ssm_document_name:
+          type: string
+        network_activity_ssm_document_name:
+          type: string
+      required:
+      - access_key
+      - ec2_instance_id
+      - expiry_time
+      - network_activity_ssm_document_name
+      - region_name
+      - secret_key
+      - shell_session_ssm_document_name
+      - token
+      - version
+    ExplorerInstanceAccessURL:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        access_token_expiration:
+          type: integer
+          maximum: 86400
+          minimum: 1
+          description: Number of seconds before the URL expires. Maximum is 86400 seconds.
+      required:
+      - id
+    ExplorerInstancesInactivityStop:
+      type: object
+      properties:
+        instance_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          maxItems: 100
+          minItems: 1
+        stop_after_inactivity_hours:
+          type:
+          - integer
+          - 'null'
+          description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
+      required:
+      - instance_ids
+      - stop_after_inactivity_hours
+    ExplorerSessionStartResponse:
+      type: object
+      properties:
+        explorer_url:
+          type: string
+          description: Clean Explorer URL to open after the session cookie is set.
+        expires_in:
+          type: integer
+          description: Explorer session duration in seconds.
+      required:
+      - expires_in
+      - explorer_url
     ExplorerInstancesStart:
       type: object
       properties:
@@ -365,6 +455,37 @@ components:
           minItems: 1
       required:
       - instance_ids
+    GetExplorerDataCredentialsResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+        access_key:
+          type: string
+        secret_key:
+          type: string
+        token:
+          type: string
+        expiry_time:
+          type: string
+          format: date-time
+        region_name:
+          type: string
+      required:
+      - access_key
+      - expiry_time
+      - region_name
+      - secret_key
+      - token
+      - version
+    ExplorerSessionStart:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required:
+      - id
     ExplorerCostReportRecord:
       type: object
       properties:
@@ -407,146 +528,6 @@ components:
       - is_current_report
       - last_updated
       - start_date
-    ExplorerSessionStart:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      required:
-      - id
-    ExplorerInstanceAccessURL:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        access_token_expiration:
-          type: integer
-          maximum: 86400
-          minimum: 1
-          description: Number of seconds before the URL expires. Maximum is 86400 seconds.
-      required:
-      - id
-    ExplorerShellSessionCredentials:
-      type: object
-      properties:
-        instance_id:
-          type: string
-          format: uuid
-      required:
-      - instance_id
-    ExplorerSessionStartResponse:
-      type: object
-      properties:
-        explorer_url:
-          type: string
-          description: Clean Explorer URL to open after the session cookie is set.
-        expires_in:
-          type: integer
-          description: Explorer session duration in seconds.
-      required:
-      - expires_in
-      - explorer_url
-    ExplorerShellSessionCredentialsResponse:
-      type: object
-      properties:
-        version:
-          type: integer
-        access_key:
-          type: string
-        secret_key:
-          type: string
-        token:
-          type: string
-        expiry_time:
-          type: string
-          format: date-time
-        region_name:
-          type: string
-        ec2_instance_id:
-          type: string
-        shell_session_ssm_document_name:
-          type: string
-        network_activity_ssm_document_name:
-          type: string
-      required:
-      - access_key
-      - ec2_instance_id
-      - expiry_time
-      - network_activity_ssm_document_name
-      - region_name
-      - secret_key
-      - shell_session_ssm_document_name
-      - token
-      - version
-    PaginatedExplorerCostReportRecordList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExplorerCostReportRecord'
-    GetExplorerDataCredentialsResponse:
-      type: object
-      properties:
-        version:
-          type: integer
-        access_key:
-          type: string
-        secret_key:
-          type: string
-        token:
-          type: string
-        expiry_time:
-          type: string
-          format: date-time
-        region_name:
-          type: string
-      required:
-      - access_key
-      - expiry_time
-      - region_name
-      - secret_key
-      - token
-      - version
-    ExplorerInstancesInactivityStop:
-      type: object
-      properties:
-        instance_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          maxItems: 100
-          minItems: 1
-        stop_after_inactivity_hours:
-          type:
-          - integer
-          - 'null'
-          description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
-      required:
-      - instance_ids
-      - stop_after_inactivity_hours
     ExplorerInstancesStop:
       type: object
       properties:
@@ -559,27 +540,6 @@ components:
           minItems: 1
       required:
       - instance_ids
-    ExplorerInstance:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-          readOnly: true
-        stop_after_inactivity_hours:
-          type:
-          - integer
-          - 'null'
-          maximum: 4294967295
-          minimum: 0
-          format: int64
-          description: After how many hours of inactivity should an explorer instance be stopped. None -> adhere to org setting. 0 -> do not stop instance. Any number -> amount of hours to wait before stopping instance. If org.explorer_override_stop_after_inactivity_hours is True, this attribute doesn't have any effects.
-      required:
-      - id
-      - status
     PaginatedExplorerInstanceList:
       type: object
       required:
@@ -617,6 +577,46 @@ components:
       required:
       - explorer_override_stop_after_inactivity_hours
       - explorer_stop_after_inactivity_hours
+    FileNested:
+      type: object
+      description: Used for all nested files except for files associated with sample.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        s3_path:
+          type: string
+          description: S3 object key
+          maxLength: 1024
+        size:
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Size as reported by AWS in bytes
+        download_url:
+          type: string
+          readOnly: true
+        file_type:
+          type: string
+          description: File extension
+          readOnly: true
+        checksum_sha256:
+          type: string
+          description: Object's sha256 Checksum
+          maxLength: 64
+        shadow_mode:
+          type:
+          - boolean
+          - 'null'
+          description: If true, file is only accessible by organizations with shadow mode access enabled.
+      required:
+      - download_url
+      - file_type
+      - id
   securitySchemes:
     API_key:
       type: apiKey

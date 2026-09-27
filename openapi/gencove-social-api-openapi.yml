@@ -136,27 +136,17 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SocialAccountNested:
+    SocialSignUp:
       type: object
       properties:
-        id:
+        provider:
           type: string
-          format: uuid
-          readOnly: true
-        created:
+        code:
           type: string
-          format: date-time
-        social_account_id:
-          type: string
-        auth_time:
-          type:
-          - string
-          - 'null'
-          format: date-time
+          description: Authorization code
       required:
-      - auth_time
-      - id
-      - social_account_id
+      - code
+      - provider
     PaginatedSocialProviderList:
       type: object
       required:
@@ -183,13 +173,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SocialProvider'
-    SocialDisconnect:
-      type: object
-      properties:
-        provider:
-          type: string
-      required:
-      - provider
     SocialProvider:
       type: object
       properties:
@@ -208,17 +191,34 @@ components:
       - accounts
       - authorization_uri
       - name
-    SocialSignUp:
+    SocialDisconnect:
       type: object
       properties:
         provider:
           type: string
-        code:
-          type: string
-          description: Authorization code
       required:
-      - code
       - provider
+    SocialAccountNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+        social_account_id:
+          type: string
+        auth_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - auth_time
+      - id
+      - social_account_id
   securitySchemes:
     API_key:
       type: apiKey

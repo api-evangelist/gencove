@@ -57,6 +57,26 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ArrayDataUploadFormResponse:
+      type: object
+      description: Response body for ``POST /api/v2/array-data-upload-form``.
+      properties:
+        sample_id:
+          type: string
+          format: uuid
+          description: UUID of the ``samples.Sample`` created for this upload session.
+        url:
+          type: string
+          format: uri
+          description: Tokenized upload URL for the end-user.
+        expires_at:
+          type: string
+          format: date-time
+          description: When the embedded JWT expires (ISO-8601).
+      required:
+      - expires_at
+      - sample_id
+      - url
     ArrayDataUploadFormCreate:
       type: object
       description: Request body for ``POST /api/v2/array-data-upload-form``.
@@ -85,26 +105,6 @@ components:
           minimum: 60
           default: 600
           description: JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token.
-    ArrayDataUploadFormResponse:
-      type: object
-      description: Response body for ``POST /api/v2/array-data-upload-form``.
-      properties:
-        sample_id:
-          type: string
-          format: uuid
-          description: UUID of the ``samples.Sample`` created for this upload session.
-        url:
-          type: string
-          format: uri
-          description: Tokenized upload URL for the end-user.
-        expires_at:
-          type: string
-          format: date-time
-          description: When the embedded JWT expires (ISO-8601).
-      required:
-      - expires_at
-      - sample_id
-      - url
   securitySchemes:
     API_key:
       type: apiKey

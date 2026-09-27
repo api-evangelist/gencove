@@ -509,35 +509,57 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UserCreate:
+    PatchedAPIKey:
       type: object
-      description: Adding name as an optional field during registration.
       properties:
-        email:
+        revoked:
+          type: boolean
+          description: If the API key is revoked, clients cannot use it anymore. (This cannot be undone.)
+        id:
+          type: string
+        name:
+          type: string
+          description: A free-form name for the API key. Need not be unique. 50 characters max.
+          maxLength: 50
+        prefix:
+          type: string
+          readOnly: true
+        expiry_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          readOnly: true
+          title: Expires
+          description: Last day (UTC) to use the API key, once API key expires clients cannot use it anymore.
+        has_expired:
+          type: string
+          readOnly: true
+        ip_range:
+          description: List of trusted subnets in CIDR notation
+    Activation:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - token
+      - uid
+    SetUsername:
+      type: object
+      properties:
+        current_password:
+          type: string
+        new_email:
           type: string
           format: email
           title: Email address
           maxLength: 254
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        password:
-          type: string
-          writeOnly: true
-        name:
-          type: string
-          maxLength: 254
-        invitation_token:
-          type: string
-          maxLength: 32
-        organization_name:
-          type: string
-          maxLength: 254
       required:
-      - email
-      - id
-      - password
+      - current_password
+      - new_email
     Project:
       type: object
       properties:
@@ -613,59 +635,16 @@ components:
       - roles
       - sample_count
       - webhook_url
-    CreateAPIKey:
+    SetPassword:
       type: object
       properties:
-        expiry_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          title: Expires
-          description: Last day (UTC) to use the API key, once API key expires clients cannot use it anymore.
-        id:
+        new_password:
           type: string
-          readOnly: true
-        key:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          description: A free-form name for the API key. Need not be unique. 50 characters max.
-          maxLength: 50
-        prefix:
-          type: string
-          readOnly: true
-        ip_range:
-          description: List of trusted subnets in CIDR notation
-      required:
-      - id
-      - key
-      - name
-      - prefix
-    SetUsername:
-      type: object
-      properties:
         current_password:
           type: string
-        new_email:
-          type: string
-          format: email
-          title: Email address
-          maxLength: 254
       required:
       - current_password
-      - new_email
-    Activation:
-      type: object
-      properties:
-        uid:
-          type: string
-        token:
-          type: string
-      required:
-      - token
-      - uid
+      - new_password
     APIKey:
       type: object
       properties:
@@ -700,34 +679,32 @@ components:
       - id
       - name
       - prefix
-    PatchedAPIKey:
+    PaginatedAPIKeyList:
       type: object
+      required:
+      - results
       properties:
-        revoked:
-          type: boolean
-          description: If the API key is revoked, clients cannot use it anymore. (This cannot be undone.)
-        id:
-          type: string
-        name:
-          type: string
-          description: A free-form name for the API key. Need not be unique. 50 characters max.
-          maxLength: 50
-        prefix:
-          type: string
-          readOnly: true
-        expiry_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          readOnly: true
-          title: Expires
-          description: Last day (UTC) to use the API key, once API key expires clients cannot use it anymore.
-        has_expired:
-          type: string
-          readOnly: true
-        ip_range:
-          description: List of trusted subnets in CIDR notation
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/APIKey'
     PaginatedProjectList:
       type: object
       required:
@@ -754,6 +731,43 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Project'
+    UserCreate:
+      type: object
+      description: Adding name as an optional field during registration.
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        password:
+          type: string
+          writeOnly: true
+        name:
+          type: string
+          maxLength: 254
+        invitation_token:
+          type: string
+          maxLength: 32
+        organization_name:
+          type: string
+          maxLength: 254
+      required:
+      - email
+      - id
+      - password
+    SendEmailReset:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
     User:
       type: object
       properties:
@@ -791,14 +805,6 @@ components:
       - id
       - is_support
       - uploads_enabled
-    SendEmailReset:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-      required:
-      - email
     PatchedUser:
       type: object
       properties:
@@ -829,6 +835,36 @@ components:
           readOnly: true
           title: Support
           description: Designates whether this user should be treated as a support.
+    CreateAPIKey:
+      type: object
+      properties:
+        expiry_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          title: Expires
+          description: Last day (UTC) to use the API key, once API key expires clients cannot use it anymore.
+        id:
+          type: string
+          readOnly: true
+        key:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: A free-form name for the API key. Need not be unique. 50 characters max.
+          maxLength: 50
+        prefix:
+          type: string
+          readOnly: true
+        ip_range:
+          description: List of trusted subnets in CIDR notation
+      required:
+      - id
+      - key
+      - name
+      - prefix
     PasswordResetConfirm:
       type: object
       properties:
@@ -842,42 +878,6 @@ components:
       - new_password
       - token
       - uid
-    PaginatedAPIKeyList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/APIKey'
-    SetPassword:
-      type: object
-      properties:
-        new_password:
-          type: string
-        current_password:
-          type: string
-      required:
-      - current_password
-      - new_password
   securitySchemes:
     API_key:
       type: apiKey

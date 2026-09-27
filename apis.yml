@@ -58,7 +58,7 @@ tags:
 - Analytics
 apis:
 - aid: gencove:gencove-array-api
-  name: Gencove array API
+  name: Gencove Array API
   description: The array API from Gencove — 1 operation(s) for array.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -68,7 +68,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-array-api-openapi.yml
 - aid: gencove:gencove-basespace-api
-  name: Gencove basespace API
+  name: Gencove Basespace API
   description: The basespace API from Gencove — 6 operation(s) for basespace.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -78,7 +78,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-basespace-api-openapi.yml
 - aid: gencove:gencove-batch-api
-  name: Gencove batch API
+  name: Gencove Batch API
   description: The batch API from Gencove — 1 operation(s) for batch.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -90,7 +90,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-batch-api-openapi.yml
 - aid: gencove:gencove-billing-api
-  name: Gencove billing API
+  name: Gencove Billing API
   description: The billing API from Gencove — 1 operation(s) for billing.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -102,7 +102,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-billing-api-openapi.yml
 - aid: gencove:gencove-explorer-api
-  name: Gencove explorer API
+  name: Gencove Explorer API
   description: The explorer API from Gencove — 10 operation(s) for explorer.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -114,7 +114,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-explorer-api-openapi.yml
 - aid: gencove:gencove-file-api
-  name: Gencove file API
+  name: Gencove File API
   description: The file API from Gencove — 2 operation(s) for file.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -126,7 +126,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-file-api-openapi.yml
 - aid: gencove:gencove-firstmile-api
-  name: Gencove firstmile API
+  name: Gencove Firstmile API
   description: The firstmile API from Gencove — 2 operation(s) for firstmile.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -138,7 +138,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-firstmile-api-openapi.yml
 - aid: gencove:gencove-invitation-api
-  name: Gencove invitation API
+  name: Gencove Invitation API
   description: The invitation API from Gencove — 3 operation(s) for invitation.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -150,7 +150,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-invitation-api-openapi.yml
 - aid: gencove:gencove-jwt-api
-  name: Gencove jwt API
+  name: Gencove JWT API
   description: The jwt API from Gencove — 4 operation(s) for jwt.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -162,7 +162,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-jwt-api-openapi.yml
 - aid: gencove:gencove-mfa-api
-  name: Gencove mfa API
+  name: Gencove Mfa API
   description: The mfa API from Gencove — 4 operation(s) for mfa.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -174,7 +174,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-mfa-api-openapi.yml
 - aid: gencove:gencove-notification-api
-  name: Gencove notification API
+  name: Gencove Notification API
   description: The notification API from Gencove — 1 operation(s) for notification.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -186,7 +186,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-notification-api-openapi.yml
 - aid: gencove:gencove-organization-api
-  name: Gencove organization API
+  name: Gencove Organization API
   description: The organization API from Gencove — 5 operation(s) for organization.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -198,7 +198,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-organization-api-openapi.yml
 - aid: gencove:gencove-pipeline-api
-  name: Gencove pipeline API
+  name: Gencove Pipeline API
   description: The pipeline API from Gencove — 5 operation(s) for pipeline.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -210,7 +210,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-pipeline-api-openapi.yml
 - aid: gencove:gencove-project-api
-  name: Gencove project API
+  name: Gencove Project API
   description: The project API from Gencove — 34 operation(s) for project.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -222,7 +222,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-project-api-openapi.yml
 - aid: gencove:gencove-role-api
-  name: Gencove role API
+  name: Gencove Role API
   description: The role API from Gencove — 1 operation(s) for role.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -234,7 +234,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-role-api-openapi.yml
 - aid: gencove:gencove-s3-api
-  name: Gencove s3 API
+  name: Gencove S3 API
   description: The s3 API from Gencove — 5 operation(s) for s3.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -246,7 +246,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-s3-api-openapi.yml
 - aid: gencove:gencove-sample-api
-  name: Gencove sample API
+  name: Gencove Sample API
   description: The sample API from Gencove — 17 operation(s) for sample.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -258,7 +258,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-sample-api-openapi.yml
 - aid: gencove:gencove-social-api
-  name: Gencove social API
+  name: Gencove Social API
   description: The social API from Gencove — 3 operation(s) for social.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -270,7 +270,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-social-api-openapi.yml
 - aid: gencove:gencove-upload-api
-  name: Gencove upload API
+  name: Gencove Upload API
   description: The upload API from Gencove — 7 operation(s) for upload.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
@@ -282,7 +282,7 @@ apis:
   - type: OpenAPI
     url: openapi/gencove-upload-api-openapi.yml
 - aid: gencove:gencove-user-api
-  name: Gencove user API
+  name: Gencove User API
   description: The user API from Gencove — 12 operation(s) for user.
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/

@@ -232,16 +232,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    S3ExternalID:
-      type: object
-      description: External ID for S3 imports serializer.
-      properties:
-        external_id:
-          type: string
-          format: uuid
-          readOnly: true
-      required:
-      - external_id
     S3ProjectsAutoimportCreate:
       type: object
       properties:
@@ -255,6 +245,32 @@ components:
           maxLength: 768
       required:
       - id
+    PaginatedS3URIAutoimportList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/S3URIAutoimport'
     S3Role:
       type: object
       description: Role ARN for S3 imports serializer.
@@ -265,6 +281,25 @@ components:
           minLength: 20
       required:
       - role_arn
+    S3URIAutoimport:
+      type: object
+      description: S3 URI auto import serializer.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        project_id:
+          type: string
+          format: uuid
+        s3_uri:
+          type: string
+          maxLength: 734
+        metadata: {}
+      required:
+      - id
+      - project_id
+      - s3_uri
     InputFormatEnum:
       enum:
       - cram
@@ -294,51 +329,16 @@ components:
       required:
       - project_id
       - s3_uri
-    S3URIAutoimport:
+    S3ExternalID:
       type: object
-      description: S3 URI auto import serializer.
+      description: External ID for S3 imports serializer.
       properties:
-        id:
+        external_id:
           type: string
           format: uuid
           readOnly: true
-        project_id:
-          type: string
-          format: uuid
-        s3_uri:
-          type: string
-          maxLength: 734
-        metadata: {}
       required:
-      - id
-      - project_id
-      - s3_uri
-    PaginatedS3URIAutoimportList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/S3URIAutoimport'
+      - external_id
   securitySchemes:
     API_key:
       type: apiKey

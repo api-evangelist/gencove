@@ -213,6 +213,45 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    OrganizationUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+        has_mfa_device:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        is_support:
+          type: boolean
+          readOnly: true
+          title: Support
+          description: Designates whether this user should be treated as a support.
+      required:
+      - email
+      - has_mfa_device
+      - id
+      - is_support
+      - roles
     UserRoleObject:
       type: object
       properties:
@@ -225,6 +264,32 @@ components:
       required:
       - id
       - name
+    PaginatedOrganizationUserList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationUser'
     Organization:
       type: object
       properties:
@@ -296,65 +361,6 @@ components:
       - project_sharing_enabled
       - roles
       - uploads_enabled
-    PatchedOrganizationUser:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        is_active:
-          type: boolean
-          title: Active
-          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-        has_mfa_device:
-          type: boolean
-          readOnly: true
-        name:
-          type: string
-          maxLength: 254
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UserRoleObject'
-          readOnly: true
-          description: Roles in the organization.
-        is_support:
-          type: boolean
-          readOnly: true
-          title: Support
-          description: Designates whether this user should be treated as a support.
-    PaginatedOrganizationUserList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrganizationUser'
     PatchedOrganization:
       type: object
       properties:
@@ -425,7 +431,7 @@ components:
         * `consumer` - consumer
 
         * `consumer_provider` - consumer provider'
-    OrganizationUser:
+    PatchedOrganizationUser:
       type: object
       properties:
         id:
@@ -458,12 +464,6 @@ components:
           readOnly: true
           title: Support
           description: Designates whether this user should be treated as a support.
-      required:
-      - email
-      - has_mfa_device
-      - id
-      - is_support
-      - roles
     UserRoleObjectCreate:
       type: object
       properties:

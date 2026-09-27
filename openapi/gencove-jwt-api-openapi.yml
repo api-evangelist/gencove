@@ -145,6 +145,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    TokenVerify:
+      type: object
+      properties:
+        token:
+          type: string
+          writeOnly: true
+      required:
+      - token
+    BlacklistRefreshToken:
+      type: object
+      description: Blacklist provided JWT refresh token.
+      properties:
+        refresh:
+          type: string
+      required:
+      - refresh
     TokenRefresh:
       type: object
       properties:
@@ -154,6 +170,16 @@ components:
         refresh:
           type: string
           writeOnly: true
+      required:
+      - access
+      - refresh
+    TokenPair:
+      type: object
+      properties:
+        refresh:
+          type: string
+        access:
+          type: string
       required:
       - access
       - refresh
@@ -176,32 +202,6 @@ components:
       required:
       - email
       - password
-    TokenVerify:
-      type: object
-      properties:
-        token:
-          type: string
-          writeOnly: true
-      required:
-      - token
-    TokenPair:
-      type: object
-      properties:
-        refresh:
-          type: string
-        access:
-          type: string
-      required:
-      - access
-      - refresh
-    BlacklistRefreshToken:
-      type: object
-      description: Blacklist provided JWT refresh token.
-      properties:
-        refresh:
-          type: string
-      required:
-      - refresh
   securitySchemes:
     API_key:
       type: apiKey

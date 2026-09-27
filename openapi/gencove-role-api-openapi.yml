@@ -59,20 +59,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Role:
-      type: object
-      description: Explicit representation of the roles from the Role enum.
-      properties:
-        name:
-          type: string
-          description: Name of the role.
-        permissions:
-          type: array
-          items: {}
-          description: List of the permissions the role has.
-      required:
-      - name
-      - permissions
     PaginatedRoleList:
       type: object
       required:
@@ -99,6 +85,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Role'
+    Role:
+      type: object
+      description: Explicit representation of the roles from the Role enum.
+      properties:
+        name:
+          type: string
+          description: Name of the role.
+        permissions:
+          type: array
+          items: {}
+          description: List of the permissions the role has.
+      required:
+      - name
+      - permissions
   securitySchemes:
     API_key:
       type: apiKey

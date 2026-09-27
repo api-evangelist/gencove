@@ -176,45 +176,83 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PaginatedInvitationList:
+    PatchedInvitationDetails:
       type: object
-      required:
-      - results
+      description: Represent invitation for invitee.
       properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invitation'
-    InviteOrganization:
+        token:
+          type: string
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/InvitationStatus'
+          readOnly: true
+        expires:
+          type: string
+          format: date-time
+          readOnly: true
+        organization:
+          $ref: '#/components/schemas/InviteOrganization'
+        role:
+          type: string
+          maxLength: 255
+    InvitationDetails:
+      type: object
+      description: Represent invitation for invitee.
+      properties:
+        token:
+          type: string
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/InvitationStatus'
+          readOnly: true
+        expires:
+          type: string
+          format: date-time
+          readOnly: true
+        organization:
+          $ref: '#/components/schemas/InviteOrganization'
+        role:
+          type: string
+          maxLength: 255
+      required:
+      - expires
+      - last_status
+      - organization
+      - role
+      - token
+    InvitationStatus:
       type: object
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
-        name:
+        status:
           type: string
-          maxLength: 254
+        created:
+          type: string
+          format: date-time
+        actor:
+          allOf:
+          - $ref: '#/components/schemas/InvitationActor'
+          readOnly: true
       required:
+      - actor
       - id
-      - name
+      - status
+    CreateInvite:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          default: ''
+      required:
+      - email
     Invitation:
       type: object
       properties:
@@ -244,63 +282,19 @@ components:
       - id
       - last_status
       - role
-    CreateInvite:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        role:
-          type: string
-          default: ''
-      required:
-      - email
-    InvitationStatus:
+    InviteOrganization:
       type: object
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
-        status:
+        name:
           type: string
-        created:
-          type: string
-          format: date-time
-        actor:
-          allOf:
-          - $ref: '#/components/schemas/InvitationActor'
-          readOnly: true
+          maxLength: 254
       required:
-      - actor
       - id
-      - status
-    InvitationDetails:
-      type: object
-      description: Represent invitation for invitee.
-      properties:
-        token:
-          type: string
-          readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/InvitationStatus'
-          readOnly: true
-        expires:
-          type: string
-          format: date-time
-          readOnly: true
-        organization:
-          $ref: '#/components/schemas/InviteOrganization'
-        role:
-          type: string
-          maxLength: 255
-      required:
-      - expires
-      - last_status
-      - organization
-      - role
-      - token
+      - name
     InvitationActor:
       type: object
       properties:
@@ -313,26 +307,32 @@ components:
           maxLength: 254
       required:
       - id
-    PatchedInvitationDetails:
+    PaginatedInvitationList:
       type: object
-      description: Represent invitation for invitee.
+      required:
+      - results
       properties:
-        token:
-          type: string
-          readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/InvitationStatus'
-          readOnly: true
-        expires:
-          type: string
-          format: date-time
-          readOnly: true
-        organization:
-          $ref: '#/components/schemas/InviteOrganization'
-        role:
-          type: string
-          maxLength: 255
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invitation'
   securitySchemes:
     API_key:
       type: apiKey
