@@ -213,7 +213,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OrganizationUser:
+    UserRoleObjectCreate:
+      type: object
+      properties:
+        user:
+          type: string
+          format: uuid
+        role:
+          type: string
+          maxLength: 255
+      required:
+      - role
+      - user
+    PatchedOrganizationUser:
       type: object
       properties:
         id:
@@ -246,12 +258,76 @@ components:
           readOnly: true
           title: Support
           description: Designates whether this user should be treated as a support.
-      required:
-      - email
-      - has_mfa_device
-      - id
-      - is_support
-      - roles
+    PatchedOrganization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        expire_uploads_period_days:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        archive_period_days:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        archive_restore_period_days:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        uploads_enabled:
+          type: boolean
+          readOnly: true
+          description: Designates whether the organization can access upload functionality.
+        delete_samples_enabled:
+          type: boolean
+          readOnly: true
+          description: Designates whether the organization can delete samples.
+        project_sharing_enabled:
+          type: boolean
+          readOnly: true
+          description: When enabled, allows organization to share projects with other organizations.
+        account_on_hold:
+          type: boolean
+          readOnly: true
+          description: When enabled, limits ability of organization to manage data and displays UI warning to organization users that invoice is past due.
+        organization_type:
+          allOf:
+          - $ref: '#/components/schemas/OrganizationTypeEnum'
+          readOnly: true
+          description: 'Type of organization
+
+
+            * `enterprise` - enterprise
+
+            * `consumer` - consumer
+
+            * `consumer_provider` - consumer provider'
+    OrganizationTypeEnum:
+      enum:
+      - enterprise
+      - consumer
+      - consumer_provider
+      type: string
+      description: '* `enterprise` - enterprise
+
+        * `consumer` - consumer
+
+        * `consumer_provider` - consumer provider'
     UserRoleObject:
       type: object
       properties:
@@ -361,77 +437,7 @@ components:
       - project_sharing_enabled
       - roles
       - uploads_enabled
-    PatchedOrganization:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 254
-        expire_uploads_period_days:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        archive_period_days:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        archive_restore_period_days:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UserRoleObject'
-          readOnly: true
-          description: Roles in the organization.
-        uploads_enabled:
-          type: boolean
-          readOnly: true
-          description: Designates whether the organization can access upload functionality.
-        delete_samples_enabled:
-          type: boolean
-          readOnly: true
-          description: Designates whether the organization can delete samples.
-        project_sharing_enabled:
-          type: boolean
-          readOnly: true
-          description: When enabled, allows organization to share projects with other organizations.
-        account_on_hold:
-          type: boolean
-          readOnly: true
-          description: When enabled, limits ability of organization to manage data and displays UI warning to organization users that invoice is past due.
-        organization_type:
-          allOf:
-          - $ref: '#/components/schemas/OrganizationTypeEnum'
-          readOnly: true
-          description: 'Type of organization
-
-
-            * `enterprise` - enterprise
-
-            * `consumer` - consumer
-
-            * `consumer_provider` - consumer provider'
-    OrganizationTypeEnum:
-      enum:
-      - enterprise
-      - consumer
-      - consumer_provider
-      type: string
-      description: '* `enterprise` - enterprise
-
-        * `consumer` - consumer
-
-        * `consumer_provider` - consumer provider'
-    PatchedOrganizationUser:
+    OrganizationUser:
       type: object
       properties:
         id:
@@ -464,18 +470,12 @@ components:
           readOnly: true
           title: Support
           description: Designates whether this user should be treated as a support.
-    UserRoleObjectCreate:
-      type: object
-      properties:
-        user:
-          type: string
-          format: uuid
-        role:
-          type: string
-          maxLength: 255
       required:
-      - role
-      - user
+      - email
+      - has_mfa_device
+      - id
+      - is_support
+      - roles
   securitySchemes:
     API_key:
       type: apiKey

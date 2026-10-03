@@ -111,23 +111,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DeviceTypeEnum:
-      enum:
-      - generator
-      - yubikey
-      type: string
-      description: '* `generator` - Token generator
-
-        * `yubikey` - YubiKey'
-    MFAStatus:
-      type: object
-      description: Serializer just to use in swagger schema.
-      properties:
-        has_mfa_device:
-          type: boolean
-          readOnly: true
-      required:
-      - has_mfa_device
     ValidateSetUpMFA:
       type: object
       description: Mixin to add token validation to serializers.
@@ -162,6 +145,23 @@ components:
       - config_url
       - device_type
       - secret
+    MFAStatus:
+      type: object
+      description: Serializer just to use in swagger schema.
+      properties:
+        has_mfa_device:
+          type: boolean
+          readOnly: true
+      required:
+      - has_mfa_device
+    DeviceTypeEnum:
+      enum:
+      - generator
+      - yubikey
+      type: string
+      description: '* `generator` - Token generator
+
+        * `yubikey` - YubiKey'
   securitySchemes:
     API_key:
       type: apiKey

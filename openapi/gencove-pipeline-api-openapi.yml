@@ -172,95 +172,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PaginatedPipelineListList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PipelineList'
-    PipelineDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        version:
-          type: string
-          maxLength: 100
-        capabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/PipelineCapabilities'
-      required:
-      - capabilities
-      - id
-      - version
-    PipelineList:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        version:
-          type: string
-          maxLength: 100
-      required:
-      - id
-      - version
-    BlankEnum:
-      enum:
-      - ''
-    PaginatedPipelineCapabilitiesList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PipelineCapabilities'
-    NullEnum:
-      enum:
-      - null
     PipelineCapabilities:
       type: object
       properties:
@@ -327,6 +238,92 @@ components:
       - name
       - species
       - steps
+    PaginatedPipelineListList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineList'
+    PaginatedPipelineCapabilitiesList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineCapabilities'
+    BlankEnum:
+      enum:
+      - ''
+    PipelineList:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        version:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - version
+    PipelineDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        version:
+          type: string
+          maxLength: 100
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineCapabilities'
+      required:
+      - capabilities
+      - id
+      - version
     PipelineCategoryEnum:
       enum:
       - Human Genomics
@@ -341,6 +338,9 @@ components:
         * `Companion Animals` - companion animals
 
         * `Other` - other'
+    NullEnum:
+      enum:
+      - null
   securitySchemes:
     API_key:
       type: apiKey

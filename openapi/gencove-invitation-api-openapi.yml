@@ -176,52 +176,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedInvitationDetails:
+    InviteOrganization:
       type: object
-      description: Represent invitation for invitee.
       properties:
-        token:
+        id:
           type: string
+          format: uuid
           readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/InvitationStatus'
-          readOnly: true
-        expires:
+        name:
           type: string
-          format: date-time
-          readOnly: true
-        organization:
-          $ref: '#/components/schemas/InviteOrganization'
-        role:
-          type: string
-          maxLength: 255
-    InvitationDetails:
-      type: object
-      description: Represent invitation for invitee.
-      properties:
-        token:
-          type: string
-          readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/InvitationStatus'
-          readOnly: true
-        expires:
-          type: string
-          format: date-time
-          readOnly: true
-        organization:
-          $ref: '#/components/schemas/InviteOrganization'
-        role:
-          type: string
-          maxLength: 255
+          maxLength: 254
       required:
-      - expires
-      - last_status
-      - organization
-      - role
-      - token
+      - id
+      - name
     InvitationStatus:
       type: object
       properties:
@@ -242,17 +209,6 @@ components:
       - actor
       - id
       - status
-    CreateInvite:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        role:
-          type: string
-          default: ''
-      required:
-      - email
     Invitation:
       type: object
       properties:
@@ -282,31 +238,26 @@ components:
       - id
       - last_status
       - role
-    InviteOrganization:
+    PatchedInvitationDetails:
       type: object
+      description: Represent invitation for invitee.
       properties:
-        id:
+        token:
           type: string
-          format: uuid
           readOnly: true
-        name:
-          type: string
-          maxLength: 254
-      required:
-      - id
-      - name
-    InvitationActor:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/InvitationStatus'
           readOnly: true
-        name:
+        expires:
           type: string
-          maxLength: 254
-      required:
-      - id
+          format: date-time
+          readOnly: true
+        organization:
+          $ref: '#/components/schemas/InviteOrganization'
+        role:
+          type: string
+          maxLength: 255
     PaginatedInvitationList:
       type: object
       required:
@@ -333,6 +284,55 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Invitation'
+    InvitationDetails:
+      type: object
+      description: Represent invitation for invitee.
+      properties:
+        token:
+          type: string
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/InvitationStatus'
+          readOnly: true
+        expires:
+          type: string
+          format: date-time
+          readOnly: true
+        organization:
+          $ref: '#/components/schemas/InviteOrganization'
+        role:
+          type: string
+          maxLength: 255
+      required:
+      - expires
+      - last_status
+      - organization
+      - role
+      - token
+    InvitationActor:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+      required:
+      - id
+    CreateInvite:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          default: ''
+      required:
+      - email
   securitySchemes:
     API_key:
       type: apiKey
