@@ -73,6 +73,8 @@ apis:
   humanURL: https://docs.gencove.com/base/getting-started/
   baseURL: https://api.gencove.com/api/v2/
   tags:
+  - Basespace
+  tags_raw:
   - basespace
   properties:
   - type: OpenAPI
