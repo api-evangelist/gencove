@@ -145,18 +145,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TokenRefresh:
-      type: object
-      properties:
-        access:
-          type: string
-          readOnly: true
-        refresh:
-          type: string
-          writeOnly: true
-      required:
-      - access
-      - refresh
     TokenPair:
       type: object
       properties:
@@ -175,6 +163,26 @@ components:
           writeOnly: true
       required:
       - token
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    BlacklistRefreshToken:
+      type: object
+      description: Blacklist provided JWT refresh token.
+      properties:
+        refresh:
+          type: string
+      required:
+      - refresh
     OTPTokenObtainPair:
       type: object
       description: Mixin to add token validation to serializers.
@@ -194,14 +202,6 @@ components:
       required:
       - email
       - password
-    BlacklistRefreshToken:
-      type: object
-      description: Blacklist provided JWT refresh token.
-      properties:
-        refresh:
-          type: string
-      required:
-      - refresh
   securitySchemes:
     API_key:
       type: apiKey

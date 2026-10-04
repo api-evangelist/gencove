@@ -83,17 +83,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    FileType:
-      type: object
-      properties:
-        key:
-          type: string
-          description: File extension
-          maxLength: 50
-        description:
-          type: string
-      required:
-      - key
     PaginatedFileTypeList:
       type: object
       required:
@@ -120,6 +109,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FileType'
+    FileType:
+      type: object
+      properties:
+        key:
+          type: string
+          description: File extension
+          maxLength: 50
+        description:
+          type: string
+      required:
+      - key
   securitySchemes:
     API_key:
       type: apiKey

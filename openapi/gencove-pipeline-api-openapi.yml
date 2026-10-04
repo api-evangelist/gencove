@@ -172,6 +172,44 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PipelineCategoryEnum:
+      enum:
+      - Human Genomics
+      - Agriculture Animals & Plant Genomics
+      - Companion Animals
+      - Other
+      type: string
+      description: '* `Human Genomics` - human genomics
+
+        * `Agriculture Animals & Plant Genomics` - animals plants
+
+        * `Companion Animals` - companion animals
+
+        * `Other` - other'
+    NullEnum:
+      enum:
+      - null
+    BlankEnum:
+      enum:
+      - ''
+    PipelineDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        version:
+          type: string
+          maxLength: 100
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineCapabilities'
+      required:
+      - capabilities
+      - id
+      - version
     PipelineCapabilities:
       type: object
       properties:
@@ -264,6 +302,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PipelineList'
+    PipelineList:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        version:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - version
     PaginatedPipelineCapabilitiesList:
       type: object
       required:
@@ -290,57 +341,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PipelineCapabilities'
-    BlankEnum:
-      enum:
-      - ''
-    PipelineList:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        version:
-          type: string
-          maxLength: 100
-      required:
-      - id
-      - version
-    PipelineDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        version:
-          type: string
-          maxLength: 100
-        capabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/PipelineCapabilities'
-      required:
-      - capabilities
-      - id
-      - version
-    PipelineCategoryEnum:
-      enum:
-      - Human Genomics
-      - Agriculture Animals & Plant Genomics
-      - Companion Animals
-      - Other
-      type: string
-      description: '* `Human Genomics` - human genomics
-
-        * `Agriculture Animals & Plant Genomics` - animals plants
-
-        * `Companion Animals` - companion animals
-
-        * `Other` - other'
-    NullEnum:
-      enum:
-      - null
   securitySchemes:
     API_key:
       type: apiKey

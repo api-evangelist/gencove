@@ -136,12 +136,62 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SocialProvider:
+      type: object
+      properties:
+        name:
+          type: string
+        authorization_uri:
+          type: string
+          format: uri
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SocialAccountNested'
+          readOnly: true
+          description: User connected social account
+      required:
+      - accounts
+      - authorization_uri
+      - name
+    SocialAccountNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+        social_account_id:
+          type: string
+        auth_time:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - auth_time
+      - id
+      - social_account_id
     SocialDisconnect:
       type: object
       properties:
         provider:
           type: string
       required:
+      - provider
+    SocialSignUp:
+      type: object
+      properties:
+        provider:
+          type: string
+        code:
+          type: string
+          description: Authorization code
+      required:
+      - code
       - provider
     PaginatedSocialProviderList:
       type: object
@@ -169,56 +219,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SocialProvider'
-    SocialAccountNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        created:
-          type: string
-          format: date-time
-        social_account_id:
-          type: string
-        auth_time:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      required:
-      - auth_time
-      - id
-      - social_account_id
-    SocialSignUp:
-      type: object
-      properties:
-        provider:
-          type: string
-        code:
-          type: string
-          description: Authorization code
-      required:
-      - code
-      - provider
-    SocialProvider:
-      type: object
-      properties:
-        name:
-          type: string
-        authorization_uri:
-          type: string
-          format: uri
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/SocialAccountNested'
-          readOnly: true
-          description: User connected social account
-      required:
-      - accounts
-      - authorization_uri
-      - name
   securitySchemes:
     API_key:
       type: apiKey

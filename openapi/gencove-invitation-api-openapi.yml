@@ -176,6 +176,26 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedInvitationDetails:
+      type: object
+      description: Represent invitation for invitee.
+      properties:
+        token:
+          type: string
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/InvitationStatus'
+          readOnly: true
+        expires:
+          type: string
+          format: date-time
+          readOnly: true
+        organization:
+          $ref: '#/components/schemas/InviteOrganization'
+        role:
+          type: string
+          maxLength: 255
     InviteOrganization:
       type: object
       properties:
@@ -189,26 +209,43 @@ components:
       required:
       - id
       - name
-    InvitationStatus:
+    CreateInvite:
       type: object
       properties:
-        id:
+        email:
           type: string
-          format: uuid
+          format: email
+        role:
+          type: string
+          default: ''
+      required:
+      - email
+    InvitationDetails:
+      type: object
+      description: Represent invitation for invitee.
+      properties:
+        token:
+          type: string
           readOnly: true
-        status:
-          type: string
-        created:
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/InvitationStatus'
+          readOnly: true
+        expires:
           type: string
           format: date-time
-        actor:
-          allOf:
-          - $ref: '#/components/schemas/InvitationActor'
           readOnly: true
+        organization:
+          $ref: '#/components/schemas/InviteOrganization'
+        role:
+          type: string
+          maxLength: 255
       required:
-      - actor
-      - id
-      - status
+      - expires
+      - last_status
+      - organization
+      - role
+      - token
     Invitation:
       type: object
       properties:
@@ -238,26 +275,6 @@ components:
       - id
       - last_status
       - role
-    PatchedInvitationDetails:
-      type: object
-      description: Represent invitation for invitee.
-      properties:
-        token:
-          type: string
-          readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/InvitationStatus'
-          readOnly: true
-        expires:
-          type: string
-          format: date-time
-          readOnly: true
-        organization:
-          $ref: '#/components/schemas/InviteOrganization'
-        role:
-          type: string
-          maxLength: 255
     PaginatedInvitationList:
       type: object
       required:
@@ -284,32 +301,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Invitation'
-    InvitationDetails:
+    InvitationStatus:
       type: object
-      description: Represent invitation for invitee.
       properties:
-        token:
+        id:
           type: string
+          format: uuid
           readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/InvitationStatus'
-          readOnly: true
-        expires:
+        status:
+          type: string
+        created:
           type: string
           format: date-time
+        actor:
+          allOf:
+          - $ref: '#/components/schemas/InvitationActor'
           readOnly: true
-        organization:
-          $ref: '#/components/schemas/InviteOrganization'
-        role:
-          type: string
-          maxLength: 255
       required:
-      - expires
-      - last_status
-      - organization
-      - role
-      - token
+      - actor
+      - id
+      - status
     InvitationActor:
       type: object
       properties:
@@ -322,17 +333,6 @@ components:
           maxLength: 254
       required:
       - id
-    CreateInvite:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        role:
-          type: string
-          default: ''
-      required:
-      - email
   securitySchemes:
     API_key:
       type: apiKey

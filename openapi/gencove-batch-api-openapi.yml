@@ -43,56 +43,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BatchDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 254
-        batch_type:
-          type: string
-          description: Key from pipeline config
-          readOnly: true
-        sample_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/BatchStatusNested'
-          readOnly: true
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchFileNested'
-          readOnly: true
-          description: Batch files
-      required:
-      - batch_type
-      - files
-      - id
-      - last_status
-      - sample_ids
-    BatchStatusNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-      - status
     BatchFileNested:
       type: object
       description: Sets batch.id as filename in file download_url.
@@ -135,6 +85,56 @@ components:
       - download_url
       - file_type
       - id
+    BatchStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    BatchDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        batch_type:
+          type: string
+          description: Key from pipeline config
+          readOnly: true
+        sample_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/BatchStatusNested'
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchFileNested'
+          readOnly: true
+          description: Batch files
+      required:
+      - batch_type
+      - files
+      - id
+      - last_status
+      - sample_ids
   securitySchemes:
     API_key:
       type: apiKey

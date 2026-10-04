@@ -250,17 +250,16 @@ components:
       required:
       - project_id
       - s3_uri
-    InputFormatEnum:
-      enum:
-      - cram
-      - fastq
-      - autodetect
-      type: string
-      description: '* `cram` - cram
-
-        * `fastq` - fastq
-
-        * `autodetect` - autodetect'
+    S3Role:
+      type: object
+      description: Role ARN for S3 imports serializer.
+      properties:
+        role_arn:
+          type: string
+          maxLength: 2048
+          minLength: 20
+      required:
+      - role_arn
     S3ProjectsAutoimportCreate:
       type: object
       properties:
@@ -274,25 +273,6 @@ components:
           maxLength: 768
       required:
       - id
-    S3URIAutoimport:
-      type: object
-      description: S3 URI auto import serializer.
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        project_id:
-          type: string
-          format: uuid
-        s3_uri:
-          type: string
-          maxLength: 734
-        metadata: {}
-      required:
-      - id
-      - project_id
-      - s3_uri
     PaginatedS3URIAutoimportList:
       type: object
       required:
@@ -319,6 +299,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/S3URIAutoimport'
+    S3URIAutoimport:
+      type: object
+      description: S3 URI auto import serializer.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        project_id:
+          type: string
+          format: uuid
+        s3_uri:
+          type: string
+          maxLength: 734
+        metadata: {}
+      required:
+      - id
+      - project_id
+      - s3_uri
     S3ExternalID:
       type: object
       description: External ID for S3 imports serializer.
@@ -329,16 +328,17 @@ components:
           readOnly: true
       required:
       - external_id
-    S3Role:
-      type: object
-      description: Role ARN for S3 imports serializer.
-      properties:
-        role_arn:
-          type: string
-          maxLength: 2048
-          minLength: 20
-      required:
-      - role_arn
+    InputFormatEnum:
+      enum:
+      - cram
+      - fastq
+      - autodetect
+      type: string
+      description: '* `cram` - cram
+
+        * `fastq` - fastq
+
+        * `autodetect` - autodetect'
   securitySchemes:
     API_key:
       type: apiKey
