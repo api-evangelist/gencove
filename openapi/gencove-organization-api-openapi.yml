@@ -213,6 +213,147 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedOrganizationUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+        has_mfa_device:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        is_support:
+          type: boolean
+          readOnly: true
+          title: Support
+          description: Designates whether this user should be treated as a support.
+    OrganizationTypeEnum:
+      enum:
+      - enterprise
+      - consumer
+      - consumer_provider
+      type: string
+      description: '* `enterprise` - enterprise
+
+        * `consumer` - consumer
+
+        * `consumer_provider` - consumer provider'
+    PatchedOrganization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 254
+        expire_uploads_period_days:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        archive_period_days:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        archive_restore_period_days:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UserRoleObject'
+          readOnly: true
+          description: Roles in the organization.
+        uploads_enabled:
+          type: boolean
+          readOnly: true
+          description: Designates whether the organization can access upload functionality.
+        delete_samples_enabled:
+          type: boolean
+          readOnly: true
+          description: Designates whether the organization can delete samples.
+        project_sharing_enabled:
+          type: boolean
+          readOnly: true
+          description: When enabled, allows organization to share projects with other organizations.
+        account_on_hold:
+          type: boolean
+          readOnly: true
+          description: When enabled, limits ability of organization to manage data and displays UI warning to organization users that invoice is past due.
+        organization_type:
+          allOf:
+          - $ref: '#/components/schemas/OrganizationTypeEnum'
+          readOnly: true
+          description: 'Type of organization
+
+
+            * `enterprise` - enterprise
+
+            * `consumer` - consumer
+
+            * `consumer_provider` - consumer provider'
+    PaginatedOrganizationUserList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationUser'
+    UserRoleObjectCreate:
+      type: object
+      properties:
+        user:
+          type: string
+          format: uuid
+        role:
+          type: string
+          maxLength: 255
+      required:
+      - role
+      - user
     Organization:
       type: object
       properties:
@@ -284,39 +425,18 @@ components:
       - project_sharing_enabled
       - roles
       - uploads_enabled
-    PatchedOrganizationUser:
+    UserRoleObject:
       type: object
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        is_active:
-          type: boolean
-          title: Active
-          description: Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-        has_mfa_device:
-          type: boolean
-          readOnly: true
         name:
           type: string
-          maxLength: 254
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UserRoleObject'
-          readOnly: true
-          description: Roles in the organization.
-        is_support:
-          type: boolean
-          readOnly: true
-          title: Support
-          description: Designates whether this user should be treated as a support.
+      required:
+      - id
+      - name
     OrganizationUser:
       type: object
       properties:
@@ -356,126 +476,6 @@ components:
       - id
       - is_support
       - roles
-    PaginatedOrganizationUserList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrganizationUser'
-    PatchedOrganization:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 254
-        expire_uploads_period_days:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        archive_period_days:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        archive_restore_period_days:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UserRoleObject'
-          readOnly: true
-          description: Roles in the organization.
-        uploads_enabled:
-          type: boolean
-          readOnly: true
-          description: Designates whether the organization can access upload functionality.
-        delete_samples_enabled:
-          type: boolean
-          readOnly: true
-          description: Designates whether the organization can delete samples.
-        project_sharing_enabled:
-          type: boolean
-          readOnly: true
-          description: When enabled, allows organization to share projects with other organizations.
-        account_on_hold:
-          type: boolean
-          readOnly: true
-          description: When enabled, limits ability of organization to manage data and displays UI warning to organization users that invoice is past due.
-        organization_type:
-          allOf:
-          - $ref: '#/components/schemas/OrganizationTypeEnum'
-          readOnly: true
-          description: 'Type of organization
-
-
-            * `enterprise` - enterprise
-
-            * `consumer` - consumer
-
-            * `consumer_provider` - consumer provider'
-    OrganizationTypeEnum:
-      enum:
-      - enterprise
-      - consumer
-      - consumer_provider
-      type: string
-      description: '* `enterprise` - enterprise
-
-        * `consumer` - consumer
-
-        * `consumer_provider` - consumer provider'
-    UserRoleObjectCreate:
-      type: object
-      properties:
-        user:
-          type: string
-          format: uuid
-        role:
-          type: string
-          maxLength: 255
-      required:
-      - role
-      - user
-    UserRoleObject:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-      required:
-      - id
-      - name
   securitySchemes:
     API_key:
       type: apiKey

@@ -228,23 +228,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SourceEnum:
-      enum:
-      - cli
-      - cli url
-      - basespace
-      - s3
-      - array data
-      type: string
-      description: '* `cli` - cli
-
-        * `cli url` - cli url
-
-        * `basespace` - basespace
-
-        * `s3` - s3
-
-        * `array data` - array data'
     FileNested:
       type: object
       description: Used for all nested files except for files associated with sample.
@@ -285,23 +268,173 @@ components:
       - download_url
       - file_type
       - id
-    UploadStatusNested:
+    UploadURLResponse:
       type: object
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
-        status:
+        destination_path:
           type: string
-        note:
+        s3:
+          allOf:
+          - $ref: '#/components/schemas/S3ObjectNested'
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/UploadStatusNested'
+          readOnly: true
+        source:
           type: string
-        created:
+        source_url:
+          type: string
+          readOnly: true
+      required:
+      - id
+      - last_status
+      - s3
+      - source
+      - source_url
+    AWSPresignedPostData:
+      type: object
+      properties:
+        key:
+          type: string
+        AWSAccessKeyId:
+          type: string
+        policy:
+          type: string
+        signature:
+          type: string
+      required:
+      - AWSAccessKeyId
+      - key
+      - policy
+      - signature
+    DeletedUnassignedUploads:
+      type: object
+      properties:
+        upload_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+      - upload_ids
+    PaginatedUploadList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Upload'
+    UploadPostDataResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        destination_path:
+          type: string
+        s3:
+          allOf:
+          - $ref: '#/components/schemas/S3ObjectNested'
+          readOnly: true
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/UploadStatusNested'
+          readOnly: true
+      required:
+      - id
+      - last_status
+      - s3
+    GetUploadCredentialsResponse:
+      type: object
+      properties:
+        version:
+          type: integer
+        access_key:
+          type: string
+        secret_key:
+          type: string
+        token:
+          type: string
+        expiry_time:
           type: string
           format: date-time
       required:
-      - id
-      - status
+      - access_key
+      - expiry_time
+      - secret_key
+      - token
+      - version
+    SourceEnum:
+      enum:
+      - cli
+      - cli url
+      - basespace
+      - s3
+      - array data
+      type: string
+      description: '* `cli` - cli
+
+        * `cli url` - cli url
+
+        * `basespace` - basespace
+
+        * `s3` - s3
+
+        * `array data` - array data'
+    S3ObjectNested:
+      type: object
+      properties:
+        bucket:
+          type: string
+        object_name:
+          type: string
+    UploadPresignedPostDataResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        fields:
+          $ref: '#/components/schemas/AWSPresignedPostData'
+      required:
+      - fields
+      - url
+    UploadURLCreate:
+      type: object
+      properties:
+        destination_path:
+          type: string
+        source_url:
+          type: string
+          writeOnly: true
+      required:
+      - destination_path
+      - source_url
     Upload:
       type: object
       properties:
@@ -338,130 +471,23 @@ components:
       - last_status
       - organization
       - source
-    UploadPostDataResponse:
+    UploadStatusNested:
       type: object
       properties:
         id:
           type: string
           format: uuid
           readOnly: true
-        destination_path:
+        status:
           type: string
-        s3:
-          allOf:
-          - $ref: '#/components/schemas/S3ObjectNested'
-          readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/UploadStatusNested'
-          readOnly: true
-      required:
-      - id
-      - last_status
-      - s3
-    UploadURLResponse:
-      type: object
-      properties:
-        id:
+        note:
           type: string
-          format: uuid
-          readOnly: true
-        destination_path:
-          type: string
-        s3:
-          allOf:
-          - $ref: '#/components/schemas/S3ObjectNested'
-          readOnly: true
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/UploadStatusNested'
-          readOnly: true
-        source:
-          type: string
-        source_url:
-          type: string
-          readOnly: true
-      required:
-      - id
-      - last_status
-      - s3
-      - source
-      - source_url
-    UploadPresignedPostDataResponse:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-        fields:
-          $ref: '#/components/schemas/AWSPresignedPostData'
-      required:
-      - fields
-      - url
-    S3ObjectNested:
-      type: object
-      properties:
-        bucket:
-          type: string
-        object_name:
-          type: string
-    AWSPresignedPostData:
-      type: object
-      properties:
-        key:
-          type: string
-        AWSAccessKeyId:
-          type: string
-        policy:
-          type: string
-        signature:
-          type: string
-      required:
-      - AWSAccessKeyId
-      - key
-      - policy
-      - signature
-    GetUploadCredentialsResponse:
-      type: object
-      properties:
-        version:
-          type: integer
-        access_key:
-          type: string
-        secret_key:
-          type: string
-        token:
-          type: string
-        expiry_time:
+        created:
           type: string
           format: date-time
       required:
-      - access_key
-      - expiry_time
-      - secret_key
-      - token
-      - version
-    UploadURLCreate:
-      type: object
-      properties:
-        destination_path:
-          type: string
-        source_url:
-          type: string
-          writeOnly: true
-      required:
-      - destination_path
-      - source_url
-    DeletedUnassignedUploads:
-      type: object
-      properties:
-        upload_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-      required:
-      - upload_ids
+      - id
+      - status
     UploadPostDataCreate:
       type: object
       description: Used for both normal post data and presigned post data.
@@ -470,32 +496,6 @@ components:
           type: string
       required:
       - destination_path
-    PaginatedUploadList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Upload'
   securitySchemes:
     API_key:
       type: apiKey

@@ -136,6 +136,39 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedSocialProviderList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SocialProvider'
+    SocialDisconnect:
+      type: object
+      properties:
+        provider:
+          type: string
+      required:
+      - provider
     SocialProvider:
       type: object
       properties:
@@ -175,13 +208,6 @@ components:
       - auth_time
       - id
       - social_account_id
-    SocialDisconnect:
-      type: object
-      properties:
-        provider:
-          type: string
-      required:
-      - provider
     SocialSignUp:
       type: object
       properties:
@@ -193,32 +219,6 @@ components:
       required:
       - code
       - provider
-    PaginatedSocialProviderList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SocialProvider'
   securitySchemes:
     API_key:
       type: apiKey

@@ -709,6 +709,231 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SampleKitFormResponse:
+      type: object
+      description: Response body for ``POST /api/v2/sample-kit-form/``.
+      properties:
+        sample_id:
+          type: string
+          format: uuid
+          description: UUID of the placeholder ``samples.Sample`` created for the order.
+        url:
+          type: string
+          format: uri
+          description: Tokenized kit-order form URL for the end-user.
+        expires_at:
+          type: string
+          format: date-time
+          description: When the embedded JWT expires (ISO-8601).
+      required:
+      - expires_at
+      - sample_id
+      - url
+    SampleKit:
+      type: object
+      description: Serializer for creating kit orders in consumer mode.
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          writeOnly: true
+        metadata:
+          writeOnly: true
+        sample_id:
+          type: string
+          format: uuid
+          readOnly: true
+        recipient_address_name:
+          type: string
+          maxLength: 255
+        recipient_address_line1:
+          type: string
+          maxLength: 50
+        recipient_address_line2:
+          type: string
+          maxLength: 50
+        recipient_address_line3:
+          type: string
+          maxLength: 50
+        recipient_address_city:
+          type: string
+          maxLength: 50
+        recipient_address_postal_code:
+          type: string
+          maxLength: 20
+        recipient_address_state_region:
+          type: string
+          maxLength: 50
+        recipient_address_country_code:
+          $ref: '#/components/schemas/RecipientAddressCountryCodeEnum'
+        recipient_phone:
+          type: string
+          maxLength: 128
+        recipient_email:
+          type: string
+          format: email
+          maxLength: 254
+        recipient_instructions:
+          type: string
+          maxLength: 255
+        test_mode:
+          type: boolean
+          default: false
+          description: Set to true to create a test order that will not be shipped. Defaults to false.
+      required:
+      - project_id
+      - recipient_address_city
+      - recipient_address_country_code
+      - recipient_address_line1
+      - recipient_address_name
+      - recipient_address_postal_code
+      - recipient_address_state_region
+      - recipient_email
+      - recipient_phone
+      - sample_id
+    Trait:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 254
+      required:
+      - key
+    AncestryMetadata:
+      type: object
+      properties:
+        value: {}
+    PaginatedTraitScoreList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TraitScore'
+    SampleDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        project:
+          type: string
+          format: uuid
+        run:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        hidden:
+          type: boolean
+          description: Flag to hide the sample.
+        client_id:
+          type: string
+          description: 'Legacy: external_id'
+          maxLength: 250
+        physical_id:
+          type: string
+          description: 'Legacy: external_id, external_barcode and sample_barcode'
+          maxLength: 250
+        legacy_id:
+          type: string
+          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
+          maxLength: 250
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/SampleStatusNested'
+          readOnly: true
+        archive_last_status:
+          allOf:
+          - $ref: '#/components/schemas/ArchiveSampleStatus'
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleFileNested'
+          readOnly: true
+          description: Sample files
+      required:
+      - archive_last_status
+      - client_id
+      - files
+      - id
+      - last_status
+      - legacy_id
+      - modified
+      - physical_id
+      - project
+    AncestrySelfNested:
+      type: object
+      description: Serializer used to nest ancestry data within other ancestry serializer.
+      properties:
+        value: {}
+    TraitUnit:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 254
+      required:
+      - key
+    SampleAncestry:
+      type: object
+      properties:
+        ancestry:
+          $ref: '#/components/schemas/AncestrySelfNested'
+        metadata:
+          $ref: '#/components/schemas/AncestryMetadata'
+      required:
+      - ancestry
+      - metadata
+    QualityControl:
+      type: object
+      properties:
+        quality_control_type:
+          $ref: '#/components/schemas/QualityControlType'
+        quality_control:
+          $ref: '#/components/schemas/QualityControlSelfNested'
+      required:
+      - quality_control
+      - quality_control_type
+    SampleStatusList:
+      type: object
+      properties:
+        status:
+          type: string
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - status
     RecipientAddressCountryCodeEnum:
       enum:
       - AF
@@ -1458,154 +1683,6 @@ components:
         * `ZM` - Zambia
 
         * `ZW` - Zimbabwe'
-    SampleKitFormCreate:
-      type: object
-      description: 'Request body for ``POST /api/v2/sample-kit-form/``.
-
-
-        Mirrors ``ArrayDataUploadFormCreateSerializer`` but is project-scoped: the
-
-        partner names the consumer project the kit''s sample lands in. The end user
-
-        supplies the shipping address later, in the form itself.'
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          description: UUID of the consumer project to create the kit order in.
-        metadata:
-          description: Free-form JSON object stored on the created sample.
-        test_mode:
-          type: boolean
-          default: false
-          description: Set to true to create a test order that will not be shipped. Defaults to false.
-        redirect_on_success:
-          type: string
-          format: uri
-          default: ''
-          description: URL the end-user is redirected to after a successful order.
-        redirect_on_failure:
-          type: string
-          format: uri
-          default: ''
-          description: URL the end-user is redirected to after a failed order.
-        expires_in:
-          type: integer
-          maximum: 3600
-          minimum: 60
-          default: 600
-          description: JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token.
-      required:
-      - project_id
-    UploadStatusNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-        note:
-          type: string
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-      - status
-    SampleList:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        run:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        created:
-          type: string
-          format: date-time
-        hidden:
-          type: boolean
-          description: Flag to hide the sample.
-        modified:
-          type: string
-          format: date-time
-        client_id:
-          type: string
-          description: 'Legacy: external_id'
-          maxLength: 250
-        physical_id:
-          type: string
-          description: 'Legacy: external_id, external_barcode and sample_barcode'
-          maxLength: 250
-        legacy_id:
-          type: string
-          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
-          maxLength: 250
-        last_status:
-          allOf:
-          - $ref: '#/components/schemas/SampleStatusNested'
-          readOnly: true
-        archive_last_status:
-          allOf:
-          - $ref: '#/components/schemas/ArchiveSampleStatus'
-          readOnly: true
-        failed_qc:
-          type: string
-          readOnly: true
-          description: Description of failed_qc status if present
-      required:
-      - archive_last_status
-      - client_id
-      - failed_qc
-      - id
-      - last_status
-      - legacy_id
-      - modified
-      - physical_id
-    QualityControlSelfNested:
-      type: object
-      description: Serializer used to nest QC data within other QC serializer.
-      properties:
-        value_expected:
-          type:
-          - number
-          - 'null'
-          format: double
-        value_measured:
-          type:
-          - number
-          - 'null'
-          format: double
-        value_string:
-          type: string
-          maxLength: 128
-        status:
-          $ref: '#/components/schemas/QualityControlSelfNestedStatusEnum'
-      required:
-      - status
-    SampleStats:
-      type: object
-      properties:
-        total_size:
-          type: integer
-      required:
-      - total_size
-    QualityControl:
-      type: object
-      properties:
-        quality_control_type:
-          $ref: '#/components/schemas/QualityControlType'
-        quality_control:
-          $ref: '#/components/schemas/QualityControlSelfNested'
-      required:
-      - quality_control
-      - quality_control_type
     SampleConsumerReportResponse:
       type: object
       properties:
@@ -1620,154 +1697,7 @@ components:
       required:
       - expires_at
       - url
-    TraitDistribution:
-      type: object
-      properties:
-        value: {}
-        version:
-          type: string
-          maxLength: 100
-      required:
-      - version
-    SampleKitFormResponse:
-      type: object
-      description: Response body for ``POST /api/v2/sample-kit-form/``.
-      properties:
-        sample_id:
-          type: string
-          format: uuid
-          description: UUID of the placeholder ``samples.Sample`` created for the order.
-        url:
-          type: string
-          format: uri
-          description: Tokenized kit-order form URL for the end-user.
-        expires_at:
-          type: string
-          format: date-time
-          description: When the embedded JWT expires (ISO-8601).
-      required:
-      - expires_at
-      - sample_id
-      - url
-    TraitScoreSelfNested:
-      type: object
-      description: Serializer used to nest trait score data within other trait score serializer.
-      properties:
-        value:
-          type: number
-          format: double
-        percentile:
-          type:
-          - number
-          - 'null'
-          format: double
-      required:
-      - value
-    SampleMetadata:
-      type: object
-      properties:
-        metadata: {}
-    ReportTypeEnum:
-      enum:
-      - prs
-      type: string
-      description: '* `prs` - prs'
-    QualityControlType:
-      type: object
-      properties:
-        key:
-          type: string
-          maxLength: 254
-        type:
-          type: string
-        name:
-          type: string
-          readOnly: true
-        description_markdown:
-          type: string
-          readOnly: true
-        display_type:
-          type: string
-          readOnly: true
-        display_only_if_failed:
-          type: string
-          readOnly: true
-      required:
-      - description_markdown
-      - display_only_if_failed
-      - display_type
-      - key
-      - name
-      - type
-    TraitUnit:
-      type: object
-      properties:
-        key:
-          type: string
-          maxLength: 254
-      required:
-      - key
-    SampleParentage:
-      type: object
-      properties:
-        parentage_tested:
-          type: string
-          readOnly: true
-        parentage:
-          type: string
-          readOnly: true
-      required:
-      - parentage
-      - parentage_tested
-    SampleStatusNested:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          type: string
-        note:
-          type: string
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-      - status
-    SampleConsumerReportCreate:
-      type: object
-      properties:
-        report_type:
-          allOf:
-          - $ref: '#/components/schemas/ReportTypeEnum'
-          default: prs
-          description: 'Type of report to generate
-
-
-            * `prs` - prs'
-        expires_in:
-          type: integer
-          maximum: 3600
-          minimum: 60
-          default: 600
-          description: Token expiration time in seconds. Note that this value is for the JWT delivered in the URL. Once the URL is accessed, a fixed duration session (15 minutes) is created that may outlive this token
-    SampleSheet:
-      type: object
-      properties:
-        client_id:
-          type: string
-          maxLength: 250
-        fastq:
-          allOf:
-          - $ref: '#/components/schemas/UploadNestedList'
-          readOnly: true
-          description: Uploaded fastq
-      required:
-      - client_id
-      - fastq
-    PaginatedTraitScoreList:
+    PaginatedSampleListList:
       type: object
       required:
       - results
@@ -1792,7 +1722,24 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/TraitScore'
+            $ref: '#/components/schemas/SampleList'
+    SampleConsumerReportCreate:
+      type: object
+      properties:
+        report_type:
+          allOf:
+          - $ref: '#/components/schemas/ReportTypeEnum'
+          default: prs
+          description: 'Type of report to generate
+
+
+            * `prs` - prs'
+        expires_in:
+          type: integer
+          maximum: 3600
+          minimum: 60
+          default: 600
+          description: Token expiration time in seconds. Note that this value is for the JWT delivered in the URL. Once the URL is accessed, a fixed duration session (15 minutes) is created that may outlive this token
     GenomicVariant:
       type: object
       description: 'Serializes a `genomic_variants.services.Variant` record.
@@ -1856,6 +1803,237 @@ components:
       - quality
       - ref
       - rsid
+    PaginatedSampleSheetList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleSheet'
+    SampleStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    QualityControlSelfNestedStatusEnum:
+      enum:
+      - succeeded
+      - failed
+      - skipped
+      type: string
+      description: '* `succeeded` - succeeded
+
+        * `failed` - failed
+
+        * `skipped` - skipped'
+    SampleList:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        run:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        created:
+          type: string
+          format: date-time
+        hidden:
+          type: boolean
+          description: Flag to hide the sample.
+        modified:
+          type: string
+          format: date-time
+        client_id:
+          type: string
+          description: 'Legacy: external_id'
+          maxLength: 250
+        physical_id:
+          type: string
+          description: 'Legacy: external_id, external_barcode and sample_barcode'
+          maxLength: 250
+        legacy_id:
+          type: string
+          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
+          maxLength: 250
+        last_status:
+          allOf:
+          - $ref: '#/components/schemas/SampleStatusNested'
+          readOnly: true
+        archive_last_status:
+          allOf:
+          - $ref: '#/components/schemas/ArchiveSampleStatus'
+          readOnly: true
+        failed_qc:
+          type: string
+          readOnly: true
+          description: Description of failed_qc status if present
+      required:
+      - archive_last_status
+      - client_id
+      - failed_qc
+      - id
+      - last_status
+      - legacy_id
+      - modified
+      - physical_id
+    SampleStats:
+      type: object
+      properties:
+        total_size:
+          type: integer
+      required:
+      - total_size
+    SampleManifest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        file_name:
+          type: string
+          maxLength: 256
+        file:
+          type: string
+          readOnly: true
+        project:
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+      required:
+      - file
+      - file_name
+      - id
+      - project
+    PaginatedGenomicVariantList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenomicVariant'
+    QualityControlType:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 254
+        type:
+          type: string
+        name:
+          type: string
+          readOnly: true
+        description_markdown:
+          type: string
+          readOnly: true
+        display_type:
+          type: string
+          readOnly: true
+        display_only_if_failed:
+          type: string
+          readOnly: true
+      required:
+      - description_markdown
+      - display_only_if_failed
+      - display_type
+      - key
+      - name
+      - type
+    TraitScore:
+      type: object
+      description: 'Serializer trait score and associated trait metadata models.
+
+
+        This is not really optimal, since it pulls data from multiple parent tables
+
+        for objects.'
+      properties:
+        trait_score:
+          $ref: '#/components/schemas/TraitScoreSelfNested'
+        trait_distribution:
+          $ref: '#/components/schemas/TraitDistribution'
+        trait:
+          $ref: '#/components/schemas/Trait'
+        trait_unit:
+          $ref: '#/components/schemas/TraitUnit'
+        risk:
+          type:
+          - string
+          - 'null'
+          description: "Return risk level for the trait score.\n\nReturns:\n    Optional[str]: \"high_risk\" if the value is greater than or equal to the risk threshold,\n    \"not_high_risk\" otherwise. If the risk threshold or percentile is None, return None."
+          readOnly: true
+      required:
+      - risk
+      - trait
+      - trait_distribution
+      - trait_score
+      - trait_unit
+    TraitDistribution:
+      type: object
+      properties:
+        value: {}
+        version:
+          type: string
+          maxLength: 100
+      required:
+      - version
     PaginatedSampleStatusListList:
       type: object
       required:
@@ -1882,20 +2060,69 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SampleStatusList'
-    SampleAncestry:
+    SampleMetadata:
       type: object
       properties:
-        ancestry:
-          $ref: '#/components/schemas/AncestrySelfNested'
-        metadata:
-          $ref: '#/components/schemas/AncestryMetadata'
+        metadata: {}
+    TraitScoreSelfNested:
+      type: object
+      description: Serializer used to nest trait score data within other trait score serializer.
+      properties:
+        value:
+          type: number
+          format: double
+        percentile:
+          type:
+          - number
+          - 'null'
+          format: double
       required:
-      - ancestry
-      - metadata
-    AncestryMetadata:
+      - value
+    ArchiveSampleStatus:
       type: object
       properties:
-        value: {}
+        id:
+          type: string
+        status:
+          type: string
+        created:
+          type: string
+        transition_cutoff:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Denotes the transition time for calculated states
+      required:
+      - created
+      - id
+      - status
+    PaginatedQualityControlList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityControl'
     SampleFileNested:
       type: object
       description: 'Sets sample.id as filename in file download_url and skips displaying
@@ -1940,304 +2167,53 @@ components:
       - download_url
       - file_type
       - id
-    TraitScore:
+    SampleParentage:
       type: object
-      description: 'Serializer trait score and associated trait metadata models.
-
-
-        This is not really optimal, since it pulls data from multiple parent tables
-
-        for objects.'
       properties:
-        trait_score:
-          $ref: '#/components/schemas/TraitScoreSelfNested'
-        trait_distribution:
-          $ref: '#/components/schemas/TraitDistribution'
-        trait:
-          $ref: '#/components/schemas/Trait'
-        trait_unit:
-          $ref: '#/components/schemas/TraitUnit'
-        risk:
+        parentage_tested:
+          type: string
+          readOnly: true
+        parentage:
+          type: string
+          readOnly: true
+      required:
+      - parentage
+      - parentage_tested
+    QualityControlSelfNested:
+      type: object
+      description: Serializer used to nest QC data within other QC serializer.
+      properties:
+        value_expected:
           type:
-          - string
+          - number
           - 'null'
-          description: "Return risk level for the trait score.\n\nReturns:\n    Optional[str]: \"high_risk\" if the value is greater than or equal to the risk threshold,\n    \"not_high_risk\" otherwise. If the risk threshold or percentile is None, return None."
-          readOnly: true
-      required:
-      - risk
-      - trait
-      - trait_distribution
-      - trait_score
-      - trait_unit
-    AncestrySelfNested:
-      type: object
-      description: Serializer used to nest ancestry data within other ancestry serializer.
-      properties:
-        value: {}
-    PaginatedSampleListList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SampleList'
-    Trait:
-      type: object
-      properties:
-        key:
-          type: string
-          maxLength: 254
-      required:
-      - key
-    SampleKit:
-      type: object
-      description: Serializer for creating kit orders in consumer mode.
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          writeOnly: true
-        metadata:
-          writeOnly: true
-        sample_id:
-          type: string
-          format: uuid
-          readOnly: true
-        recipient_address_name:
-          type: string
-          maxLength: 255
-        recipient_address_line1:
-          type: string
-          maxLength: 50
-        recipient_address_line2:
-          type: string
-          maxLength: 50
-        recipient_address_line3:
-          type: string
-          maxLength: 50
-        recipient_address_city:
-          type: string
-          maxLength: 50
-        recipient_address_postal_code:
-          type: string
-          maxLength: 20
-        recipient_address_state_region:
-          type: string
-          maxLength: 50
-        recipient_address_country_code:
-          $ref: '#/components/schemas/RecipientAddressCountryCodeEnum'
-        recipient_phone:
+          format: double
+        value_measured:
+          type:
+          - number
+          - 'null'
+          format: double
+        value_string:
           type: string
           maxLength: 128
-        recipient_email:
-          type: string
-          format: email
-          maxLength: 254
-        recipient_instructions:
-          type: string
-          maxLength: 255
-        test_mode:
-          type: boolean
-          default: false
-          description: Set to true to create a test order that will not be shipped. Defaults to false.
-      required:
-      - project_id
-      - recipient_address_city
-      - recipient_address_country_code
-      - recipient_address_line1
-      - recipient_address_name
-      - recipient_address_postal_code
-      - recipient_address_state_region
-      - recipient_email
-      - recipient_phone
-      - sample_id
-    SampleStatusList:
-      type: object
-      properties:
         status:
-          type: string
-        note:
-          type: string
-        created:
-          type: string
-          format: date-time
+          $ref: '#/components/schemas/QualityControlSelfNestedStatusEnum'
       required:
       - status
-    ArchiveSampleStatus:
+    SampleSheet:
       type: object
       properties:
-        id:
-          type: string
-        status:
-          type: string
-        created:
-          type: string
-        transition_cutoff:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Denotes the transition time for calculated states
-      required:
-      - created
-      - id
-      - status
-    PaginatedGenomicVariantList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenomicVariant'
-    SampleDetails:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-        run:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        created:
-          type: string
-          format: date-time
-        modified:
-          type: string
-          format: date-time
-        hidden:
-          type: boolean
-          description: Flag to hide the sample.
         client_id:
           type: string
-          description: 'Legacy: external_id'
           maxLength: 250
-        physical_id:
-          type: string
-          description: 'Legacy: external_id, external_barcode and sample_barcode'
-          maxLength: 250
-        legacy_id:
-          type: string
-          description: 'Legacy: sample_id/member_id. Matching sample_ids from back_api app.'
-          maxLength: 250
-        last_status:
+        fastq:
           allOf:
-          - $ref: '#/components/schemas/SampleStatusNested'
+          - $ref: '#/components/schemas/UploadNestedList'
           readOnly: true
-        archive_last_status:
-          allOf:
-          - $ref: '#/components/schemas/ArchiveSampleStatus'
-          readOnly: true
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/SampleFileNested'
-          readOnly: true
-          description: Sample files
+          description: Uploaded fastq
       required:
-      - archive_last_status
       - client_id
-      - files
-      - id
-      - last_status
-      - legacy_id
-      - modified
-      - physical_id
-      - project
-    SampleManifest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        file_name:
-          type: string
-          maxLength: 256
-        file:
-          type: string
-          readOnly: true
-        project:
-          type: string
-          format: uuid
-          readOnly: true
-        created:
-          type: string
-          format: date-time
-      required:
-      - file
-      - file_name
-      - id
-      - project
-    PaginatedSampleSheetList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SampleSheet'
+      - fastq
     SampleKitResponse:
       type: object
       properties:
@@ -2247,43 +2223,6 @@ components:
           readOnly: true
       required:
       - sample_id
-    QualityControlSelfNestedStatusEnum:
-      enum:
-      - succeeded
-      - failed
-      - skipped
-      type: string
-      description: '* `succeeded` - succeeded
-
-        * `failed` - failed
-
-        * `skipped` - skipped'
-    PaginatedQualityControlList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/QualityControl'
     UploadNestedList:
       type: object
       description: Used in sample sheet creation.
@@ -2306,6 +2245,67 @@ components:
       - last_status
       - source_url
       - upload
+    ReportTypeEnum:
+      enum:
+      - prs
+      type: string
+      description: '* `prs` - prs'
+    UploadStatusNested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+        note:
+          type: string
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+      - status
+    SampleKitFormCreate:
+      type: object
+      description: 'Request body for ``POST /api/v2/sample-kit-form/``.
+
+
+        Mirrors ``ArrayDataUploadFormCreateSerializer`` but is project-scoped: the
+
+        partner names the consumer project the kit''s sample lands in. The end user
+
+        supplies the shipping address later, in the form itself.'
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          description: UUID of the consumer project to create the kit order in.
+        metadata:
+          description: Free-form JSON object stored on the created sample.
+        test_mode:
+          type: boolean
+          default: false
+          description: Set to true to create a test order that will not be shipped. Defaults to false.
+        redirect_on_success:
+          type: string
+          format: uri
+          default: ''
+          description: URL the end-user is redirected to after a successful order.
+        redirect_on_failure:
+          type: string
+          format: uri
+          default: ''
+          description: URL the end-user is redirected to after a failed order.
+        expires_in:
+          type: integer
+          maximum: 3600
+          minimum: 60
+          default: 600
+          description: JWT lifetime in seconds (default 600, max 3600). Once the URL is opened, a 15-minute session is created that may outlive this token.
+      required:
+      - project_id
   securitySchemes:
     API_key:
       type: apiKey

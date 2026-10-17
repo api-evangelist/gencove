@@ -259,6 +259,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    BaseSpaceProjectsAutoimportCreate:
+      type: object
+      description: Gencove representation of BaseSpace projects create and update autoimport response.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        metadata:
+          description: Additional information to be attached to the Sample instances.
+        action:
+          type: string
+          readOnly: true
+      required:
+      - action
+      - id
     BaseSpaceBioSampleNested:
       type: object
       description: Single BaseSpace biosample to be imported.
@@ -275,7 +291,7 @@ components:
       - basespace_id
       - client_id
       - sample
-    PaginatedBaseSpaceProjectList:
+    PaginatedBaseSpaceProjectsAutoimportList:
       type: object
       required:
       - results
@@ -300,25 +316,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/BaseSpaceProject'
-    BaseSpaceProjectsAutoimport:
-      type: object
-      description: Gencove representation of BaseSpace projects to be imported periodically.
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        project_id:
-          type: string
-          format: uuid
-        identifier:
-          type: string
-        metadata: {}
-      required:
-      - id
-      - identifier
-      - project_id
+            $ref: '#/components/schemas/BaseSpaceProjectsAutoimport'
     BaseSpaceBioSample:
       type: object
       description: Gencove representation of BaseSpace biosample.
@@ -347,63 +345,6 @@ components:
       - basespace_lab_status
       - basespace_status
       - basespace_user_owned_by_id
-    BaseSpaceProjectsImport:
-      type: object
-      description: Gencove representation of BaseSpace projects to be imported.
-      properties:
-        project_id:
-          type: string
-          format: uuid
-        basespace_project_ids:
-          type: array
-          items:
-            type: string
-        metadata: {}
-      required:
-      - basespace_project_ids
-      - project_id
-    BaseSpaceProjectsAutoimportCreate:
-      type: object
-      description: Gencove representation of BaseSpace projects create and update autoimport response.
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        metadata:
-          description: Additional information to be attached to the Sample instances.
-        action:
-          type: string
-          readOnly: true
-      required:
-      - action
-      - id
-    PaginatedBaseSpaceProjectsAutoimportList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseSpaceProjectsAutoimport'
     BaseSpaceProject:
       type: object
       description: Gencove representation of BaseSpace project.
@@ -426,6 +367,39 @@ components:
       - basespace_description
       - basespace_id
       - basespace_name
+    BaseSpaceProjectsAutoimport:
+      type: object
+      description: Gencove representation of BaseSpace projects to be imported periodically.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        project_id:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+        metadata: {}
+      required:
+      - id
+      - identifier
+      - project_id
+    BaseSpaceBioSamplesImport:
+      type: object
+      description: Project and accompanying BaseSpace biosamples to be imported.
+      properties:
+        project_id:
+          type: string
+          format: uuid
+        basespace_bio_samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseSpaceBioSampleNested'
+        metadata: {}
+      required:
+      - basespace_bio_samples
+      - project_id
     PaginatedBaseSpaceBioSampleList:
       type: object
       required:
@@ -452,20 +426,46 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BaseSpaceBioSample'
-    BaseSpaceBioSamplesImport:
+    PaginatedBaseSpaceProjectList:
       type: object
-      description: Project and accompanying BaseSpace biosamples to be imported.
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseSpaceProject'
+    BaseSpaceProjectsImport:
+      type: object
+      description: Gencove representation of BaseSpace projects to be imported.
       properties:
         project_id:
           type: string
           format: uuid
-        basespace_bio_samples:
+        basespace_project_ids:
           type: array
           items:
-            $ref: '#/components/schemas/BaseSpaceBioSampleNested'
+            type: string
         metadata: {}
       required:
-      - basespace_bio_samples
+      - basespace_project_ids
       - project_id
   securitySchemes:
     API_key:

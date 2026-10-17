@@ -189,27 +189,35 @@ components:
     NullEnum:
       enum:
       - null
+    PaginatedPipelineListList:
+      type: object
+      required:
+      - results
+      properties:
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            next:
+              type:
+              - string
+              - 'null'
+              format: uri
+            previous:
+              type:
+              - string
+              - 'null'
+              format: uri
+          required:
+          - count
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineList'
     BlankEnum:
       enum:
       - ''
-    PipelineDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        version:
-          type: string
-          maxLength: 100
-        capabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/PipelineCapabilities'
-      required:
-      - capabilities
-      - id
-      - version
     PipelineCapabilities:
       type: object
       properties:
@@ -276,33 +284,7 @@ components:
       - name
       - species
       - steps
-    PaginatedPipelineListList:
-      type: object
-      required:
-      - results
-      properties:
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-            next:
-              type:
-              - string
-              - 'null'
-              format: uri
-            previous:
-              type:
-              - string
-              - 'null'
-              format: uri
-          required:
-          - count
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PipelineList'
-    PipelineList:
+    PipelineDetail:
       type: object
       properties:
         id:
@@ -312,7 +294,12 @@ components:
         version:
           type: string
           maxLength: 100
+        capabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/PipelineCapabilities'
       required:
+      - capabilities
       - id
       - version
     PaginatedPipelineCapabilitiesList:
@@ -341,6 +328,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PipelineCapabilities'
+    PipelineList:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        version:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - version
   securitySchemes:
     API_key:
       type: apiKey
