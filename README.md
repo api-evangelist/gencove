@@ -64,6 +64,164 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Gencove is a company surfaced as a portfolio company of version-one-ventures and added to the API Evangelist network as a stub for enrichment. Sector: health. This profile is a lead awaiting the enrichment pipeline.
+Gencove is an enterprise analytics platform for low-pass whole genome sequencing (lpWGS). Its REST API lets customers upload FASTQ and array data, run samples through configurable analysis pipelines, track sample status, download deliverables (including merged VCFs, imputation and ancestry outputs), manage projects, batches, BaseSpace and S3 imports, and operate the Gencove Explorer compute environment. The platform is used across human health, agriculture and research to turn raw sequencing reads into genotypes, polygenic scores and ancestry at industrial scale. Access is via a web dashboard, the official `gencove` Python CLI/SDK, and a versioned HTTP API authenticated with an API key or JWT, with signed webhooks for analysis-completion events.
 
-Backed by: version-one-ventures — https://gencove.com
+**Areas:** Company · Health · Genomics · Sequencing · Bioinformatics · DNA · Life Sciences · Analytics
+
+## Gencove on APIs.io
+
+Everything profiled for Gencove is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/gencove/](https://apis.io/providers/gencove/)** — or go straight to one of the APIs or properties below.
+
+### APIs (20)
+
+- [Gencove Array API](https://apis.io/apis/gencove/gencove-array-api/) — The array API from Gencove — 1 operation(s) for array.
+- [Gencove Basespace API](https://apis.io/apis/gencove/gencove-basespace-api/) — The basespace API from Gencove — 6 operation(s) for basespace.
+- [Gencove Batch API](https://apis.io/apis/gencove/gencove-batch-api/) — The batch API from Gencove — 1 operation(s) for batch.
+- [Gencove Billing API](https://apis.io/apis/gencove/gencove-billing-api/) — The billing API from Gencove — 1 operation(s) for billing.
+- [Gencove Explorer API](https://apis.io/apis/gencove/gencove-explorer-api/) — The explorer API from Gencove — 10 operation(s) for explorer.
+- [Gencove File API](https://apis.io/apis/gencove/gencove-file-api/) — The file API from Gencove — 2 operation(s) for file.
+- [Gencove Firstmile API](https://apis.io/apis/gencove/gencove-firstmile-api/) — The firstmile API from Gencove — 2 operation(s) for firstmile.
+- [Gencove Invitation API](https://apis.io/apis/gencove/gencove-invitation-api/) — The invitation API from Gencove — 3 operation(s) for invitation.
+- [Gencove JWT API](https://apis.io/apis/gencove/gencove-jwt-api/) — The jwt API from Gencove — 4 operation(s) for jwt.
+- [Gencove Mfa API](https://apis.io/apis/gencove/gencove-mfa-api/) — The mfa API from Gencove — 4 operation(s) for mfa.
+- [Gencove Notification API](https://apis.io/apis/gencove/gencove-notification-api/) — The notification API from Gencove — 1 operation(s) for notification.
+- [Gencove Organization API](https://apis.io/apis/gencove/gencove-organization-api/) — The organization API from Gencove — 5 operation(s) for organization.
+- [Gencove Pipeline API](https://apis.io/apis/gencove/gencove-pipeline-api/) — The pipeline API from Gencove — 5 operation(s) for pipeline.
+- [Gencove Project API](https://apis.io/apis/gencove/gencove-project-api/) — The project API from Gencove — 34 operation(s) for project.
+- [Gencove Role API](https://apis.io/apis/gencove/gencove-role-api/) — The role API from Gencove — 1 operation(s) for role.
+- [Gencove S3 API](https://apis.io/apis/gencove/gencove-s3-api/) — The s3 API from Gencove — 5 operation(s) for s3.
+- [Gencove Sample API](https://apis.io/apis/gencove/gencove-sample-api/) — The sample API from Gencove — 17 operation(s) for sample.
+- [Gencove Social API](https://apis.io/apis/gencove/gencove-social-api/) — The social API from Gencove — 3 operation(s) for social.
+- [Gencove Upload API](https://apis.io/apis/gencove/gencove-upload-api/) — The upload API from Gencove — 7 operation(s) for upload.
+- [Gencove User API](https://apis.io/apis/gencove/gencove-user-api/) — The user API from Gencove — 12 operation(s) for user.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Gencove Webhooks](https://apis.io/asyncapis/gencove/gencove-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [gencove](https://apis.io/servers/gencove/gencove/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Gencove Agentic Access](https://apis.io/agentic-access/gencove/gencove-agentic-access/)
+
+#### Collections (20)
+
+Postman and Open Collection request collections.
+
+- [Gencove Back array API](https://apis.io/collections/gencove/open-gencove-array-api/)
+- [Gencove Back array basespace API](https://apis.io/collections/gencove/open-gencove-basespace-api/)
+- [Gencove Back array batch API](https://apis.io/collections/gencove/open-gencove-batch-api/)
+- [Gencove Back array billing API](https://apis.io/collections/gencove/open-gencove-billing-api/)
+- [Gencove Back array explorer API](https://apis.io/collections/gencove/open-gencove-explorer-api/)
+- [Gencove Back array file API](https://apis.io/collections/gencove/open-gencove-file-api/)
+- [Gencove Back array firstmile API](https://apis.io/collections/gencove/open-gencove-firstmile-api/)
+- [Gencove Back array invitation API](https://apis.io/collections/gencove/open-gencove-invitation-api/)
+- [Gencove Back array jwt API](https://apis.io/collections/gencove/open-gencove-jwt-api/)
+- [Gencove Back array mfa API](https://apis.io/collections/gencove/open-gencove-mfa-api/)
+- [Gencove Back array notification API](https://apis.io/collections/gencove/open-gencove-notification-api/)
+- [Gencove Back array organization API](https://apis.io/collections/gencove/open-gencove-organization-api/)
+- [Gencove Back array pipeline API](https://apis.io/collections/gencove/open-gencove-pipeline-api/)
+- [Gencove Back array project API](https://apis.io/collections/gencove/open-gencove-project-api/)
+- [Gencove Back array role API](https://apis.io/collections/gencove/open-gencove-role-api/)
+- [Gencove Back array s3 API](https://apis.io/collections/gencove/open-gencove-s3-api/)
+- [Gencove Back array sample API](https://apis.io/collections/gencove/open-gencove-sample-api/)
+- [Gencove Back array social API](https://apis.io/collections/gencove/open-gencove-social-api/)
+- [Gencove Back array upload API](https://apis.io/collections/gencove/open-gencove-upload-api/)
+- [Gencove Back array user API](https://apis.io/collections/gencove/open-gencove-user-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Gencove Openapi Overlay](https://apis.io/overlays/gencove/gencove-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Gencove Authentication](https://apis.io/security/gencove/gencove-authentication/)
+- [Gencove Domain Security](https://apis.io/security/gencove/gencove-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://gencove.com)
+- [Documentation](https://docs.gencove.com/base/getting-started/)
+- [Getting started](https://docs.gencove.com/base/getting-started/)
+- [API reference](https://docs.gencove.com/base/getting-started/)
+- [Sign up](https://consumer.gencove.com/user/register/)
+- [Support](https://docs.gencove.com/general/support/)
+- [Blog](https://gencove.com/blog)
+- [Terms of service](https://consumer.gencove.com/terms-and-conditions/)
+- [Privacy policy](https://consumer.gencove.com/privacy-policy/)
+- [GitHub](https://github.com/gncv)
+- [Status](https://gencove.statuspage.io)
+
+## API Evangelist rating
+
+**Kin Score 53.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 54.4 |
+| Contract governance | 4.5 |
+| Operational transparency | 50.0 |
+| Developer ergonomics | 73.2 |
+| Access clarity | 34.2 |
+
+**Agent readiness 29.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.5** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/gencove/](https://apis.io/providers/gencove/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Gencove: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/gencove/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
